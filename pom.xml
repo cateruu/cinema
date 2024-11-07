@@ -12,7 +12,7 @@
 	<artifactId>movies</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
 	<name>movies</name>
-	<description>Demo project for Spring Boot</description>
+	<description>Movie theatre management</description>
 	<url/>
 	<licenses>
 		<license/>

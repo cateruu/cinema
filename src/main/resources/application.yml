@@ -1,4 +1,6 @@
 spring:
+  profiles:
+    active: ${SPRING_PROFILE}
   application:
     name: movies
   datasource:
@@ -10,22 +12,20 @@ spring:
     hibernate:
       ddl-auto: none
     show-sql: false
-
-profiles:
-  active: dev
-
 ---
 spring:
-  profiles: ${SPRING_PROFILE}
-
+  config:
+    activate:
+      on-profile: dev
   jpa:
     hibernate:
       ddl-auto: update
     show-sql: true
 ---
 spring:
-  profiles: prod
-
+  config:
+    activate:
+      on-profile: prod
   jpa:
     hibernate:
       ddl-auto: none
