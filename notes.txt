@@ -1,0 +1,54 @@
+Databse 
+
+movies:
+- id uuid
+- name String
+- description String
+- duration number
+- genre []String
+- ticket_price number
+- created_at date
+- updated_at date
+
+rooms:
+- id uuid
+- name String
+- playing_movie [movie relation]
+- playing_time date
+- created_at date
+- updated_at date
+
+seats:
+- id uuid
+- row int
+- seat char
+- reserved boolean
+- room_id [room relation]
+
+reservations:
+- id uuid
+- room [room relation]
+- date date
+- user_id [user relation]
+- tickets []String (1A, 1B)
+- created_at date
+- updated_at date
+
+users:
+- id uuid
+- name String
+- password hashed
+- email String
+- created_at date
+
+roles:
+- id serial
+- name String
+
+user_roles:
+- user_id [user relation]
+- role_id [role relation]
+
+
+
+

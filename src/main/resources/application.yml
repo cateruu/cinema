@@ -1,0 +1,32 @@
+spring:
+  application:
+    name: movies
+  datasource:
+    url: ${DB_URL}
+    username: ${DB_USERNAME}
+    password: ${DB_PASSWORD}
+    driver-class-name: org.postgresql.Driver
+  jpa:
+    hibernate:
+      ddl-auto: none
+    show-sql: false
+
+profiles:
+  active: dev
+
+---
+spring:
+  profiles: ${SPRING_PROFILE}
+
+  jpa:
+    hibernate:
+      ddl-auto: update
+    show-sql: true
+---
+spring:
+  profiles: prod
+
+  jpa:
+    hibernate:
+      ddl-auto: none
+    show-sql: false
