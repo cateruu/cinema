@@ -12,40 +12,40 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.pawelkrml.movies.model.Movie;
-import com.pawelkrml.movies.service.MovieService;
+import com.pawelkrml.movies.dto.RoomDTO;
+import com.pawelkrml.movies.model.Room;
+import com.pawelkrml.movies.service.RoomService;
 
 @RestController
-@RequestMapping("/v1/movies")
-public class MovieController {
-
+@RequestMapping("/v1/rooms")
+public class RoomController {
   @Autowired
-  private MovieService movieService;
+  private RoomService roomService;
 
   @GetMapping
-  public Iterable<Movie> getAllMovies() {
-    return movieService.getAllMovies();
+  public Iterable<Room> getAllRooms() {
+    return roomService.getAllRooms();
   }
 
   @PostMapping
-  public Movie createMovie(@RequestBody Movie movie) {
-    return movieService.saveMovie(movie);
+  public Room createRoom(@RequestBody RoomDTO roomDto) {
+    return roomService.createRoom(roomDto);
   }
 
   @GetMapping("/{id}")
-  public Movie getMovieById(@PathVariable String id) {
-    Optional<Movie> movie = movieService.getMovieById(UUID.fromString(id));
+  public Room getRoomById(@PathVariable UUID id) {
+    Optional<Room> room = roomService.getRoomById(id);
 
-    if (movie.isPresent()) {
-      return movie.get();
+    if (room.isPresent()) {
+      return room.get();
     }
 
     return null;
   }
 
   @DeleteMapping("/{id}")
-  public boolean deleteMovie(@PathVariable UUID id) {
-    movieService.deleteMovieById(id);
+  public boolean deleteRoom(@PathVariable UUID id) {
+    roomService.deleteRoomById(id);
 
     return true;
   }
