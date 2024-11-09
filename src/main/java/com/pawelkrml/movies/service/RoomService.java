@@ -1,6 +1,5 @@
 package com.pawelkrml.movies.service;
 
-import java.util.Optional;
 import java.util.UUID;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -10,6 +9,8 @@ import com.pawelkrml.movies.dto.RoomDTO;
 import com.pawelkrml.movies.model.Movie;
 import com.pawelkrml.movies.model.Room;
 import com.pawelkrml.movies.repository.RoomRepository;
+
+import jakarta.persistence.EntityNotFoundException;
 
 @Service
 public class RoomService {
@@ -23,18 +24,21 @@ public class RoomService {
     return roomRepository.findAll();
   }
 
-  public Optional<Room> getRoomById(UUID id) {
-    return roomRepository.findById(id);
+  public Room getRoomById(UUID id) {
+    return roomRepository.findById(id)
+        .orElseThrow(() -> new EntityNotFoundException("room with given id: " + id + " not found."));
   }
 
   public Room createRoom(RoomDTO roomDto) {
-    Movie movie = movieService.getMovieById(roomDto.getPlayingMovieId())
-        .orElseThrow(() -> new RuntimeException("Movie not found"));
+    Movie movie = movieService.getMovieById(roomDto.getPlayingMovieId());
 
     Room room = new Room();
     room.setName(roomDto.getName());
     room.setPlayingTime(roomDto.getPlayingTime());
-    room.setPlayingMovie(movie);
+    if (movie != null) {
+      room.setPlayingMovie(movie);
+    }
+
     return roomRepository.save(room);
   }
 

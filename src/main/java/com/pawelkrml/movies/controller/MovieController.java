@@ -1,10 +1,8 @@
 package com.pawelkrml.movies.controller;
 
-import java.util.Optional;
 import java.util.UUID;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -16,6 +14,8 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.pawelkrml.movies.model.Movie;
 import com.pawelkrml.movies.service.MovieService;
+
+import jakarta.validation.Valid;
 
 @RestController
 @RequestMapping("/v1/movies")
@@ -30,25 +30,21 @@ public class MovieController {
   }
 
   @PostMapping
-  public ResponseEntity<Movie> createMovie(@RequestBody Movie movie) {
+  public ResponseEntity<Movie> createMovie(@Valid @RequestBody Movie movie) {
     return ResponseEntity.ok(movieService.saveMovie(movie));
   }
 
   @GetMapping("/{id}")
-  public ResponseEntity<?> getMovieById(@PathVariable String id) {
-    Optional<Movie> movie = movieService.getMovieById(UUID.fromString(id));
+  public ResponseEntity<Movie> getMovieById(@PathVariable String id) {
+    Movie movie = movieService.getMovieById(UUID.fromString(id));
 
-    if (movie.isPresent()) {
-      return ResponseEntity.ok(movie.get());
-    }
-
-    return ResponseEntity.status(HttpStatus.NOT_FOUND).body("movie with given id not found");
+    return ResponseEntity.ok(movie);
   }
 
   @DeleteMapping("/{id}")
-  public ResponseEntity<Boolean> deleteMovie(@PathVariable UUID id) {
+  public ResponseEntity<?> deleteMovie(@PathVariable UUID id) {
     movieService.deleteMovieById(id);
 
-    return ResponseEntity.ok(true);
+    return ResponseEntity.ok().build();
   }
 }

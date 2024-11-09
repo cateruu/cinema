@@ -1,6 +1,5 @@
 package com.pawelkrml.movies.service;
 
-import java.util.Optional;
 import java.util.UUID;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -8,6 +7,8 @@ import org.springframework.stereotype.Service;
 
 import com.pawelkrml.movies.model.Movie;
 import com.pawelkrml.movies.repository.MovieRepository;
+
+import jakarta.persistence.EntityNotFoundException;
 
 @Service
 public class MovieService {
@@ -22,8 +23,9 @@ public class MovieService {
     return movieRepository.save(movie);
   }
 
-  public Optional<Movie> getMovieById(UUID id) {
-    return movieRepository.findById(id);
+  public Movie getMovieById(UUID id) {
+    return movieRepository.findById(id)
+        .orElseThrow(() -> new EntityNotFoundException("movie with given id: " + id + " not found."));
   }
 
   public void deleteMovieById(UUID id) {
