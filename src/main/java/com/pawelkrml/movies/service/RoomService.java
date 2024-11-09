@@ -9,7 +9,6 @@ import org.springframework.stereotype.Service;
 import com.pawelkrml.movies.dto.RoomDTO;
 import com.pawelkrml.movies.model.Movie;
 import com.pawelkrml.movies.model.Room;
-import com.pawelkrml.movies.repository.MovieRepository;
 import com.pawelkrml.movies.repository.RoomRepository;
 
 @Service

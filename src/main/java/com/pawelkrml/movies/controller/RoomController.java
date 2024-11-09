@@ -4,6 +4,7 @@ import java.util.Optional;
 import java.util.UUID;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -23,30 +24,30 @@ public class RoomController {
   private RoomService roomService;
 
   @GetMapping
-  public Iterable<Room> getAllRooms() {
-    return roomService.getAllRooms();
+  public ResponseEntity<Iterable<Room>> getAllRooms() {
+    return ResponseEntity.ok(roomService.getAllRooms());
   }
 
   @PostMapping
-  public Room createRoom(@RequestBody RoomDTO roomDto) {
-    return roomService.createRoom(roomDto);
+  public ResponseEntity<Room> createRoom(@RequestBody RoomDTO roomDto) {
+    return ResponseEntity.ok(roomService.createRoom(roomDto));
   }
 
   @GetMapping("/{id}")
-  public Room getRoomById(@PathVariable UUID id) {
+  public ResponseEntity<Room> getRoomById(@PathVariable UUID id) {
     Optional<Room> room = roomService.getRoomById(id);
 
     if (room.isPresent()) {
-      return room.get();
+      return ResponseEntity.ok(room.get());
     }
 
-    return null;
+    return ResponseEntity.notFound().build();
   }
 
   @DeleteMapping("/{id}")
-  public boolean deleteRoom(@PathVariable UUID id) {
+  public ResponseEntity<Boolean> deleteRoom(@PathVariable UUID id) {
     roomService.deleteRoomById(id);
 
-    return true;
+    return ResponseEntity.ok(true);
   }
 }
