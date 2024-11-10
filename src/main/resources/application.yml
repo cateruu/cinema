@@ -1,3 +1,6 @@
+jwt:
+  secret: ${JWT_SECRET}
+  sxpiration: 86400000
 spring:
   profiles:
     active: ${SPRING_PROFILE}
