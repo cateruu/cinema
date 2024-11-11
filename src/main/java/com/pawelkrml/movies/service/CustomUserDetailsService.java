@@ -12,18 +12,23 @@ import org.springframework.stereotype.Service;
 import com.pawelkrml.movies.model.User;
 import com.pawelkrml.movies.repository.UserRepository;
 
+import jakarta.transaction.Transactional;
+
 @Service
 public class CustomUserDetailsService implements UserDetailsService {
   @Autowired
   private UserRepository userRepository;
 
   @Override
+  @Transactional
   public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
     User user = userRepository.findByUsername(username)
         .orElseThrow(() -> new UsernameNotFoundException("User not found"));
+
     return new org.springframework.security.core.userdetails.User(
         user.getUsername(),
         user.getPassword(),
-        user.getRoles().stream().map(role -> new SimpleGrantedAuthority("ROLE_" + role)).collect(Collectors.toList()));
+        user.getRoles().stream().map(role -> new SimpleGrantedAuthority(role.getName().name()))
+            .collect(Collectors.toList()));
   }
 }

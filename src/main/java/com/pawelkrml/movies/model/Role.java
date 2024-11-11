@@ -2,6 +2,8 @@ package com.pawelkrml.movies.model;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
+import jakarta.persistence.EnumType;
+import jakarta.persistence.Enumerated;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
@@ -14,8 +16,16 @@ public class Role {
   @GeneratedValue(strategy = GenerationType.IDENTITY)
   private Long id;
 
-  @Column(unique = true)
-  private String role;
+  @Enumerated(EnumType.STRING)
+  @Column(length = 20)
+  private ERole name;
+
+  public Role() {
+  }
+
+  public Role(ERole name) {
+    this.name = name;
+  }
 
   public Long getId() {
     return this.id;
@@ -25,11 +35,16 @@ public class Role {
     this.id = id;
   }
 
-  public String getRole() {
-    return this.role;
+  public ERole getName() {
+    return this.name;
   }
 
-  public void setRole(String role) {
-    this.role = role;
+  public void setName(ERole name) {
+    this.name = name;
+  }
+
+  @Override
+  public String toString() {
+    return "Role [name=" + name + "]";
   }
 }

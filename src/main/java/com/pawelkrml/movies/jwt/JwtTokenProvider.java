@@ -1,5 +1,6 @@
 package com.pawelkrml.movies.jwt;
 
+import java.security.Key;
 import java.util.Date;
 
 import org.springframework.beans.factory.annotation.Value;
@@ -7,7 +8,6 @@ import org.springframework.security.core.Authentication;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Component;
 
-import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.security.Keys;
 
@@ -32,20 +32,22 @@ public class JwtTokenProvider {
         .compact();
   }
 
+  private Key key() {
+    return Keys.hmacShaKeyFor(jwtSecret.getBytes());
+  }
+
   public String getUsernameForToken(String token) {
-    Claims claims = Jwts.parserBuilder()
-        .setSigningKey(Keys.hmacShaKeyFor(jwtSecret.getBytes()))
+    return Jwts.parserBuilder()
+        .setSigningKey(this.key())
         .build()
         .parseClaimsJws(token)
-        .getBody();
-
-    return claims.getSubject();
+        .getBody().getSubject();
   }
 
   public boolean validateToken(String token) {
     try {
       Jwts.parserBuilder()
-          .setSigningKey(Keys.hmacShaKeyFor(jwtSecret.getBytes()))
+          .setSigningKey(this.key())
           .build()
           .parseClaimsJws(token);
 

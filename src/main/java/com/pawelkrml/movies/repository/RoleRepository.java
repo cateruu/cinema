@@ -1,8 +1,12 @@
 package com.pawelkrml.movies.repository;
 
-import org.springframework.data.repository.CrudRepository;
+import java.util.Optional;
 
+import org.springframework.data.jpa.repository.JpaRepository;
+
+import com.pawelkrml.movies.model.ERole;
 import com.pawelkrml.movies.model.Role;
 
-public interface RoleRepository extends CrudRepository<Role, Long> {
+public interface RoleRepository extends JpaRepository<Role, Long> {
+  public Optional<Role> findByName(ERole name);
 }

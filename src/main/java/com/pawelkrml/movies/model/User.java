@@ -4,8 +4,6 @@ import java.util.HashSet;
 import java.util.Set;
 import java.util.UUID;
 
-import org.hibernate.validator.constraints.Length;
-
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.FetchType;
@@ -17,7 +15,7 @@ import jakarta.persistence.JoinTable;
 import jakarta.persistence.ManyToMany;
 import jakarta.persistence.Table;
 import jakarta.validation.constraints.Email;
-import jakarta.validation.constraints.NotEmpty;
+import jakarta.validation.constraints.NotBlank;
 
 @Entity
 @Table(name = "users")
@@ -27,22 +25,30 @@ public class User {
   private UUID id;
 
   @Column(nullable = false, unique = true)
-  @NotEmpty(message = "username cannot be empty")
+  @NotBlank(message = "username cannot be empty")
   private String username;
 
   @Column(nullable = false)
-  @NotEmpty(message = "password cannot be empty")
-  @Length(min = 3, max = 50, message = "password has to be min 3 and max 50 characters long")
+  @NotBlank(message = "password cannot be empty")
   private String password;
 
   @Column(nullable = false)
-  @NotEmpty(message = "email cannot be empty")
+  @NotBlank(message = "email cannot be empty")
   @Email
   private String email;
 
   @ManyToMany(fetch = FetchType.EAGER)
   @JoinTable(name = "user_roles", joinColumns = @JoinColumn(name = "user_id"), inverseJoinColumns = @JoinColumn(name = "role_id"))
   private Set<Role> roles = new HashSet<>();
+
+  public User() {
+  }
+
+  public User(String username, String password, String email) {
+    this.username = username;
+    this.password = password;
+    this.email = email;
+  }
 
   public UUID getId() {
     return this.id;
@@ -64,7 +70,7 @@ public class User {
     return this.password;
   }
 
-  public void setPassowrd(String hash) {
+  public void setPassword(String hash) {
     this.password = hash;
   }
 
@@ -76,7 +82,7 @@ public class User {
     this.email = email;
   }
 
-  public Set<?> getRoles() {
+  public Set<Role> getRoles() {
     return this.roles;
   }
 
@@ -90,5 +96,11 @@ public class User {
 
   public void removeRole(Role role) {
     this.roles.remove(role);
+  }
+
+  @Override
+  public String toString() {
+    return "User [id=" + id + ", username=" + username + ", password=" + password + ", email=" + email + ", roles="
+        + roles + "]";
   }
 }

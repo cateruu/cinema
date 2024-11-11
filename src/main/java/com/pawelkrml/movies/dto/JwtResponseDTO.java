@@ -8,6 +8,12 @@ public class JwtResponseDTO {
   private String username;
   private Collection<String> roles;
 
+  public JwtResponseDTO(String token, String username, Collection<String> roles) {
+    this.token = token;
+    this.username = username;
+    this.roles = roles;
+  }
+
   public String getToken() {
     return this.token;
   }

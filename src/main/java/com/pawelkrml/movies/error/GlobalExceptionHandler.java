@@ -58,7 +58,7 @@ public class GlobalExceptionHandler extends ResponseEntityExceptionHandler {
   public ResponseEntity<ErrorResponse> handleGeneralException(Exception ex) {
     ErrorResponse errorResponse = new ErrorResponse(
         "INTERNAL_SERVER_ERROR",
-        "An unexpected error occurred");
+        ex.getMessage());
     return new ResponseEntity<>(errorResponse, HttpStatus.INTERNAL_SERVER_ERROR);
   }
 }
