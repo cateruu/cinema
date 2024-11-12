@@ -7,4 +7,5 @@ import org.springframework.data.jpa.repository.JpaRepository;
 import com.pawelkrml.movies.model.Room;
 
 public interface RoomRepository extends JpaRepository<Room, UUID> {
+  public Room findByName(String name);
 }

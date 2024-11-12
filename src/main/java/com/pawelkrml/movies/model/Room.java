@@ -12,7 +12,7 @@ import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
-import jakarta.persistence.OneToOne;
+import jakarta.persistence.ManyToOne;
 import jakarta.persistence.Table;
 
 @Entity
@@ -22,13 +22,13 @@ public class Room {
   @GeneratedValue(strategy = GenerationType.UUID)
   private UUID id;
 
-  @Column(nullable = false)
+  @Column(nullable = false, unique = true)
   private String name;
 
-  @Column(name = "playing_time", nullable = false)
+  @Column(name = "playing_time", nullable = true)
   private LocalDateTime playingTime;
 
-  @OneToOne
+  @ManyToOne
   @JoinColumn(name = "playing_movie_id")
   private Movie playingMovie;
 
@@ -86,5 +86,11 @@ public class Room {
 
   public void setUpdatedAt(LocalDateTime date) {
     this.updatedAt = date;
+  }
+
+  @Override
+  public String toString() {
+    return "Room [id=" + id + ", name=" + name + ", playingTime=" + playingTime + ", playingMovie=" + playingMovie
+        + ", createdAt=" + createdAt + ", updatedAt=" + updatedAt + "]";
   }
 }

@@ -4,6 +4,8 @@ import java.net.http.HttpHeaders;
 import java.util.List;
 import java.util.stream.Collectors;
 
+import org.springframework.dao.DataIntegrityViolationException;
+import org.springframework.dao.InvalidDataAccessApiUsageException;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.HttpStatusCode;
 import org.springframework.http.ResponseEntity;
@@ -54,8 +56,27 @@ public class GlobalExceptionHandler extends ResponseEntityExceptionHandler {
     return new ResponseEntity<>(errorResponse, HttpStatus.BAD_REQUEST);
   }
 
+  @ExceptionHandler(InvalidDataAccessApiUsageException.class)
+  public ResponseEntity<ErrorResponse> handleInvalidDataAccessApi(InvalidDataAccessApiUsageException ex) {
+    ErrorResponse errorResponse = new ErrorResponse(
+        "BAD_REQUEST",
+        ex.getMessage());
+
+    return new ResponseEntity<>(errorResponse, HttpStatus.BAD_REQUEST);
+  }
+
+  @ExceptionHandler(DataIntegrityViolationException.class)
+  public ResponseEntity<ErrorResponse> handleDataIntegrityVialotaion(DataIntegrityViolationException ex) {
+    ErrorResponse errorResponse = new ErrorResponse(
+        "CONFLICT",
+        ex.getMessage());
+
+    return new ResponseEntity<>(errorResponse, HttpStatus.CONFLICT);
+  }
+
   @ExceptionHandler(Exception.class)
   public ResponseEntity<ErrorResponse> handleGeneralException(Exception ex) {
+    System.out.println(ex);
     ErrorResponse errorResponse = new ErrorResponse(
         "INTERNAL_SERVER_ERROR",
         ex.getMessage());
