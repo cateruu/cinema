@@ -1,6 +1,5 @@
 package com.pawelkrml.movies.config;
 
-import java.text.SimpleDateFormat;
 import java.util.List;
 
 import org.springframework.context.annotation.Bean;
@@ -18,7 +17,6 @@ import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.databind.DeserializationFeature;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.SerializationFeature;
-import com.fasterxml.jackson.datatype.jsr310.JavaTimeModule;
 
 @Configuration
 @EnableWebMvc
@@ -29,7 +27,7 @@ public class AppConfig implements WebMvcConfigurer {
   public void addCorsMappings(@NonNull CorsRegistry registry) {
     registry.addMapping("/v1/**")
         .allowedOriginPatterns("*")
-        .allowedMethods("GET", "POST", "PUT", "DELETE", "OPTIONS")
+        .allowedMethods("GET", "POST", "PATCH", "DELETE", "OPTIONS")
         .allowedHeaders("*")
         .allowCredentials(true)
         .maxAge(3600);
@@ -45,13 +43,13 @@ public class AppConfig implements WebMvcConfigurer {
   @Bean
   public ObjectMapper objectMapper() {
     ObjectMapper mapper = new ObjectMapper();
-    mapper.registerModule(new JavaTimeModule());
 
     mapper.configure(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES, false);
     mapper.setSerializationInclusion(JsonInclude.Include.NON_NULL);
 
     mapper.disable(SerializationFeature.WRITE_DATES_AS_TIMESTAMPS);
-    mapper.setDateFormat(new SimpleDateFormat("dd-MM-yyyy HH:mm:ss"));
+
+    mapper.findAndRegisterModules();
 
     return mapper;
   }

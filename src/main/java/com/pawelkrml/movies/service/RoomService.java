@@ -76,4 +76,8 @@ public class RoomService {
   public void deleteRoomById(UUID id) {
     roomRepository.deleteById(id);
   }
+
+  public Room updateRoom(Room room) {
+    return roomRepository.save(room);
+  }
 }
