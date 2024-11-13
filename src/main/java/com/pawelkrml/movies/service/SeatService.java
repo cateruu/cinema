@@ -1,5 +1,6 @@
 package com.pawelkrml.movies.service;
 
+import java.util.List;
 import java.util.UUID;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -35,6 +36,14 @@ public class SeatService {
         seatNumber++;
       }
     }
+  }
+
+  public List<String> getSeatsForRoom(UUID roomId) {
+    return seatRespository.getSeatsForRoom(roomId);
+  }
+
+  public int getRoomCapacity(UUID roomId) {
+    return seatRespository.countByRoomId(roomId);
   }
 
 }
