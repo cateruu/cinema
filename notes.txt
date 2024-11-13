@@ -28,9 +28,8 @@ seats:
 reservations:
 - id uuid
 - room [room relation]
-- date date
 - user_id [user relation]
-- tickets []String (1A, 1B)
+- tickets []String (1-A, 1-B)
 - created_at date
 - updated_at date
 

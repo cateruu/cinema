@@ -6,6 +6,7 @@ import java.util.Set;
 import java.util.stream.Collectors;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
@@ -22,6 +23,7 @@ import com.pawelkrml.movies.dto.JwtResponseDTO;
 import com.pawelkrml.movies.dto.LoginDTO;
 import com.pawelkrml.movies.dto.MessageDTO;
 import com.pawelkrml.movies.dto.RegisterDTO;
+import com.pawelkrml.movies.error.ErrorResponse;
 import com.pawelkrml.movies.jwt.JwtTokenProvider;
 import com.pawelkrml.movies.model.ERole;
 import com.pawelkrml.movies.model.Role;
@@ -67,11 +69,11 @@ public class AuthController {
   @PostMapping("/register")
   public ResponseEntity<?> registerUser(@Valid @RequestBody RegisterDTO registerDTO) {
     if (userService.isUsernameTaken(registerDTO.getUsername())) {
-      return ResponseEntity.badRequest().body(new MessageDTO("username already taken"));
+      return ResponseEntity.status(HttpStatus.CONFLICT).body(new ErrorResponse("CONFLICT", "username already taken"));
     }
 
     if (userService.isEmailTaken(registerDTO.getEmail())) {
-      return ResponseEntity.badRequest().body(new MessageDTO("email already taken"));
+      return ResponseEntity.status(HttpStatus.CONFLICT).body(new ErrorResponse("CONFLICT", "email already taken"));
     }
 
     User user = new User(registerDTO.getUsername(), passwordEncoder.encode(registerDTO.getPassword()),
