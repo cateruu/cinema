@@ -19,6 +19,7 @@ import com.pawelkrml.movies.dto.RoomDTO;
 import com.pawelkrml.movies.model.Room;
 import com.pawelkrml.movies.service.MovieService;
 import com.pawelkrml.movies.service.RoomService;
+import com.pawelkrml.movies.service.SeatService;
 
 import jakarta.validation.Valid;
 
@@ -30,6 +31,9 @@ public class RoomController {
 
   @Autowired
   private MovieService movieService;
+
+  @Autowired
+  private SeatService seatService;
 
   @GetMapping
   public ResponseEntity<Iterable<Room>> getAllRooms() {
@@ -59,12 +63,26 @@ public class RoomController {
   public ResponseEntity<Room> updateRoom(@PathVariable UUID id, @RequestBody Map<String, Object> updates) {
     Room room = roomService.getRoomById(id);
 
+    if (updates.containsKey("rows") && updates.containsKey("seats")) {
+      seatService.removeAllSeatsForRoom(id);
+      int rows = Integer.valueOf(String.valueOf(updates.get("rows")));
+      int seats = Integer.valueOf(String.valueOf(updates.get("seats")));
+
+      seatService.createSeatsForRoom(room, rows, seats);
+    } else if (updates.containsKey("rows") || updates.containsKey("seats")) {
+      throw new IllegalArgumentException(
+          "if you want to update room layout both 'rows' and 'seats' values has to be present.");
+    }
+
+    updates.remove("rows");
+    updates.remove("seats");
+
     updates.forEach((key, value) -> {
       try {
         Field field = room.getClass().getDeclaredField(key);
         field.setAccessible(true);
 
-        if (key == "playingMovie") {
+        if (key.equals("playingMovie")) {
           value = movieService.getMovieById(UUID.fromString(String.valueOf(value)));
         }
 

@@ -33,6 +33,9 @@ public class Seat {
   @OnDelete(action = OnDeleteAction.CASCADE)
   private Room room;
 
+  public Seat() {
+  }
+
   public Seat(int row, char seat, Room room) {
     this.row = row;
     this.seat = seat;

@@ -9,9 +9,7 @@ import org.springframework.stereotype.Service;
 import com.pawelkrml.movies.dto.RoomDTO;
 import com.pawelkrml.movies.model.Movie;
 import com.pawelkrml.movies.model.Room;
-import com.pawelkrml.movies.model.Seat;
 import com.pawelkrml.movies.repository.RoomRepository;
-import com.pawelkrml.movies.repository.SeatRespository;
 
 import jakarta.persistence.EntityNotFoundException;
 import jakarta.transaction.Transactional;
@@ -22,7 +20,7 @@ public class RoomService {
   private RoomRepository roomRepository;
 
   @Autowired
-  SeatRespository seatRespository;
+  private SeatService seatService;
 
   @Autowired
   private MovieService movieService;
@@ -57,18 +55,7 @@ public class RoomService {
 
     Room createdRoom = roomRepository.save(room);
 
-    int seatNumber = 0;
-    for (int row = 1; row <= roomDto.getRows(); row++) {
-      for (char seat = 'A'; seat <= 'Z'; seat++) {
-        if (seatNumber == roomDto.getSeats()) {
-          seatNumber = 0;
-          break;
-        }
-
-        seatRespository.save(new Seat(row, seat, createdRoom));
-        seatNumber++;
-      }
-    }
+    seatService.createSeatsForRoom(createdRoom, roomDto.getRows(), roomDto.getSeats());
 
     return createdRoom;
   }
