@@ -44,7 +44,7 @@ public class RoomController {
     ArrayList<RoomResponseDTO> roomResponse = new ArrayList<>();
 
     rooms.forEach(room -> {
-      List<String> seats = seatService.getSeatsForRoom(room.getId());
+      List<String> seats = seatService.getAvailableSeatsForRoom(room.getId());
       int capacity = seatService.getRoomCapacity(room.getId());
       roomResponse.add(new RoomResponseDTO(room, seats, capacity));
     });
@@ -55,7 +55,7 @@ public class RoomController {
   @PostMapping
   public ResponseEntity<RoomResponseDTO> createRoom(@Valid @RequestBody RoomDTO roomDto) {
     Room room = roomService.createRoom(roomDto);
-    List<String> availableSeats = seatService.getSeatsForRoom(room.getId());
+    List<String> availableSeats = seatService.getAvailableSeatsForRoom(room.getId());
     int capacity = seatService.getRoomCapacity(room.getId());
 
     return ResponseEntity.ok(new RoomResponseDTO(room, availableSeats, capacity));
@@ -64,7 +64,7 @@ public class RoomController {
   @GetMapping("/{id}")
   public ResponseEntity<RoomResponseDTO> getRoomById(@PathVariable UUID id) {
     Room room = roomService.getRoomById(id);
-    List<String> availableSeats = seatService.getSeatsForRoom(room.getId());
+    List<String> availableSeats = seatService.getAvailableSeatsForRoom(room.getId());
     int capacity = seatService.getRoomCapacity(room.getId());
 
     return ResponseEntity.ok(new RoomResponseDTO(room, availableSeats, capacity));
@@ -111,7 +111,7 @@ public class RoomController {
     });
 
     roomService.updateRoom(room);
-    List<String> availableSeats = seatService.getSeatsForRoom(room.getId());
+    List<String> availableSeats = seatService.getAvailableSeatsForRoom(room.getId());
     int capacity = seatService.getRoomCapacity(room.getId());
 
     return ResponseEntity.ok(new RoomResponseDTO(room, availableSeats, capacity));

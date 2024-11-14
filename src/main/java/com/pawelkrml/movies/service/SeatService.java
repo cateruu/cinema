@@ -38,12 +38,31 @@ public class SeatService {
     }
   }
 
-  public List<String> getSeatsForRoom(UUID roomId) {
-    return seatRespository.getSeatsForRoom(roomId);
+  public List<String> getAvailableSeatsForRoom(UUID roomId) {
+    return seatRespository.getAvailableSeatsForRoom(roomId);
   }
 
   public int getRoomCapacity(UUID roomId) {
     return seatRespository.countByRoomId(roomId);
+  }
+
+  public boolean checkIfSeatsAvailable(List<String> tickets, UUID roomId) {
+    List<String> availableSeats = this.getAvailableSeatsForRoom(roomId);
+
+    return availableSeats.containsAll(tickets);
+  }
+
+  @Transactional
+  public void reserveSeats(List<String> tickets, UUID roomId) {
+    tickets.stream().forEach(ticket -> {
+      String[] data = ticket.split("-");
+      int row = Integer.valueOf(data[0]);
+      char seatChar = data[1].charAt(0);
+
+      Seat seat = seatRespository.getByRowBySeatByRoomId(row, seatChar, roomId);
+      seat.setReserved(true);
+      seatRespository.save(seat);
+    });
   }
 
 }
