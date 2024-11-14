@@ -1,7 +1,9 @@
 # Cinema - management system
+
 This API is designed to manage a cinema's operations, including handling movies, room configurations, and reservations. It enables seamless movie scheduling, room allocation, and booking management, providing an efficient solution for cinema administrators to maintain an organized, user-friendly experience for customers.
 
 ### User authentication
+
 This API provides user authentication with JWT.
 
 <summary><code>POST</code> <code><b>/v1/auth/register</b></code> <code>register user in database</code></summary>
@@ -23,4 +25,8 @@ This API provides user authentication with JWT.
 <summary><code>PATCH</code> <code><b>/v1/movies/{id}</b></code> <code>update movie</code></summary>
 <summary><code>DELETE</code> <code><b>/v1/movies/{id}</b></code> <code>remove movie</code></summary>
 
+### Reservations
 
+<summary><code>POST</code> <code><b>/v1/reservations</b></code> <code>add new reservation</code></summary>
+<summary><code>GET</code> <code><b>/v1/reservations</b></code> <code>get all reservations</code></summary>
+<summary><code>GET</code> <code><b>/v1/reservations/{id}</b></code> <code>get reservation by id</code></summary>
