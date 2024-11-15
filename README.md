@@ -14,6 +14,7 @@ This API provides user authentication with JWT.
 <summary><code>POST</code> <code><b>/v1/rooms</b></code> <code>add new room</code></summary>
 <summary><code>GET</code> <code><b>/v1/rooms</b></code> <code>get all rooms</code></summary>
 <summary><code>GET</code> <code><b>/v1/rooms/{id}</b></code> <code>get room by id</code></summary>
+<summary><code>GET</code> <code><b>/v1/rooms/{id}/reservations</b></code> <code>get all reservations made for the room</code></summary>
 <summary><code>PATCH</code> <code><b>/v1/rooms/{id}</b></code> <code>update room</code></summary>
 <summary><code>DELETE</code> <code><b>/v1/rooms/{id}</b></code> <code>remove room</code></summary>
 
