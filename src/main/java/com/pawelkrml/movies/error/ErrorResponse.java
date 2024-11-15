@@ -1,6 +1,7 @@
 package com.pawelkrml.movies.error;
 
 import java.time.LocalDateTime;
+import java.util.ArrayList;
 import java.util.List;
 
 public class ErrorResponse {
@@ -11,6 +12,7 @@ public class ErrorResponse {
 
   public ErrorResponse() {
     this.timestamp = LocalDateTime.now();
+    this.errors = new ArrayList<>();
   }
 
   public ErrorResponse(String status, String message) {
@@ -56,5 +58,20 @@ public class ErrorResponse {
 
   public void setTimestamp(LocalDateTime timestamp) {
     this.timestamp = timestamp;
+  }
+
+  @Override
+  public String toString() {
+    StringBuilder json = new StringBuilder();
+    json.append("{");
+    json.append("\"status:\":\"").append(this.status).append("\",");
+    json.append("\"message\":\"").append(this.message).append("\",");
+    if (!this.errors.isEmpty()) {
+      json.append("\"errors\":").append(this.errors).append(",");
+    }
+    json.append("\"timestamp\":\"").append(this.timestamp).append("\"");
+    json.append("}");
+
+    return json.toString();
   }
 }

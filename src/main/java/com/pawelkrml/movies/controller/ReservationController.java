@@ -7,6 +7,9 @@ import java.util.stream.Collectors;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.AccessDeniedException;
+import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -18,6 +21,7 @@ import com.pawelkrml.movies.dto.ReservationDTO;
 import com.pawelkrml.movies.dto.ReservationResponseDTO;
 import com.pawelkrml.movies.model.Reservation;
 import com.pawelkrml.movies.service.ReservationService;
+import com.pawelkrml.movies.service.UserService;
 
 import jakarta.validation.Valid;
 
@@ -27,6 +31,9 @@ public class ReservationController {
   @Autowired
   private ReservationService reservationService;
 
+  @Autowired
+  private UserService userService;
+
   @GetMapping
   public ResponseEntity<List<ReservationResponseDTO>> getAllReservation() {
     return ResponseEntity.ok(reservationService.getAllReservations().stream()
@@ -35,7 +42,15 @@ public class ReservationController {
 
   @GetMapping("/{id}")
   public ResponseEntity<ReservationResponseDTO> getReservation(@PathVariable UUID id) {
-    return ResponseEntity.ok(reservationService.tranformToResponseDto(reservationService.getReservationById(id)));
+    UserDetails userDetails = (UserDetails) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+    UUID userId = userService.getUserByUsername(userDetails.getUsername()).getId();
+    Reservation reservation = reservationService.getReservationById(id);
+
+    if (!userId.equals(reservation.getUser().getId())) {
+      throw new AccessDeniedException("you do not have permission to access this resource.");
+    }
+
+    return ResponseEntity.ok(reservationService.tranformToResponseDto(reservation));
   }
 
   @PostMapping

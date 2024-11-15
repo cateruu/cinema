@@ -3,6 +3,7 @@ package com.pawelkrml.movies.config;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.http.HttpMethod;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.dao.DaoAuthenticationProvider;
 import org.springframework.security.config.annotation.authentication.configuration.AuthenticationConfiguration;
@@ -15,6 +16,7 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.SecurityFilterChain;
 import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
 
+import com.pawelkrml.movies.error.CustomAccessDeniedHandler;
 import com.pawelkrml.movies.jwt.JwtAuthenticationFilter;
 import com.pawelkrml.movies.service.CustomUserDetailsService;
 
@@ -22,6 +24,9 @@ import com.pawelkrml.movies.service.CustomUserDetailsService;
 @EnableWebSecurity
 @EnableMethodSecurity
 public class SecurityConfig {
+  @Autowired
+  private CustomAccessDeniedHandler customAccessDeniedHandler;
+
   @Autowired
   private CustomUserDetailsService userDetailsService;
 
@@ -34,9 +39,12 @@ public class SecurityConfig {
         .sessionManagement(session -> session.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
         .authorizeHttpRequests(requests -> requests
             .requestMatchers("/v1/auth/**").permitAll()
-            .requestMatchers("/v1/movies/**", "/v1/rooms/**").hasRole("ADMIN")
+            .requestMatchers(HttpMethod.POST, "/v1/reservations").hasAnyRole("ADMIN", "USER")
+            .requestMatchers("/v1/reservations/{id}").hasAnyRole("ADMIN", "USER")
+            .requestMatchers("/v1/movies/**", "/v1/rooms/**", "/v1/reservations/**").hasRole("ADMIN")
             .anyRequest().authenticated())
-        .addFilterBefore(jwtAuthenticationFilter, UsernamePasswordAuthenticationFilter.class);
+        .addFilterBefore(jwtAuthenticationFilter, UsernamePasswordAuthenticationFilter.class)
+        .exceptionHandling(handler -> handler.accessDeniedHandler(customAccessDeniedHandler));
 
     return http.build();
   }
