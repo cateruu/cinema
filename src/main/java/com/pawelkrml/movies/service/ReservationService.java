@@ -73,4 +73,8 @@ public class ReservationService {
 
     return responseDTO;
   }
+
+  public List<Reservation> getAllForRoomId(UUID roomId) {
+    return reservationRespository.getAllForRoomId(roomId);
+  }
 }

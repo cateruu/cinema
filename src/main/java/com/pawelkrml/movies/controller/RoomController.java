@@ -5,6 +5,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 import java.util.UUID;
+import java.util.stream.Collectors;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -17,10 +18,13 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.pawelkrml.movies.dto.ReservationResponseDTO;
 import com.pawelkrml.movies.dto.RoomDTO;
 import com.pawelkrml.movies.dto.RoomResponseDTO;
+import com.pawelkrml.movies.model.Reservation;
 import com.pawelkrml.movies.model.Room;
 import com.pawelkrml.movies.service.MovieService;
+import com.pawelkrml.movies.service.ReservationService;
 import com.pawelkrml.movies.service.RoomService;
 import com.pawelkrml.movies.service.SeatService;
 
@@ -37,6 +41,9 @@ public class RoomController {
 
   @Autowired
   private SeatService seatService;
+
+  @Autowired
+  ReservationService reservationService;
 
   @GetMapping
   public ResponseEntity<Iterable<RoomResponseDTO>> getAllRooms() {
@@ -115,5 +122,13 @@ public class RoomController {
     int capacity = seatService.getRoomCapacity(room.getId());
 
     return ResponseEntity.ok(new RoomResponseDTO(room, availableSeats, capacity));
+  }
+
+  @GetMapping("/{id}/reservations")
+  public ResponseEntity<List<ReservationResponseDTO>> getAllReservationsForRoom(@PathVariable UUID id) {
+    List<Reservation> reservations = reservationService.getAllForRoomId(id);
+
+    return ResponseEntity.ok(reservations.stream()
+        .map(reservation -> reservationService.tranformToResponseDto(reservation)).collect(Collectors.toList()));
   }
 }
