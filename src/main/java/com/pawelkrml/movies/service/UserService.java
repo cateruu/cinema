@@ -1,10 +1,15 @@
 package com.pawelkrml.movies.service;
 
+import java.util.List;
 import java.util.UUID;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.GrantedAuthority;
+import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Service;
 
+import com.pawelkrml.movies.dto.UserResponseDTO;
+import com.pawelkrml.movies.model.ERole;
 import com.pawelkrml.movies.model.User;
 import com.pawelkrml.movies.repository.UserRepository;
 
@@ -14,6 +19,15 @@ import jakarta.persistence.EntityNotFoundException;
 public class UserService {
   @Autowired
   private UserRepository userRepository;
+
+  public List<User> getAll() {
+    return userRepository.findAll();
+  }
+
+  public User getById(UUID id) {
+    return userRepository.findById(id)
+        .orElseThrow(() -> new EntityNotFoundException("user with given id: " + id + " not found."));
+  }
 
   public boolean isUsernameTaken(String username) {
     return userRepository.existsByUsername(username);
@@ -34,5 +48,20 @@ public class UserService {
 
   public User getUserByUsername(String username) {
     return userRepository.findByUsername(username).orElseThrow(() -> new EntityNotFoundException("user not found."));
+  }
+
+  public UserResponseDTO transformToResponse(User user) {
+    UserResponseDTO responseDTO = new UserResponseDTO();
+    responseDTO.setId(user.getId());
+    responseDTO.setUsername(user.getUsername());
+    responseDTO.setEmail(user.getEmail());
+    responseDTO.setRoles(user.getRoles());
+
+    return responseDTO;
+  }
+
+  public boolean isOnlyUserRole(UserDetails userDetails) {
+    return userDetails.getAuthorities().stream().map(GrantedAuthority::getAuthority)
+        .allMatch(role -> role.equals(ERole.ROLE_USER.toString()));
   }
 }

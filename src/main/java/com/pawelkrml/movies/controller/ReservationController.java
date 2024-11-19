@@ -54,7 +54,7 @@ public class ReservationController {
     UUID userId = userService.getUserByUsername(userDetails.getUsername()).getId();
     Reservation reservation = reservationService.getReservationById(id);
 
-    if (!userId.equals(reservation.getUser().getId())) {
+    if (userService.isOnlyUserRole(userDetails) && !userId.equals(reservation.getUser().getId())) {
       throw new AccessDeniedException("you do not have permission to access this resource.");
     }
 
@@ -77,7 +77,7 @@ public class ReservationController {
     UUID userId = userService.getUserByUsername(userDetails.getUsername()).getId();
     Reservation reservation = reservationService.getReservationById(id);
 
-    if (!userId.equals(reservation.getUser().getId())) {
+    if (userService.isOnlyUserRole(userDetails) && !userId.equals(reservation.getUser().getId())) {
       throw new AccessDeniedException("you do not have permission to access this resource.");
     }
 
