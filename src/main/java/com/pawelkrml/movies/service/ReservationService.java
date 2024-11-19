@@ -77,4 +77,12 @@ public class ReservationService {
   public List<Reservation> getAllForRoomId(UUID roomId) {
     return reservationRespository.getAllForRoomId(roomId);
   }
+
+  public void deleteAllReservationsForRoom(UUID roomId) {
+    reservationRespository.deleteAllByRoomId(roomId);
+  }
+
+  public Reservation update(Reservation reservation) {
+    return reservationRespository.save(reservation);
+  }
 }

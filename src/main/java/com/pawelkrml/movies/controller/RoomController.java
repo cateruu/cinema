@@ -89,6 +89,7 @@ public class RoomController {
     Room room = roomService.getRoomById(id);
 
     if (updates.containsKey("rows") && updates.containsKey("seats")) {
+      reservationService.deleteAllReservationsForRoom(id);
       seatService.removeAllSeatsForRoom(id);
       int rows = Integer.valueOf(String.valueOf(updates.get("rows")));
       int seats = Integer.valueOf(String.valueOf(updates.get("seats")));

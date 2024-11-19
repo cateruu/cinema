@@ -65,4 +65,17 @@ public class SeatService {
     });
   }
 
+  @Transactional
+  public void cancelSeatsReservation(List<String> tickets, UUID roomId) {
+    tickets.stream().forEach(ticket -> {
+      String[] data = ticket.split("-");
+      int row = Integer.valueOf(data[0]);
+      char seatChar = data[1].charAt(0);
+
+      Seat seat = seatRespository.getByRowBySeatByRoomId(row, seatChar, roomId);
+      seat.setReserved(false);
+      seatRespository.save(seat);
+    });
+  }
+
 }
