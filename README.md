@@ -9,6 +9,11 @@ This API provides user authentication with JWT.
 <summary><code>POST</code> <code><b>/v1/auth/register</b></code> <code>register user in database</code></summary>
 <summary><code>POST</code> <code><b>/v1/auth/login</b></code> <code>get JWT token for user</code></summary>
 
+### Users
+
+<summary><code>GET</code> <code><b>/v1/users</b></code> <code>get all users</code></summary>
+<summary><code>GET</code> <code><b>/v1/users/{id}</b></code> <code>get user by id</code></summary>
+
 ### Rooms
 
 <summary><code>POST</code> <code><b>/v1/rooms</b></code> <code>add new room</code></summary>
@@ -31,3 +36,4 @@ This API provides user authentication with JWT.
 <summary><code>POST</code> <code><b>/v1/reservations</b></code> <code>add new reservation</code></summary>
 <summary><code>GET</code> <code><b>/v1/reservations</b></code> <code>get all reservations</code></summary>
 <summary><code>GET</code> <code><b>/v1/reservations/{id}</b></code> <code>get reservation by id</code></summary>
+<summary><code>PATCH</code> <code><b>/v1/reservations/{id}</b></code> <code>update reservation</code></summary>
