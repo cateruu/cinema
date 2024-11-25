@@ -4,6 +4,7 @@ import java.util.List;
 import java.util.UUID;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.access.AccessDeniedException;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Service;
@@ -63,5 +64,13 @@ public class UserService {
   public boolean isOnlyUserRole(UserDetails userDetails) {
     return userDetails.getAuthorities().stream().map(GrantedAuthority::getAuthority)
         .allMatch(role -> role.equals(ERole.ROLE_USER.toString()));
+  }
+
+  public void checkIfUserOwnsThatResource(UserDetails userDetails, UUID ownerdId) {
+    UUID userId = this.getUserByUsername(userDetails.getUsername()).getId();
+
+    if (this.isOnlyUserRole(userDetails) && !userId.equals(ownerdId)) {
+      throw new AccessDeniedException("you do not have permission to access this resource.");
+    }
   }
 }

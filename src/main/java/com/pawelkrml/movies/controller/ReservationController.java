@@ -9,7 +9,6 @@ import java.util.stream.Collectors;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
-import org.springframework.security.access.AccessDeniedException;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -51,12 +50,9 @@ public class ReservationController {
   @GetMapping("/{id}")
   public ResponseEntity<ReservationResponseDTO> getReservation(@PathVariable UUID id) {
     UserDetails userDetails = (UserDetails) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
-    UUID userId = userService.getUserByUsername(userDetails.getUsername()).getId();
     Reservation reservation = reservationService.getReservationById(id);
 
-    if (userService.isOnlyUserRole(userDetails) && !userId.equals(reservation.getUser().getId())) {
-      throw new AccessDeniedException("you do not have permission to access this resource.");
-    }
+    userService.checkIfUserOwnsThatResource(userDetails, reservation.getUser().getId());
 
     return ResponseEntity.ok(reservationService.tranformToResponseDto(reservation));
   }
@@ -74,12 +70,9 @@ public class ReservationController {
   public ResponseEntity<ReservationResponseDTO> upadteReservation(@PathVariable UUID id,
       @RequestBody Map<String, Object> updates) {
     UserDetails userDetails = (UserDetails) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
-    UUID userId = userService.getUserByUsername(userDetails.getUsername()).getId();
     Reservation reservation = reservationService.getReservationById(id);
 
-    if (userService.isOnlyUserRole(userDetails) && !userId.equals(reservation.getUser().getId())) {
-      throw new AccessDeniedException("you do not have permission to access this resource.");
-    }
+    userService.checkIfUserOwnsThatResource(userDetails, reservation.getUser().getId());
 
     updates.forEach((key, value) -> {
       try {
