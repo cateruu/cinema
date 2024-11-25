@@ -73,4 +73,8 @@ public class UserService {
       throw new AccessDeniedException("you do not have permission to access this resource.");
     }
   }
+
+  public User update(User user) {
+    return userRepository.save(user);
+  }
 }
