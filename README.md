@@ -13,6 +13,7 @@ This API provides user authentication with JWT.
 
 <summary><code>GET</code> <code><b>/v1/users</b></code> <code>get all users</code></summary>
 <summary><code>GET</code> <code><b>/v1/users/{id}</b></code> <code>get user by id</code></summary>
+<summary><code>PATCH</code> <code><b>/v1/users/{id}</b></code> <code>update user information</code></summary>
 
 ### Rooms
 
