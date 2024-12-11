@@ -19,6 +19,7 @@ public class MoviesApplication {
 		System.setProperty("AWS_ACCESS_KEY_ID", dotenv.get("AWS_ACCESS_KEY_ID"));
 		System.setProperty("AWS_SECRET_ACCESS_KEY", dotenv.get("AWS_SECRET_ACCESS_KEY"));
 		System.setProperty("AWS_BUCKET_NAME", dotenv.get("AWS_BUCKET_NAME"));
+		System.setProperty("CND_URL", dotenv.get("CND_URL"));
 
 		SpringApplication.run(MoviesApplication.class, args);
 	}

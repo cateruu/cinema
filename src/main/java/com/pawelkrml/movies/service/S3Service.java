@@ -25,6 +25,9 @@ public class S3Service {
   @Value("${aws.s3.region}")
   private String region;
 
+  @Value("${cdn.url}")
+  private String cdnUrl;
+
   @Autowired
   private FileValidatorService fileValidator;
 
@@ -41,7 +44,7 @@ public class S3Service {
 
       s3Client.putObject(request, RequestBody.fromInputStream(file.getInputStream(), file.getSize()));
 
-      return String.format("https://%s.s3.%s.amazonaws.com/%s", bucketName, region, fileName);
+      return String.format("https://%s/%s", cdnUrl, fileName);
     } catch (IOException e) {
       throw new FileUploadException("Failed to upload file: " + e.getMessage(), e);
     }
