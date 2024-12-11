@@ -88,6 +88,15 @@ public class GlobalExceptionHandler extends ResponseEntityExceptionHandler {
     return new ResponseEntity<>(errorResponse, HttpStatus.FORBIDDEN);
   }
 
+  @ExceptionHandler(FileUploadException.class)
+  public ResponseEntity<ErrorResponse> handleFileUploadException(FileUploadException ex) {
+    ErrorResponse errorResponse = new ErrorResponse(
+        "INTERNAL_SERVER_ERROR",
+        ex.getMessage());
+
+    return new ResponseEntity<>(errorResponse, HttpStatus.INTERNAL_SERVER_ERROR);
+  }
+
   @ExceptionHandler(Exception.class)
   public ResponseEntity<ErrorResponse> handleGeneralException(Exception ex) {
     System.out.println(ex);

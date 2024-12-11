@@ -42,7 +42,8 @@ public class SecurityConfig {
             .requestMatchers(HttpMethod.POST, "/v1/reservations").hasAnyRole("ADMIN", "USER")
             .requestMatchers("/v1/reservations/{id}", "/v1/users/{id}", "/v1/rooms", "v1/rooms/{id}")
             .hasAnyRole("ADMIN", "USER")
-            .requestMatchers("/v1/movies/**", "/v1/rooms/**", "/v1/reservations/**", "/v1/users/**").hasRole("ADMIN")
+            .requestMatchers("/v1/movies/**", "/v1/rooms/**", "/v1/reservations/**", "/v1/users/**", "/v1/upload/**")
+            .hasRole("ADMIN")
             .anyRequest().authenticated())
         .addFilterBefore(jwtAuthenticationFilter, UsernamePasswordAuthenticationFilter.class)
         .exceptionHandling(handler -> handler.accessDeniedHandler(customAccessDeniedHandler));
