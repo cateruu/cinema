@@ -2,6 +2,14 @@
 
 This API is designed to manage a cinema's operations, including handling movies, room configurations, and reservations. It enables seamless movie scheduling, room allocation, and booking management, providing an efficient solution for cinema administrators to maintain an organized, user-friendly experience for customers.
 
+## Tech used
+- Java
+- Spring Boot
+- PostgreSQL
+- AWS (S3)
+- Cloudflare (CDN)
+- JWT
+
 ### User authentication
 
 This API provides user authentication with JWT.
@@ -38,3 +46,7 @@ This API provides user authentication with JWT.
 <summary><code>GET</code> <code><b>/v1/reservations</b></code> <code>get all reservations</code></summary>
 <summary><code>GET</code> <code><b>/v1/reservations/{id}</b></code> <code>get reservation by id</code></summary>
 <summary><code>PATCH</code> <code><b>/v1/reservations/{id}</b></code> <code>update reservation</code></summary>
+
+### Uploads
+
+<summary><code>POST</code> <code><b>/v1/upload</b></code> <code>upload an image to the S3 bucket</code></summary>
