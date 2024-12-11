@@ -97,6 +97,14 @@ public class GlobalExceptionHandler extends ResponseEntityExceptionHandler {
     return new ResponseEntity<>(errorResponse, HttpStatus.INTERNAL_SERVER_ERROR);
   }
 
+  @ExceptionHandler(InvalidFileException.class)
+  public ResponseEntity<ErrorResponse> handleInvalidFileException(InvalidFileException ex) {
+    ErrorResponse errorResponse = new ErrorResponse(
+        "INVALID_FILE",
+        ex.getMessage());
+    return new ResponseEntity<>(errorResponse, HttpStatus.BAD_REQUEST);
+  }
+
   @ExceptionHandler(Exception.class)
   public ResponseEntity<ErrorResponse> handleGeneralException(Exception ex) {
     System.out.println(ex);

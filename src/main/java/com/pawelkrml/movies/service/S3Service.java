@@ -25,7 +25,12 @@ public class S3Service {
   @Value("${aws.s3.region}")
   private String region;
 
+  @Autowired
+  private FileValidatorService fileValidator;
+
   public String uploadFile(MultipartFile file) {
+    fileValidator.validateFile(file);
+
     try {
       String fileName = this.generateFileName(file.getOriginalFilename());
       PutObjectRequest request = PutObjectRequest.builder()
