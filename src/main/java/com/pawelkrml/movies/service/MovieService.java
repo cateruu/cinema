@@ -3,6 +3,11 @@ package com.pawelkrml.movies.service;
 import java.util.UUID;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Sort;
+import org.springframework.data.domain.Sort.Direction;
 import org.springframework.stereotype.Service;
 
 import com.pawelkrml.movies.model.Movie;
@@ -15,8 +20,11 @@ public class MovieService {
   @Autowired
   private MovieRepository movieRepository;
 
-  public Iterable<Movie> getAllMovies() {
-    return movieRepository.findAll();
+  public Page<Movie> getAllMovies(int page, int size, String sortBy, String direction) {
+    Direction sortDirection = direction.equalsIgnoreCase("desc") ? Direction.DESC : Direction.ASC;
+    Pageable pageable = PageRequest.of(page, size, Sort.by(sortDirection, sortBy));
+
+    return movieRepository.findAll(pageable);
   }
 
   public Movie saveMovie(Movie movie) {

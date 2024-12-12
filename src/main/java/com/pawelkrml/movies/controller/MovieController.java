@@ -6,6 +6,7 @@ import java.util.Map;
 import java.util.UUID;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -14,8 +15,10 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.pawelkrml.movies.dto.PaginatedResponseDTO;
 import com.pawelkrml.movies.model.Movie;
 import com.pawelkrml.movies.service.MovieService;
 
@@ -29,8 +32,14 @@ public class MovieController {
   private MovieService movieService;
 
   @GetMapping
-  public ResponseEntity<Iterable<Movie>> getAllMovies() {
-    return ResponseEntity.ok(movieService.getAllMovies());
+  public ResponseEntity<PaginatedResponseDTO<Movie>> getAllMovies(
+      @RequestParam(defaultValue = "0") int page,
+      @RequestParam(defaultValue = "10") int size,
+      @RequestParam(defaultValue = "id") String sortBy,
+      @RequestParam(defaultValue = "desc") String direction) {
+    Page<Movie> moviePage = movieService.getAllMovies(page, size, sortBy, direction);
+
+    return ResponseEntity.ok(PaginatedResponseDTO.from(moviePage));
   }
 
   @PostMapping

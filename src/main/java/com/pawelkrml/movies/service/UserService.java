@@ -4,6 +4,11 @@ import java.util.List;
 import java.util.UUID;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Sort;
+import org.springframework.data.domain.Sort.Direction;
 import org.springframework.security.access.AccessDeniedException;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -21,8 +26,11 @@ public class UserService {
   @Autowired
   private UserRepository userRepository;
 
-  public List<User> getAll() {
-    return userRepository.findAll();
+  public Page<User> getAll(int page, int size, String sortBy, String direction) {
+    Direction sortDirection = direction.equalsIgnoreCase("desc") ? Direction.DESC : Direction.ASC;
+    Pageable pageable = PageRequest.of(page, size, Sort.by(sortDirection, sortBy));
+
+    return userRepository.findAll(pageable);
   }
 
   public User getById(UUID id) {

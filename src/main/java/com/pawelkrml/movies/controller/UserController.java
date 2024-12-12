@@ -1,13 +1,12 @@
 package com.pawelkrml.movies.controller;
 
 import java.lang.reflect.Field;
-import java.util.List;
 import java.util.Map;
 import java.util.UUID;
 import java.util.regex.Pattern;
-import java.util.stream.Collectors;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.AccessDeniedException;
 import org.springframework.security.core.context.SecurityContextHolder;
@@ -17,8 +16,10 @@ import org.springframework.web.bind.annotation.PatchMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.pawelkrml.movies.dto.PaginatedResponseDTO;
 import com.pawelkrml.movies.dto.UserResponseDTO;
 import com.pawelkrml.movies.model.User;
 import com.pawelkrml.movies.service.UserService;
@@ -30,9 +31,15 @@ public class UserController {
   private UserService userService;
 
   @GetMapping
-  public ResponseEntity<List<UserResponseDTO>> getAllUsers() {
-    return ResponseEntity.ok(
-        userService.getAll().stream().map(user -> userService.transformToResponse(user)).collect(Collectors.toList()));
+  public ResponseEntity<PaginatedResponseDTO<UserResponseDTO>> getAllUsers(
+      @RequestParam(defaultValue = "0") int page,
+      @RequestParam(defaultValue = "10") int size,
+      @RequestParam(defaultValue = "id") String sortBy,
+      @RequestParam(defaultValue = "desc") String direction) {
+    Page<UserResponseDTO> userPage = userService.getAll(page, size, sortBy, direction)
+        .map(user -> userService.transformToResponse(user));
+
+    return ResponseEntity.ok(PaginatedResponseDTO.from(userPage));
   }
 
   @GetMapping("/{id}")

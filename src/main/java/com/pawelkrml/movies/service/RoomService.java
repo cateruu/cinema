@@ -1,12 +1,19 @@
 package com.pawelkrml.movies.service;
 
+import java.util.List;
 import java.util.UUID;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataIntegrityViolationException;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Sort;
+import org.springframework.data.domain.Sort.Direction;
 import org.springframework.stereotype.Service;
 
 import com.pawelkrml.movies.dto.RoomDTO;
+import com.pawelkrml.movies.dto.RoomResponseDTO;
 import com.pawelkrml.movies.model.Movie;
 import com.pawelkrml.movies.model.Room;
 import com.pawelkrml.movies.repository.RoomRepository;
@@ -25,8 +32,11 @@ public class RoomService {
   @Autowired
   private MovieService movieService;
 
-  public Iterable<Room> getAllRooms() {
-    return roomRepository.findAll();
+  public Page<Room> getAllRooms(int page, int size, String sortBy, String direction) {
+    Direction sortDirection = direction.equalsIgnoreCase("desc") ? Direction.DESC : Direction.ASC;
+    Pageable pageable = PageRequest.of(page, size, Sort.by(sortDirection, sortBy));
+
+    return roomRepository.findAll(pageable);
   }
 
   public Room getRoomById(UUID id) {
@@ -66,5 +76,13 @@ public class RoomService {
 
   public Room updateRoom(Room room) {
     return roomRepository.save(room);
+  }
+
+  public Page<RoomResponseDTO> transformToPageResponseDTO(Page<Room> rooms) {
+    return rooms.map(room -> {
+      List<String> seats = seatService.getAvailableSeatsForRoom(room.getId());
+      int capacity = seatService.getRoomCapacity(room.getId());
+      return new RoomResponseDTO(room, seats, capacity);
+    });
   }
 }

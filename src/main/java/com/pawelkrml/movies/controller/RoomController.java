@@ -2,13 +2,13 @@ package com.pawelkrml.movies.controller;
 
 import java.lang.reflect.Field;
 import java.time.LocalDateTime;
-import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 import java.util.UUID;
 import java.util.stream.Collectors;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -17,8 +17,10 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.pawelkrml.movies.dto.PaginatedResponseDTO;
 import com.pawelkrml.movies.dto.ReservationResponseDTO;
 import com.pawelkrml.movies.dto.RoomDTO;
 import com.pawelkrml.movies.dto.RoomResponseDTO;
@@ -47,17 +49,15 @@ public class RoomController {
   ReservationService reservationService;
 
   @GetMapping
-  public ResponseEntity<Iterable<RoomResponseDTO>> getAllRooms() {
-    Iterable<Room> rooms = roomService.getAllRooms();
-    ArrayList<RoomResponseDTO> roomResponse = new ArrayList<>();
+  public ResponseEntity<PaginatedResponseDTO<RoomResponseDTO>> getAllRooms(
+      @RequestParam(defaultValue = "0") int page,
+      @RequestParam(defaultValue = "10") int size,
+      @RequestParam(defaultValue = "id") String sortBy,
+      @RequestParam(defaultValue = "desc") String direction) {
+    Page<RoomResponseDTO> rooms = roomService
+        .transformToPageResponseDTO(roomService.getAllRooms(page, size, sortBy, direction));
 
-    rooms.forEach(room -> {
-      List<String> seats = seatService.getAvailableSeatsForRoom(room.getId());
-      int capacity = seatService.getRoomCapacity(room.getId());
-      roomResponse.add(new RoomResponseDTO(room, seats, capacity));
-    });
-
-    return ResponseEntity.ok(roomResponse);
+    return ResponseEntity.ok(PaginatedResponseDTO.from(rooms));
   }
 
   @PostMapping

@@ -6,6 +6,11 @@ import java.util.UUID;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataIntegrityViolationException;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Sort;
+import org.springframework.data.domain.Sort.Direction;
 import org.springframework.stereotype.Service;
 
 import com.pawelkrml.movies.dto.ReservationDTO;
@@ -54,8 +59,11 @@ public class ReservationService {
         .orElseThrow(() -> new EntityNotFoundException("reservation with given id: " + id + " do not exist."));
   }
 
-  public List<Reservation> getAllReservations() {
-    return reservationRespository.findAll();
+  public Page<Reservation> getAllReservations(int page, int size, String sortBy, String direction) {
+    Direction sortDirection = direction.equalsIgnoreCase("desc") ? Direction.DESC : Direction.ASC;
+    Pageable pageable = PageRequest.of(page, size, Sort.by(sortDirection, sortBy));
+
+    return reservationRespository.findAll(pageable);
   }
 
   public ReservationResponseDTO tranformToResponseDto(Reservation reservation) {
@@ -72,6 +80,10 @@ public class ReservationService {
     responseDTO.setUpdatedAt(reservation.getUpdatedAt());
 
     return responseDTO;
+  }
+
+  public Page<ReservationResponseDTO> tranformToPageResponseDto(Page<Reservation> reservations) {
+    return reservations.map(this::tranformToResponseDto);
   }
 
   public List<Reservation> getAllForRoomId(UUID roomId) {

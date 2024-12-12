@@ -6,9 +6,9 @@ import java.time.LocalDateTime;
 import java.util.List;
 import java.util.Map;
 import java.util.UUID;
-import java.util.stream.Collectors;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -18,8 +18,10 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.pawelkrml.movies.dto.PaginatedResponseDTO;
 import com.pawelkrml.movies.dto.ReservationDTO;
 import com.pawelkrml.movies.dto.ReservationResponseDTO;
 import com.pawelkrml.movies.model.Reservation;
@@ -43,9 +45,15 @@ public class ReservationController {
   private SeatService seatService;
 
   @GetMapping
-  public ResponseEntity<List<ReservationResponseDTO>> getAllReservation() {
-    return ResponseEntity.ok(reservationService.getAllReservations().stream()
-        .map(reservation -> reservationService.tranformToResponseDto(reservation)).collect(Collectors.toList()));
+  public ResponseEntity<PaginatedResponseDTO<ReservationResponseDTO>> getAllReservation(
+      @RequestParam(defaultValue = "0") int page,
+      @RequestParam(defaultValue = "10") int size,
+      @RequestParam(defaultValue = "id") String sortBy,
+      @RequestParam(defaultValue = "desc") String direction) {
+    Page<ReservationResponseDTO> reservationsPage = reservationService
+        .tranformToPageResponseDto(reservationService.getAllReservations(page, size, sortBy, direction));
+
+    return ResponseEntity.ok(PaginatedResponseDTO.from(reservationsPage));
   }
 
   @GetMapping("/{id}")
