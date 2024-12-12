@@ -74,6 +74,8 @@ public class UserController {
       }
     });
 
+    userService.update(user);
+
     return ResponseEntity.ok(userService.transformToResponse(user));
   }
 }

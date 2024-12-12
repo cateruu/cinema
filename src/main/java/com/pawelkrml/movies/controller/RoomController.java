@@ -1,6 +1,7 @@
 package com.pawelkrml.movies.controller;
 
 import java.lang.reflect.Field;
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
@@ -117,6 +118,8 @@ public class RoomController {
         throw new IllegalArgumentException("unknown key: " + key);
       }
     });
+
+    room.setUpdatedAt(LocalDateTime.now());
 
     roomService.updateRoom(room);
     List<String> availableSeats = seatService.getAvailableSeatsForRoom(room.getId());

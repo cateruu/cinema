@@ -1,6 +1,7 @@
 package com.pawelkrml.movies.controller;
 
 import java.lang.reflect.Field;
+import java.time.LocalDateTime;
 import java.util.Map;
 import java.util.UUID;
 
@@ -64,6 +65,8 @@ public class MovieController {
         throw new IllegalArgumentException("unknown key: " + key);
       }
     });
+
+    movie.setUpdatedAt(LocalDateTime.now());
 
     movieService.updateMovie(movie);
 

@@ -2,6 +2,7 @@ package com.pawelkrml.movies.controller;
 
 import java.lang.reflect.Field;
 import java.net.URI;
+import java.time.LocalDateTime;
 import java.util.List;
 import java.util.Map;
 import java.util.UUID;
@@ -102,6 +103,8 @@ public class ReservationController {
         throw new IllegalArgumentException("unknown key: " + key);
       }
     });
+
+    reservation.setUpdatedAt(LocalDateTime.now());
 
     reservationService.update(reservation);
 
