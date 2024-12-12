@@ -8,6 +8,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.multipart.MultipartFile;
 
+import com.pawelkrml.movies.dto.UploadDTO;
 import com.pawelkrml.movies.service.S3Service;
 
 @RestController
@@ -17,8 +18,8 @@ public class UploadController {
   private S3Service s3Service;
 
   @PostMapping
-  public ResponseEntity<String> uploadFile(@RequestParam("file") MultipartFile file) {
+  public ResponseEntity<UploadDTO> uploadFile(@RequestParam("file") MultipartFile file) {
     String fileUrl = s3Service.uploadFile(file);
-    return ResponseEntity.ok(fileUrl);
+    return ResponseEntity.ok(new UploadDTO(fileUrl));
   }
 }

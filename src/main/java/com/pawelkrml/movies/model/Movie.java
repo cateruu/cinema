@@ -8,6 +8,8 @@ import java.util.UUID;
 import org.hibernate.annotations.CreationTimestamp;
 import org.hibernate.annotations.UpdateTimestamp;
 
+import com.fasterxml.jackson.annotation.JsonInclude;
+
 import jakarta.persistence.Column;
 import jakarta.persistence.ElementCollection;
 import jakarta.persistence.Entity;
@@ -18,6 +20,7 @@ import jakarta.persistence.Table;
 
 @Entity
 @Table(name = "movies")
+@JsonInclude(JsonInclude.Include.ALWAYS)
 public class Movie {
   @Id
   @GeneratedValue(strategy = GenerationType.UUID)
@@ -46,6 +49,9 @@ public class Movie {
   @Column(name = "updated_at")
   @UpdateTimestamp
   private LocalDateTime updatedAt;
+
+  @Column(name = "thumbnail_url")
+  private String thumbnailUrl;
 
   public UUID getId() {
     return id;
@@ -109,5 +115,13 @@ public class Movie {
 
   public void setUpdatedAt(LocalDateTime date) {
     this.updatedAt = date;
+  }
+
+  public String getThumbnailUrl() {
+    return this.thumbnailUrl;
+  }
+
+  public void setThumbnailUrl(String url) {
+    this.thumbnailUrl = url;
   }
 }
