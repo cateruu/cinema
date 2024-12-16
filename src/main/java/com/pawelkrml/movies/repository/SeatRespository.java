@@ -19,4 +19,7 @@ public interface SeatRespository extends JpaRepository<Seat, Long> {
 
   @Query(value = "SELECT * FROM seats WHERE row = :row AND seat = :seat AND room_id = :roomId", nativeQuery = true)
   public Seat getByRowBySeatByRoomId(@Param("row") int row, @Param("seat") char seat, @Param("roomId") UUID roomId);
+
+  @Query(value = "SELECT MAX(row) from seats WHERE room_id = :roomId", nativeQuery = true)
+  public int getRowsNumberForRoomId(@Param("roomId") UUID roomId);
 }

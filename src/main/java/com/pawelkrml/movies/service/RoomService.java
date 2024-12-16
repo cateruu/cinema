@@ -82,7 +82,9 @@ public class RoomService {
     return rooms.map(room -> {
       List<String> seats = seatService.getAvailableSeatsForRoom(room.getId());
       int capacity = seatService.getRoomCapacity(room.getId());
-      return new RoomResponseDTO(room, seats, capacity);
+      int rows = seatService.getRoomRows(room.getId());
+
+      return new RoomResponseDTO(room, seats, capacity, rows);
     });
   }
 }

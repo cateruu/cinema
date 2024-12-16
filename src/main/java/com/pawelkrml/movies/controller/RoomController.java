@@ -65,8 +65,9 @@ public class RoomController {
     Room room = roomService.createRoom(roomDto);
     List<String> availableSeats = seatService.getAvailableSeatsForRoom(room.getId());
     int capacity = seatService.getRoomCapacity(room.getId());
+    int rows = seatService.getRoomRows(room.getId());
 
-    return ResponseEntity.ok(new RoomResponseDTO(room, availableSeats, capacity));
+    return ResponseEntity.ok(new RoomResponseDTO(room, availableSeats, capacity, rows));
   }
 
   @GetMapping("/{id}")
@@ -74,8 +75,9 @@ public class RoomController {
     Room room = roomService.getRoomById(id);
     List<String> availableSeats = seatService.getAvailableSeatsForRoom(room.getId());
     int capacity = seatService.getRoomCapacity(room.getId());
+    int rows = seatService.getRoomRows(room.getId());
 
-    return ResponseEntity.ok(new RoomResponseDTO(room, availableSeats, capacity));
+    return ResponseEntity.ok(new RoomResponseDTO(room, availableSeats, capacity, rows));
   }
 
   @DeleteMapping("/{id}")

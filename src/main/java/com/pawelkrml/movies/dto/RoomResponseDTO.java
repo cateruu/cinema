@@ -8,11 +8,19 @@ public class RoomResponseDTO {
   private Room room;
   private List<String> availableSeats;
   private int capacity;
+  private int rows;
 
   public RoomResponseDTO(Room room, List<String> availableSeats, int capacity) {
     this.room = room;
     this.availableSeats = availableSeats;
     this.capacity = capacity;
+  }
+
+  public RoomResponseDTO(Room room, List<String> availableSeats, int capacity, int rows) {
+    this.room = room;
+    this.availableSeats = availableSeats;
+    this.capacity = capacity;
+    this.rows = rows;
   }
 
   public Room getRoom() {
@@ -37,5 +45,13 @@ public class RoomResponseDTO {
 
   public void setCapacity(int capacity) {
     this.capacity = capacity;
+  }
+
+  public int getRows() {
+    return this.rows;
+  }
+
+  public void setRows(int rows) {
+    this.rows = rows;
   }
 }

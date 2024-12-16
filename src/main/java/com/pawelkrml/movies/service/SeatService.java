@@ -46,6 +46,10 @@ public class SeatService {
     return seatRespository.countByRoomId(roomId);
   }
 
+  public int getRoomRows(UUID roomId) {
+    return seatRespository.getRowsNumberForRoomId(roomId);
+  }
+
   public boolean checkIfSeatsAvailable(List<String> tickets, UUID roomId) {
     List<String> availableSeats = this.getAvailableSeatsForRoom(roomId);
 
