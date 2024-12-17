@@ -2,8 +2,9 @@
 
 import React, { useActionState } from 'react';
 import Input from '../Input/Input';
-import { signIn } from '../../actions';
 import Link from 'next/link';
+import LoadingButton from '../LoadingButton/LoadingButton';
+import { signIn } from '../../app/(clean)/auth-actions';
 
 const initialState = {
   message: '',
@@ -28,12 +29,7 @@ const LoginForm = () => {
         label='Password'
       />
       <div className='w-full'>
-        <button
-          disabled={isPending}
-          className='w-full h-11 bg-orange-400 rounded-xl font-bold disabled:bg-orange-300 disabled:text-slate-500'
-        >
-          Sign In
-        </button>
+        <LoadingButton text='Sign In' isLoading={isPending} />
         <p className='text-sm text-center mt-1 text-slate-400'>
           Don&apos;t have an account?{' '}
           <Link href='/register' className='text-orange-400'>
