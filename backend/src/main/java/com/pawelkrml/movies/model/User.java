@@ -25,15 +25,15 @@ public class User {
   private UUID id;
 
   @Column(nullable = false, unique = true)
-  @NotBlank(message = "username cannot be empty")
+  @NotBlank(message = "cannot be empty")
   private String username;
 
   @Column(nullable = false)
-  @NotBlank(message = "password cannot be empty")
+  @NotBlank(message = "cannot be empty")
   private String password;
 
   @Column(nullable = false)
-  @NotBlank(message = "email cannot be empty")
+  @NotBlank(message = "cannot be empty")
   @Email
   private String email;
 

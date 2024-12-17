@@ -8,14 +8,14 @@ import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.NotBlank;
 
 public class RegisterDTO {
-  @NotBlank(message = "username cannot be empty")
+  @NotBlank(message = "cannot be empty")
   private String username;
 
-  @NotBlank(message = "password cannot be empty")
-  @Length(min = 3, max = 50, message = "password has to be min 3 and max 50 characters long")
+  @NotBlank(message = "cannot be empty")
+  @Length(min = 3, max = 50, message = "has to be min 3 and max 50 characters long")
   private String password;
 
-  @NotBlank(message = "email cannot be empty")
+  @NotBlank(message = "cannot be empty")
   @Email(message = "provide valid email")
   private String email;
 
