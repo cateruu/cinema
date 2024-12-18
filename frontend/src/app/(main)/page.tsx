@@ -1,16 +1,15 @@
-export enum UserRoles {
-  ADMIN = 'admin',
-  USER = 'user',
-}
+import SearchHeader from '../../components/SearchHeader/SearchHeader';
+import MoviesList from '../../components/MoviesList/MoviesList';
 
-export interface UserSession {
-  valid: boolean;
-  username: string;
-  roles: string[];
-}
-
-const Home = async () => {
-  return <main className='font-[family-name:var(--font-poppins)]'>ehe</main>;
+const HomePage = async () => {
+  return (
+    <main className='font-[family-name:var(--font-poppins)] w-full'>
+      <SearchHeader />
+      <div className='flex pr-8'>
+        <MoviesList />
+      </div>
+    </main>
+  );
 };
 
-export default Home;
+export default HomePage;

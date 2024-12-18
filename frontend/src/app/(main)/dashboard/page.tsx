@@ -1,7 +1,7 @@
 import React from 'react';
 import { verifySession } from '../../../actions/verifySession';
 import { redirect } from 'next/navigation';
-import { UserRoles } from '../page';
+import { UserRoles } from '../../../types/auth';
 
 const DashboardPage = async () => {
   const user = await verifySession();

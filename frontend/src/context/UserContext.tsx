@@ -2,6 +2,7 @@
 
 import { createContext, ReactNode, useEffect, useState } from 'react';
 import { verifySession } from '../actions/verifySession';
+import { UserSession } from '../types/auth';
 
 export const UserContext = createContext<UserSession | null>(null);
 

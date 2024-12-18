@@ -5,9 +5,10 @@ interface Props {
   name: string;
   placeholder?: string;
   label?: string;
+  className?: string;
 }
 
-const Input = ({ type, name, placeholder, label }: Props) => {
+const Input = ({ type, name, placeholder, label, className }: Props) => {
   return (
     <div>
       {label && (
@@ -23,7 +24,7 @@ const Input = ({ type, name, placeholder, label }: Props) => {
         name={name}
         id={name}
         placeholder={placeholder}
-        className='bg-slate-950 border-2 border-slate-950 text-sm px-3 py-3 min-w-96 rounded-xl focus:border-orange-400 focus:outline-none'
+        className={`bg-slate-950 border-2 border-slate-950 text-sm px-3 py-3 min-w-96 rounded-xl focus:border-orange-400 focus:outline-none ${className}`}
       />
     </div>
   );

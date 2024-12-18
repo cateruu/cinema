@@ -1,9 +1,9 @@
 import type { Metadata } from 'next';
 import { Krona_One, Poppins } from 'next/font/google';
 import '../globals.css';
-import SideBar from '../../components/SideBar/SideBar';
-import { UserProvider } from '../../context/UserContext';
 import NextTopLoader from 'nextjs-toploader';
+import { ReactNode } from 'react';
+import SideBar from '../../components/SideBar/SideBar';
 
 const poppins = Poppins({
   variable: '--font-poppins',
@@ -22,21 +22,15 @@ export const metadata: Metadata = {
   description: 'Cinema Management app.',
 };
 
-const RootLayout = ({
-  children,
-}: Readonly<{
-  children: React.ReactNode;
-}>) => {
+const RootLayout = async ({ children }: { children: ReactNode }) => {
   return (
     <html lang='en'>
       <body
         className={`${poppins.variable} ${kronaOne.variable} antialiased bg-slate-900 text-orange-50 flex`}
       >
-        <UserProvider>
-          <NextTopLoader color='#FB923C' showSpinner={false} />
-          <SideBar />
-          {children}
-        </UserProvider>
+        <NextTopLoader color='#FB923C' showSpinner={false} />
+        <SideBar />
+        {children}
       </body>
     </html>
   );

@@ -2,7 +2,7 @@
 
 import { cookies } from 'next/headers';
 import { cache } from 'react';
-import { UserSession } from '../context/UserContext';
+import { UserSession } from '../types/auth';
 
 export const verifySession = cache(async () => {
   const cookieStore = await cookies();
