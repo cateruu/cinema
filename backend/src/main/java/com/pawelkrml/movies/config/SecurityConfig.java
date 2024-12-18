@@ -39,6 +39,7 @@ public class SecurityConfig {
         .sessionManagement(session -> session.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
         .authorizeHttpRequests(requests -> requests
             .requestMatchers("/v1/auth/**").permitAll()
+            .requestMatchers(HttpMethod.GET, "/v1/movies/**", "/v1/rooms/**").permitAll()
             .requestMatchers(HttpMethod.POST, "/v1/reservations").hasAnyRole("ADMIN", "USER")
             .requestMatchers("/v1/reservations/{id}", "/v1/users/{id}", "/v1/rooms", "v1/rooms/{id}")
             .hasAnyRole("ADMIN", "USER")
