@@ -4,7 +4,7 @@ import React, { useActionState } from 'react';
 import Input from '../Input/Input';
 import Link from 'next/link';
 import LoadingButton from '../LoadingButton/LoadingButton';
-import { signIn } from '../../app/(clean)/auth-actions';
+import { signIn } from '../../actions/auth-actions';
 
 const initialState = {
   message: '',

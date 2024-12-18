@@ -2,6 +2,8 @@ import type { Metadata } from 'next';
 import { Krona_One, Poppins } from 'next/font/google';
 import '../globals.css';
 import SideBar from '../../components/SideBar/SideBar';
+import { UserProvider } from '../../context/UserContext';
+import NextTopLoader from 'nextjs-toploader';
 
 const poppins = Poppins({
   variable: '--font-poppins',
@@ -28,10 +30,13 @@ const RootLayout = ({
   return (
     <html lang='en'>
       <body
-        className={`${poppins.variable} ${kronaOne.variable} antialiased bg-slate-900 text-orange-50`}
+        className={`${poppins.variable} ${kronaOne.variable} antialiased bg-slate-900 text-orange-50 flex`}
       >
-        <SideBar />
-        {children}
+        <UserProvider>
+          <NextTopLoader color='#FB923C' showSpinner={false} />
+          <SideBar />
+          {children}
+        </UserProvider>
       </body>
     </html>
   );

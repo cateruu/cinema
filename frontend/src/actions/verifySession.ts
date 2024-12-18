@@ -2,12 +2,7 @@
 
 import { cookies } from 'next/headers';
 import { cache } from 'react';
-
-interface UserSession {
-  valid: boolean;
-  username: string;
-  roles: string[];
-}
+import { UserSession } from '../context/UserContext';
 
 export const verifySession = cache(async () => {
   const cookieStore = await cookies();

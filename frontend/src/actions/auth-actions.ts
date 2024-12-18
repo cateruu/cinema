@@ -53,17 +53,6 @@ export const signIn = async (
     path: '/',
   });
 
-  cookieStore.set(
-    'user',
-    JSON.stringify({
-      username: data.username,
-      role: data.roles.map((role) => role.split('_')[1].toLowerCase()),
-    }),
-    {
-      expires: new Date().getTime() + 24 * 60 * 60 * 1000,
-    }
-  );
-
   redirect('/');
 };
 
@@ -126,16 +115,12 @@ export const signUp = async (
     path: '/',
   });
 
-  cookieStore.set(
-    'user',
-    JSON.stringify({
-      username: data.username,
-      role: data.roles.map((role) => role.split('_')[1].toLowerCase()),
-    }),
-    {
-      expires: new Date().getTime() + 24 * 60 * 60 * 1000,
-    }
-  );
+  redirect('/');
+};
 
+export const signOut = async () => {
+  const cookieStore = await cookies();
+
+  cookieStore.delete('token');
   redirect('/');
 };

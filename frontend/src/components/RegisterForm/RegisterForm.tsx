@@ -4,7 +4,7 @@ import React, { useActionState } from 'react';
 import Input from '../Input/Input';
 import Link from 'next/link';
 import LoadingButton from '../LoadingButton/LoadingButton';
-import { signUp } from '../../app/(clean)/auth-actions';
+import { signUp } from '../../actions/auth-actions';
 
 const initialState = {
   message: '',
@@ -34,7 +34,7 @@ const RegisterForm = () => {
         <p className='text-sm text-center mt-1 text-slate-400'>
           Already have an account?{' '}
           <Link href='/login' className='text-orange-400'>
-            Sign ip
+            Sign up
           </Link>
         </p>
       </div>
