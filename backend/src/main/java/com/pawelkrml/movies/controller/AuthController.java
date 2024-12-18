@@ -14,8 +14,10 @@ import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.crypto.password.PasswordEncoder;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestHeader;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -23,6 +25,7 @@ import com.pawelkrml.movies.dto.JwtResponseDTO;
 import com.pawelkrml.movies.dto.LoginDTO;
 import com.pawelkrml.movies.dto.MessageDTO;
 import com.pawelkrml.movies.dto.RegisterDTO;
+import com.pawelkrml.movies.dto.TokenVerificationDTO;
 import com.pawelkrml.movies.error.ErrorResponse;
 import com.pawelkrml.movies.jwt.JwtTokenProvider;
 import com.pawelkrml.movies.model.ERole;
@@ -103,5 +106,22 @@ public class AuthController {
     userService.createUser(user);
 
     return ResponseEntity.ok(new MessageDTO("user created successfully."));
+  }
+
+  @GetMapping("/verify")
+  public ResponseEntity<?> verifyToken(@RequestHeader("Authorization") String authorization) {
+    String[] parts = authorization.split(" ");
+    String type = parts[0];
+    String jwt = parts[1];
+
+    if (!type.equals("Bearer") || !tokenProvider.validateToken(jwt)) {
+      return ResponseEntity.status(HttpStatus.UNAUTHORIZED)
+          .body(new ErrorResponse("INVALID_TOKEN", "provided JWT token is invalid"));
+    }
+
+    String username = tokenProvider.getUsernameForToken(jwt);
+    Set<Role> roles = userService.getUserByUsername(username).getRoles();
+
+    return ResponseEntity.ok(new TokenVerificationDTO(true, username, roles));
   }
 }

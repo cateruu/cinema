@@ -1,7 +1,7 @@
 import type { Metadata } from 'next';
 import { Krona_One, Poppins } from 'next/font/google';
 import '../globals.css';
-import SideBar from '../_components/SideBar/SideBar';
+import SideBar from '../../components/SideBar/SideBar';
 
 const poppins = Poppins({
   variable: '--font-poppins',
