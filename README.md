@@ -1,29 +1,47 @@
-# Cinema - management system
+# Cinema - management system 🎬
 
-This API is designed to manage a cinema's operations, including handling movies, room configurations, and reservations. It enables seamless movie scheduling, room allocation, and booking management, providing an efficient solution for cinema administrators to maintain an organized, user-friendly experience for customers.
+A comprehensive full-stack solution for managing cinema operations, enabling efficient movie scheduling, room management, and ticket reservations.
 
-## Tech used
-- Java
-- Spring Boot
-- PostgreSQL
-- AWS (S3)
-- Cloudflare (CDN)
-- JWT
+### Overview
 
-### User authentication
+This project consists of two main components:
 
-This API provides user authentication with JWT.
+- robust REST API backend for managing core cinema operations
+- modern, responsive frontend application for both administrators and customers
+
+## Tech Stack
+
+- **Backend**
+  - Java
+  - Spring Boot
+  - PostgreSQL
+  - AWS (S3)
+  - Cloudflare (CDN)
+  - JWT
+- **Frontend**
+  - Next.js 15 (App Router)
+  - React 19
+  - TailwindCSS
+
+## Endpoints
+
+<details>
+<summary>User authentication</summary>
 
 <summary><code>POST</code> <code><b>/v1/auth/register</b></code> <code>register user in database</code></summary>
 <summary><code>POST</code> <code><b>/v1/auth/login</b></code> <code>get JWT token for user</code></summary>
+</details>
 
-### Users
+<details>
+<summary>Users</summary>
 
 <summary><code>GET</code> <code><b>/v1/users</b></code> <code>get all users</code></summary>
 <summary><code>GET</code> <code><b>/v1/users/{id}</b></code> <code>get user by id</code></summary>
 <summary><code>PATCH</code> <code><b>/v1/users/{id}</b></code> <code>update user information</code></summary>
+</details>
 
-### Rooms
+<details>
+<summary>Rooms</summary>
 
 <summary><code>POST</code> <code><b>/v1/rooms</b></code> <code>add new room</code></summary>
 <summary><code>GET</code> <code><b>/v1/rooms</b></code> <code>get all rooms</code></summary>
@@ -31,22 +49,29 @@ This API provides user authentication with JWT.
 <summary><code>GET</code> <code><b>/v1/rooms/{id}/reservations</b></code> <code>get all reservations made for the room</code></summary>
 <summary><code>PATCH</code> <code><b>/v1/rooms/{id}</b></code> <code>update room</code></summary>
 <summary><code>DELETE</code> <code><b>/v1/rooms/{id}</b></code> <code>remove room</code></summary>
+</details>
 
-### Movies
+<details>
+<summary>Movies</summary>
 
 <summary><code>POST</code> <code><b>/v1/movies</b></code> <code>add new movie</code></summary>
 <summary><code>GET</code> <code><b>/v1/movies</b></code> <code>get all movies</code></summary>
 <summary><code>GET</code> <code><b>/v1/movies/{id}</b></code> <code>get movie by id</code></summary>
 <summary><code>PATCH</code> <code><b>/v1/movies/{id}</b></code> <code>update movie</code></summary>
 <summary><code>DELETE</code> <code><b>/v1/movies/{id}</b></code> <code>remove movie</code></summary>
+</details>
 
-### Reservations
+<details>
+<summary>Reservations</summary>
 
 <summary><code>POST</code> <code><b>/v1/reservations</b></code> <code>add new reservation</code></summary>
 <summary><code>GET</code> <code><b>/v1/reservations</b></code> <code>get all reservations</code></summary>
 <summary><code>GET</code> <code><b>/v1/reservations/{id}</b></code> <code>get reservation by id</code></summary>
 <summary><code>PATCH</code> <code><b>/v1/reservations/{id}</b></code> <code>update reservation</code></summary>
+</details>
 
-### Uploads
+<details>
+<summary>Uploads</summary>
 
 <summary><code>POST</code> <code><b>/v1/upload</b></code> <code>upload an image to the S3 bucket</code></summary>
+</details>
