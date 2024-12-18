@@ -4,7 +4,7 @@ import { House, LayoutDashboard, Ticket } from 'lucide-react';
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
 import React from 'react';
-import { UserRoles, UserSession } from '../../../context/UserContext';
+import { UserRoles, UserSession } from '../../../app/(main)/page';
 
 interface Props {
   user: UserSession | null;
