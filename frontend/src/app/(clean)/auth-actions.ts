@@ -26,7 +26,7 @@ export const signIn = async (
     password: formData.get('password'),
   };
 
-  const resp = await fetch('http://localhost:8080/v1/auth/login', {
+  const resp = await fetch(`${process.env.API_URL}/v1/auth/login`, {
     method: 'POST',
     body: JSON.stringify(payload),
     headers: {
@@ -77,7 +77,7 @@ export const signUp = async (
     password: formData.get('password'),
   };
 
-  const registerResp = await fetch('http://localhost:8080/v1/auth/register', {
+  const registerResp = await fetch(`${process.env.API_URL}/v1/auth/register`, {
     method: 'POST',
     body: JSON.stringify(registerPayload),
     headers: {
@@ -99,7 +99,7 @@ export const signUp = async (
     password: registerPayload.password,
   };
 
-  const loginResp = await fetch('http://localhost:8080/v1/auth/login', {
+  const loginResp = await fetch(`${process.env.API_URL}/v1/auth/login`, {
     method: 'POST',
     body: JSON.stringify(loginPayload),
     headers: {

@@ -1,15 +1,15 @@
 package com.pawelkrml.movies.dto;
 
-import java.util.Set;
+import java.util.List;
 
-import com.pawelkrml.movies.model.Role;
+import com.pawelkrml.movies.model.ERole;
 
 public class TokenVerificationDTO {
   private boolean valid;
   private String username;
-  private Set<Role> roles;
+  private List<ERole> roles;
 
-  public TokenVerificationDTO(boolean valid, String username, Set<Role> roles) {
+  public TokenVerificationDTO(boolean valid, String username, List<ERole> roles) {
     this.valid = valid;
     this.username = username;
     this.roles = roles;
@@ -31,11 +31,11 @@ public class TokenVerificationDTO {
     this.username = username;
   }
 
-  public Set<Role> getRoles() {
+  public List<ERole> getRoles() {
     return this.roles;
   }
 
-  public void setRoles(Set<Role> roles) {
+  public void setRoles(List<ERole> roles) {
     this.roles = roles;
   }
 }

@@ -120,7 +120,8 @@ public class AuthController {
     }
 
     String username = tokenProvider.getUsernameForToken(jwt);
-    Set<Role> roles = userService.getUserByUsername(username).getRoles();
+    List<ERole> roles = userService.getUserByUsername(username).getRoles().stream().map(role -> role.getName())
+        .collect(Collectors.toList());
 
     return ResponseEntity.ok(new TokenVerificationDTO(true, username, roles));
   }
