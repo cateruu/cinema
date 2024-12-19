@@ -20,8 +20,8 @@ const MovieElement = ({ movie, isSelected, setSelectedMovie }: Props) => {
         setSelectedMovie(movie);
         router.push(`/?selectedMovie=${movie.id}`);
       }}
-      className={`flex flex-col px-1 bg-slate-950 rounded-xl p-1 cursor-pointer pb-2 shadow-orange-400 hover:shadow-sm hover:shadow-orange-400 transition-shadow ${
-        isSelected && 'shadow-sm'
+      className={`flex flex-col px-1 bg-slate-950 rounded-xl p-1 cursor-pointer pb-2 border-2 border-slate-950  ${
+        isSelected && 'border-b-orange-400'
       }`}
     >
       <Image
