@@ -71,6 +71,15 @@ This project consists of two main components:
 </details>
 
 <details>
+<summary>Schedule</summary>
+
+<summary><code>POST</code> <code><b>/v1/schedule</b></code> <code>add new movie schedule</code></summary>
+<summary><code>GET</code> <code><b>/v1/schedule</b></code> <code>get all schedule</code></summary>
+<summary><code>GET</code> <code><b>/v1/schedule/{id}</b></code> <code>get schedule by id</code></summary>
+<summary><code>GET</code> <code><b>/v1/movies/{id}/schedule</b></code> <code>get all schedule for movie</code></summary>
+</details>
+
+<details>
 <summary>Uploads</summary>
 
 <summary><code>POST</code> <code><b>/v1/upload</b></code> <code>upload an image to the S3 bucket</code></summary>
