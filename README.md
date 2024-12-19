@@ -19,6 +19,7 @@ This project consists of two main components:
   - Cloudflare (CDN)
   - JWT
 - **Frontend**
+  - TypeScript
   - Next.js 15 (App Router)
   - React 19
   - TailwindCSS
