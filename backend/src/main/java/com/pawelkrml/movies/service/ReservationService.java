@@ -1,6 +1,5 @@
 package com.pawelkrml.movies.service;
 
-import java.math.BigDecimal;
 import java.util.List;
 import java.util.UUID;
 
@@ -70,11 +69,7 @@ public class ReservationService {
     ReservationResponseDTO responseDTO = new ReservationResponseDTO();
     responseDTO.setId(reservation.getId());
     responseDTO.setTickets(reservation.getTickets());
-    responseDTO.setMovieName(reservation.getRoom().getPlayingMovie().getName());
-    responseDTO.setPrice(reservation.getRoom().getPlayingMovie().getTicketPrice()
-        .multiply(BigDecimal.valueOf(reservation.getTickets().size())));
     responseDTO.setRomoName(reservation.getRoom().getName());
-    responseDTO.setPlayingTime(reservation.getRoom().getPlayingTime());
     responseDTO.setUserId(reservation.getUser().getId());
     responseDTO.setCreatedAt(reservation.getCreatedAt());
     responseDTO.setUpdatedAt(reservation.getUpdatedAt());

@@ -43,4 +43,8 @@ public class MovieService {
   public Movie updateMovie(Movie movie) {
     return movieRepository.save(movie);
   }
+
+  public int getMaxMovieDuration() {
+    return movieRepository.findMaxDuration();
+  }
 }

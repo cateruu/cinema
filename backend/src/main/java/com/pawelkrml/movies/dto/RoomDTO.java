@@ -1,7 +1,6 @@
 package com.pawelkrml.movies.dto;
 
 import java.time.LocalDateTime;
-import java.util.UUID;
 
 import jakarta.validation.constraints.Max;
 import jakarta.validation.constraints.Min;
@@ -12,7 +11,6 @@ public class RoomDTO {
   @NotBlank
   private String name;
   private LocalDateTime playingTime;
-  private UUID playingMovieId;
 
   @Positive
   @Min(1)
@@ -37,14 +35,6 @@ public class RoomDTO {
 
   public void setPlayingTime(LocalDateTime playingTime) {
     this.playingTime = playingTime;
-  }
-
-  public UUID getPlayingMovieId() {
-    return playingMovieId;
-  }
-
-  public void setPlayingMovieId(UUID playingMovieId) {
-    this.playingMovieId = playingMovieId;
   }
 
   public int getRows() {

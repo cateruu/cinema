@@ -11,8 +11,6 @@ import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
-import jakarta.persistence.JoinColumn;
-import jakarta.persistence.ManyToOne;
 import jakarta.persistence.Table;
 
 @Entity
@@ -24,13 +22,6 @@ public class Room {
 
   @Column(nullable = false, unique = true)
   private String name;
-
-  @Column(name = "playing_time", nullable = true)
-  private LocalDateTime playingTime;
-
-  @ManyToOne
-  @JoinColumn(name = "playing_movie_id")
-  private Movie playingMovie;
 
   @Column(name = "created_at", nullable = false)
   @CreationTimestamp
@@ -56,22 +47,6 @@ public class Room {
     this.name = name;
   }
 
-  public LocalDateTime getPlayingTime() {
-    return this.playingTime;
-  }
-
-  public void setPlayingTime(LocalDateTime date) {
-    this.playingTime = date;
-  }
-
-  public Movie getPlayingMovie() {
-    return this.playingMovie;
-  }
-
-  public void setPlayingMovie(Movie movie) {
-    this.playingMovie = movie;
-  }
-
   public LocalDateTime getCreatedAt() {
     return this.createdAt;
   }
@@ -90,7 +65,6 @@ public class Room {
 
   @Override
   public String toString() {
-    return "Room [id=" + id + ", name=" + name + ", playingTime=" + playingTime + ", playingMovie=" + playingMovie
-        + ", createdAt=" + createdAt + ", updatedAt=" + updatedAt + "]";
+    return "Room [id=" + id + ", name=" + name + ", createdAt=" + createdAt + ", updatedAt=" + updatedAt + "]";
   }
 }

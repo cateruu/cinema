@@ -39,11 +39,12 @@ public class SecurityConfig {
         .sessionManagement(session -> session.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
         .authorizeHttpRequests(requests -> requests
             .requestMatchers("/v1/auth/**").permitAll()
-            .requestMatchers(HttpMethod.GET, "/v1/movies/**", "/v1/rooms/**").permitAll()
+            .requestMatchers(HttpMethod.GET, "/v1/movies/**", "/v1/rooms/{id}", "/v1/schedule/{id}").permitAll()
             .requestMatchers(HttpMethod.POST, "/v1/reservations").hasAnyRole("ADMIN", "USER")
             .requestMatchers("/v1/reservations/{id}", "/v1/users/{id}", "/v1/rooms", "v1/rooms/{id}")
             .hasAnyRole("ADMIN", "USER")
-            .requestMatchers("/v1/movies/**", "/v1/rooms/**", "/v1/reservations/**", "/v1/users/**", "/v1/upload/**")
+            .requestMatchers("/v1/movies/**", "/v1/rooms/**", "/v1/reservations/**", "/v1/users/**", "/v1/upload/**",
+                "/v1/schedule/**")
             .hasRole("ADMIN")
             .anyRequest().authenticated())
         .addFilterBefore(jwtAuthenticationFilter, UsernamePasswordAuthenticationFilter.class)
