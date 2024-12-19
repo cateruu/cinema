@@ -1,7 +1,12 @@
 package com.pawelkrml.movies.service;
 
+import java.io.ByteArrayInputStream;
+import java.io.ByteArrayOutputStream;
 import java.io.IOException;
 import java.util.UUID;
+
+import java.awt.image.BufferedImage;
+import javax.imageio.ImageIO;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
@@ -35,19 +40,46 @@ public class S3Service {
     fileValidator.validateFile(file);
 
     try {
-      String fileName = this.generateFileName(file.getOriginalFilename());
-      PutObjectRequest request = PutObjectRequest.builder()
-          .bucket(bucketName)
-          .key(fileName)
-          .contentType(file.getContentType())
-          .build();
-
-      s3Client.putObject(request, RequestBody.fromInputStream(file.getInputStream(), file.getSize()));
-
-      return String.format("https://%s/%s", cdnUrl, fileName);
+      return uploadAsWebp(file);
     } catch (IOException e) {
       throw new FileUploadException("Failed to upload file: " + e.getMessage(), e);
     }
+  }
+
+  private String uploadAsWebp(MultipartFile file) throws IOException {
+    BufferedImage originalImage = ImageIO.read(file.getInputStream());
+    if (originalImage == null) {
+      throw new FileUploadException("Failed to read image file");
+    }
+
+    ByteArrayOutputStream outputStream = new ByteArrayOutputStream();
+    boolean success = ImageIO.write(originalImage, "webp", outputStream);
+    if (!success) {
+      throw new FileUploadException("Failed to convert image to WebP format");
+    }
+
+    String originalName = file.getOriginalFilename();
+    String baseFileName = originalName;
+    if (originalName != null && !originalName.isEmpty()) {
+      baseFileName = originalName.substring(0, originalName.lastIndexOf('.'));
+    }
+
+    String webpFileName = generateFileName(baseFileName + ".webp");
+
+    PutObjectRequest request = PutObjectRequest.builder()
+        .bucket(bucketName)
+        .key(webpFileName)
+        .contentType("image/webp")
+        .cacheControl("public, max-age=31536000")
+        .build();
+
+    byte[] webpBytes = outputStream.toByteArray();
+    s3Client.putObject(request,
+        RequestBody.fromInputStream(
+            new ByteArrayInputStream(webpBytes),
+            webpBytes.length));
+
+    return String.format("https://%s/%s", cdnUrl, webpFileName);
   }
 
   private String generateFileName(String originalFileName) {
