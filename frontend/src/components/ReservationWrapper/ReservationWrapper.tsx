@@ -28,7 +28,7 @@ const ReservationWrapper = async ({ selectedMovie }: Props) => {
 
   return (
     <div className='flex flex-col flex-grow ml-5'>
-      <Room schedules={schedules} />
+      <Room schedules={schedules} selectedMovieId={selectedMovie.id} />
       <Ticket />
     </div>
   );

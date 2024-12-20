@@ -10,7 +10,7 @@ interface Props {
 
 const SelectComponent = ({ values, value, onChange }: Props) => {
   return (
-    <Select.Root defaultValue={value} onValueChange={onChange}>
+    <Select.Root value={value} onValueChange={onChange}>
       <Select.Trigger className='bg-slate-950 rounded-xl border-2 border-slate-800 p-2 flex gap-2 outline-none font-medium'>
         <Select.Value />
         <Select.Icon>

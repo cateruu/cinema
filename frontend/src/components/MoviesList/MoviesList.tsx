@@ -1,7 +1,7 @@
 import React from 'react';
 import { Movie } from '../../types/movies';
 import List from './List/List';
-import { Paginated } from '../../types/Pagination';
+import { Paginated } from '../../types/pagination';
 
 interface Props {
   selectedMovie: Movie;

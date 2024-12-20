@@ -1,6 +1,6 @@
 'use client';
 
-import React, { useState } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 import { Schedule } from '../../../types/schedule';
 import SelectComponent from '../../SelectComponent/SelectComponent';
 import { formatDate } from '../../../utils/formatDate';
@@ -15,9 +15,11 @@ interface TimeSlot {
 
 interface Props {
   schedules: Schedule[];
+  selectedMovieId: string;
 }
 
-const Room = ({ schedules }: Props) => {
+const Room = ({ schedules, selectedMovieId }: Props) => {
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   const timeSlots: TimeSlot = {};
   schedules.forEach((schedule) => {
     const playingTime = new Date(schedule.playingTime);
@@ -40,11 +42,21 @@ const Room = ({ schedules }: Props) => {
 
   const possibleDates = Object.keys(timeSlots);
   const [selectedDate, setSelectedDate] = useState(possibleDates[0] || '');
-  const [selectedTimeId, setSelectedTimeId] = useState(
-    timeSlots[selectedDate][0].id
-  );
+  const defaultTimeId = timeSlots[selectedDate]?.[0].id;
+  const [selectedTimeId, setSelectedTimeId] = useState(defaultTimeId);
+  const prevMovieId = useRef(selectedMovieId);
 
-  console.log(selectedTimeId);
+  useEffect(() => {
+    if (prevMovieId.current !== selectedMovieId) {
+      const date = possibleDates[0] || '';
+      setSelectedDate(date);
+      setSelectedTimeId(timeSlots[date]?.[0].id);
+      prevMovieId.current = selectedMovieId;
+    }
+  }, [defaultTimeId, possibleDates, selectedMovieId, timeSlots]);
+
+  console.log('pos', selectedDate);
+  console.log('time', selectedTimeId);
 
   return (
     <section className='w-full p-3 bg-slate-950 rounded-xl'>
@@ -57,7 +69,7 @@ const Room = ({ schedules }: Props) => {
             onChange={setSelectedDate}
           />
         </div>
-        {timeSlots[selectedDate].map((time) => (
+        {timeSlots[selectedDate]?.map((time) => (
           <button
             key={time.id}
             onClick={() => setSelectedTimeId(time.id)}
