@@ -22,6 +22,7 @@ This project consists of two main components:
   - TypeScript
   - Next.js 15 (App Router)
   - React 19
+  - Radix UI
   - TailwindCSS
 
 ## Endpoints
