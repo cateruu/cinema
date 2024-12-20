@@ -7,17 +7,15 @@ import MovieElement from '../MovieElement/MovieElement';
 
 interface Props {
   movies: Movie[];
-  initialSelectedMovieId: Movie;
+  selectedMovie: Movie;
 }
 
-const List = ({ movies, initialSelectedMovieId }: Props) => {
-  const [selectedMovie, setSelectedMovie] = useState<Movie>(
-    initialSelectedMovieId
-  );
+const List = ({ movies, selectedMovie }: Props) => {
+  const [mainMovie, setMainMovie] = useState<Movie>(selectedMovie);
   const [maxListHeight, setMaxListHeight] = useState(500);
 
   const handleSelectMovie = (movie: Movie) => {
-    setSelectedMovie(movie);
+    setMainMovie(movie);
   };
 
   // adjust movies list height
@@ -53,7 +51,7 @@ const List = ({ movies, initialSelectedMovieId }: Props) => {
 
   return (
     <section className='min-w-72'>
-      <SelectedMovie movie={selectedMovie} />
+      <SelectedMovie movie={mainMovie} />
       <div
         style={{
           maxHeight: maxListHeight + 'px',

@@ -1,28 +1,18 @@
 import React from 'react';
 import { Movie } from '../../types/movies';
-import { Paginated } from '../../types/Pagination';
 import List from './List/List';
+import { Paginated } from '../../types/Pagination';
 
 interface Props {
-  initialSelectedMovieId: string | null;
+  selectedMovie: Movie;
+  movies: Paginated<Movie>;
 }
 
-const MoviesList = async ({ initialSelectedMovieId }: Props) => {
-  const resp = await fetch(`${process.env.API_URL}/v1/movies?direction=ASC`);
-
-  if (!resp.ok) {
-    return 'Unable to get movies. Please try again...';
-  }
-
-  const movies = (await resp.json()) as Paginated<Movie>;
-  const selectedMovie =
-    movies.content.find((movie) => movie.id === initialSelectedMovieId) ||
-    movies.content[0];
-
+const MoviesList = async ({ selectedMovie, movies }: Props) => {
   return (
     <div>
       {movies.content.length > 0 ? (
-        <List movies={movies.content} initialSelectedMovieId={selectedMovie} />
+        <List movies={movies.content} selectedMovie={selectedMovie} />
       ) : (
         <section>No movies :(</section>
       )}
