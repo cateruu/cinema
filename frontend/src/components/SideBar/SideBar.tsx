@@ -9,7 +9,7 @@ const SideBar = async () => {
   const user = await verifySession();
 
   return (
-    <aside className='min-h-screen p-8 flex flex-col'>
+    <aside className='min-h-screen max-h-screen p-8 flex flex-col sticky top-0'>
       <h1 className='font-[family-name:var(--font-krona-one)] text-2xl mb-8 whitespace-nowrap'>
         CINEMA <span className='text-orange-400'>MNGMT</span>
       </h1>

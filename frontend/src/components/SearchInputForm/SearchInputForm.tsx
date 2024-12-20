@@ -9,7 +9,7 @@ interface Props {
 
 const SearchInputForm = ({ placeholder }: Props) => {
   return (
-    <form className='w-full py-6 pr-8 flex'>
+    <form id='search-form' className='w-full py-6 pr-8 flex'>
       <input
         type='text'
         name='search'

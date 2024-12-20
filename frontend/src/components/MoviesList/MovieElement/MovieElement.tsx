@@ -31,8 +31,8 @@ const MovieElement = ({ movie, isSelected, setSelectedMovie }: Props) => {
         height={500}
         className='w-full aspect-square object-cover rounded-lg max-w-[200px]'
       />
-      <p className='text-sm mt-1'>{movie.name}</p>
-      <div className='flex gap-2 text-[10px] text-slate-400'>
+      <p className='text-sm mt-1 truncate'>{movie.name}</p>
+      <div className='flex gap-2 text-[10px] text-slate-400 truncate'>
         {movie.genre.map((genre) => (
           <p key={genre}>{genre.slice(0, 1).toUpperCase() + genre.slice(1)}</p>
         ))}

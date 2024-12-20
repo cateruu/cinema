@@ -11,7 +11,7 @@ const MoviesList = async ({ initialSelectedMovieId }: Props) => {
   const resp = await fetch(`${process.env.API_URL}/v1/movies?direction=ASC`);
 
   if (!resp.ok) {
-    return <section>Unable to get movies. Please try again...</section>;
+    return 'Unable to get movies. Please try again...';
   }
 
   const movies = (await resp.json()) as Paginated<Movie>;

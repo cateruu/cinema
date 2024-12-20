@@ -9,9 +9,9 @@ const HomePage = async (props: { searchParams: SearchParams }) => {
   const selectedMovieId = searchParams.selectedMovie;
 
   return (
-    <main className='font-[family-name:var(--font-poppins)] w-full'>
+    <main className='font-[family-name:var(--font-poppins)] w-full h-full'>
       <SearchHeader />
-      <div className='flex pr-8'>
+      <div className='flex pr-8 relative'>
         <MoviesList initialSelectedMovieId={selectedMovieId || null} />
         <ReservationWrapper selectedMovieId={selectedMovieId || null} />
       </div>

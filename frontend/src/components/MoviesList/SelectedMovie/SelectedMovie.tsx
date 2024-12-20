@@ -8,13 +8,17 @@ interface Props {
 
 const SelectedMovie = ({ movie }: Props) => {
   return (
-    <div className='rounded-xl overflow-hidden relative aspect-video '>
+    <div
+      id='selected-movie'
+      className='rounded-xl overflow-hidden relative aspect-video'
+    >
       <Image
         src={movie.thumbnailUrl}
         alt={`${movie.name} poster`}
         width={500}
         height={300}
         className='aspect-video object-cover w-full'
+        priority
       />
       <div className='absolute top-0 left-0 bg-gradient-to-t from-[#020617] to-[#D9D9D900] w-full h-full flex p-3 items-end gap-3'>
         <div className='flex flex-col '>
