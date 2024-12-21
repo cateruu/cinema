@@ -1,6 +1,5 @@
 package com.pawelkrml.movies.service;
 
-import java.util.List;
 import java.util.UUID;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -25,9 +24,6 @@ public class RoomService {
   @Autowired
   private RoomRepository roomRepository;
 
-  @Autowired
-  private SeatService seatService;
-
   public Page<Room> getAllRooms(int page, int size, String sortBy, String direction) {
     Direction sortDirection = direction.equalsIgnoreCase("desc") ? Direction.DESC : Direction.ASC;
     Pageable pageable = PageRequest.of(page, size, Sort.by(sortDirection, sortBy));
@@ -48,12 +44,10 @@ public class RoomService {
 
     Room room = new Room();
     room.setName(roomDto.getName());
+    room.setRows(roomDto.getRows());
+    room.setSeats(roomDto.getSeats());
 
-    Room createdRoom = roomRepository.save(room);
-
-    seatService.createSeatsForRoom(createdRoom, roomDto.getRows(), roomDto.getSeats());
-
-    return createdRoom;
+    return roomRepository.save(room);
   }
 
   public void deleteRoomById(UUID id) {
@@ -65,20 +59,16 @@ public class RoomService {
   }
 
   public RoomResponseDTO transformToResponseDTO(Room room) {
-    List<String> seats = seatService.getAvailableSeatsForRoom(room.getId());
-    int capacity = seatService.getRoomCapacity(room.getId());
-    int rows = seatService.getRoomRows(room.getId());
+    int capacity = room.getRows() * room.getSeats();
 
-    return new RoomResponseDTO(room, seats, capacity, rows);
+    return new RoomResponseDTO(room, capacity);
   }
 
   public Page<RoomResponseDTO> transformToPageResponseDTO(Page<Room> rooms) {
     return rooms.map(room -> {
-      List<String> seats = seatService.getAvailableSeatsForRoom(room.getId());
-      int capacity = seatService.getRoomCapacity(room.getId());
-      int rows = seatService.getRoomRows(room.getId());
+      int capacity = room.getRows() * room.getSeats();
 
-      return new RoomResponseDTO(room, seats, capacity, rows);
+      return new RoomResponseDTO(room, capacity);
     });
   }
 }

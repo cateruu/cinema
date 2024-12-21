@@ -23,6 +23,12 @@ public class Room {
   @Column(nullable = false, unique = true)
   private String name;
 
+  @Column(nullable = false)
+  private int rows;
+
+  @Column(nullable = false)
+  private int seats;
+
   @Column(name = "created_at", nullable = false)
   @CreationTimestamp
   private LocalDateTime createdAt;
@@ -45,6 +51,22 @@ public class Room {
 
   public void setName(String name) {
     this.name = name;
+  }
+
+  public int getRows() {
+    return this.rows;
+  }
+
+  public void setRows(int rows) {
+    this.rows = rows;
+  }
+
+  public int getSeats() {
+    return this.seats;
+  }
+
+  public void setSeats(int seats) {
+    this.seats = seats;
   }
 
   public LocalDateTime getCreatedAt() {

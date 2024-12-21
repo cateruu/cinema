@@ -55,9 +55,6 @@ const Room = ({ schedules, selectedMovieId }: Props) => {
     }
   }, [defaultTimeId, possibleDates, selectedMovieId, timeSlots]);
 
-  console.log('pos', selectedDate);
-  console.log('time', selectedTimeId);
-
   return (
     <section className='w-full p-3 bg-slate-950 rounded-xl'>
       <section className='flex gap-2 items-end'>
