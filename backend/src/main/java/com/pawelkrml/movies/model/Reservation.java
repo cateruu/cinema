@@ -30,8 +30,8 @@ public class Reservation {
   private User user;
 
   @ManyToOne
-  @JoinColumn(name = "room_id")
-  private Room room;
+  @JoinColumn(name = "schedule_id")
+  private Schedule schedule;
 
   @Column(name = "created_at")
   @CreationTimestamp
@@ -44,10 +44,10 @@ public class Reservation {
   public Reservation() {
   };
 
-  public Reservation(List<String> tickets, User user, Room room) {
+  public Reservation(List<String> tickets, User user, Schedule schedule) {
     this.tickets = tickets;
     this.user = user;
-    this.room = room;
+    this.schedule = schedule;
   }
 
   public UUID getId() {
@@ -74,12 +74,12 @@ public class Reservation {
     this.user = user;
   }
 
-  public Room getRoom() {
-    return this.room;
+  public Schedule getSchedule() {
+    return this.schedule;
   }
 
-  public void setRoom(Room room) {
-    this.room = room;
+  public void setRoom(Schedule schedule) {
+    this.schedule = schedule;
   }
 
   public LocalDateTime getCreatedAt() {

@@ -12,8 +12,8 @@ public class ReservationDTO {
   @NotEmpty(message = "userId has to be present.")
   private String userId;
 
-  @NotEmpty(message = "roomId has to be present.")
-  private String roomId;
+  @NotEmpty(message = "scheduleId has to be present.")
+  private String scheduleId;
 
   public List<String> getTickets() {
     return this.tickets;
@@ -31,11 +31,11 @@ public class ReservationDTO {
     this.userId = userId;
   }
 
-  public String getRoomId() {
-    return this.roomId;
+  public String getScheduleId() {
+    return this.scheduleId;
   }
 
-  public void setRoomId(String roomId) {
-    this.roomId = roomId;
+  public void setScheduleId(String scheduleId) {
+    this.scheduleId = scheduleId;
   }
 }

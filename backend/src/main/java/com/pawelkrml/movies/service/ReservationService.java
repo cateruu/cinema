@@ -15,7 +15,7 @@ import org.springframework.stereotype.Service;
 import com.pawelkrml.movies.dto.ReservationDTO;
 import com.pawelkrml.movies.dto.ReservationResponseDTO;
 import com.pawelkrml.movies.model.Reservation;
-import com.pawelkrml.movies.model.Room;
+import com.pawelkrml.movies.model.Schedule;
 import com.pawelkrml.movies.model.User;
 import com.pawelkrml.movies.repository.ReservationRespository;
 
@@ -28,8 +28,7 @@ public class ReservationService {
   private ReservationRespository reservationRespository;
 
   @Autowired
-  private RoomService roomService;
-
+  private ScheduleService scheduleService;
   @Autowired
   private SeatService seatService;
 
@@ -38,17 +37,18 @@ public class ReservationService {
 
   @Transactional
   public Reservation createReservation(ReservationDTO reservationDTO) {
-    Room room = roomService.getRoomById(UUID.fromString(reservationDTO.getRoomId()));
+    Schedule schedule = scheduleService.getById(UUID.fromString(reservationDTO.getScheduleId()));
     User user = userService.getUserById(UUID.fromString(reservationDTO.getUserId()));
-    Reservation reservation = new Reservation(reservationDTO.getTickets(), user, room);
+    Reservation reservation = new Reservation(reservationDTO.getTickets(), user, schedule);
 
-    boolean seatsAvailable = seatService.checkIfSeatsAvailable(reservation.getTickets(), reservation.getRoom().getId());
+    boolean seatsAvailable = seatService.checkIfSeatsAvailable(reservation.getTickets(),
+        reservation.getSchedule().getId());
 
     if (!seatsAvailable) {
       throw new DataIntegrityViolationException("tickets you are trying to buy are already reserved.");
     }
 
-    seatService.reserveSeats(reservation.getTickets(), reservation.getRoom().getId());
+    seatService.reserveSeats(reservation.getTickets(), reservation.getSchedule().getId());
 
     return reservationRespository.save(reservation);
   }
@@ -69,7 +69,7 @@ public class ReservationService {
     ReservationResponseDTO responseDTO = new ReservationResponseDTO();
     responseDTO.setId(reservation.getId());
     responseDTO.setTickets(reservation.getTickets());
-    responseDTO.setRomoName(reservation.getRoom().getName());
+    responseDTO.setRoomName(reservation.getSchedule().getRoom().getName());
     responseDTO.setUserId(reservation.getUser().getId());
     responseDTO.setCreatedAt(reservation.getCreatedAt());
     responseDTO.setUpdatedAt(reservation.getUpdatedAt());
@@ -82,11 +82,11 @@ public class ReservationService {
   }
 
   public List<Reservation> getAllForRoomId(UUID roomId) {
-    return reservationRespository.getAllForRoomId(roomId);
+    return reservationRespository.getAllForScheduleId(roomId);
   }
 
   public void deleteAllReservationsForRoom(UUID roomId) {
-    reservationRespository.deleteAllByRoomId(roomId);
+    reservationRespository.deleteAllByScheduleId(roomId);
   }
 
   public Reservation update(Reservation reservation) {

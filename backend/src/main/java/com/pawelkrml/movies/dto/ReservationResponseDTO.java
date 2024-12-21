@@ -68,7 +68,7 @@ public class ReservationResponseDTO {
     return this.roomName;
   }
 
-  public void setRomoName(String name) {
+  public void setRoomName(String name) {
     this.roomName = name;
   }
 

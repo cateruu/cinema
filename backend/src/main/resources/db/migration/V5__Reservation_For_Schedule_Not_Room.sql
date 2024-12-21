@@ -1,0 +1,1 @@
+ALTER TABLE reservations DROP COLUMN room_id;

@@ -91,11 +91,11 @@ public class ReservationController {
           if (value instanceof List) {
             @SuppressWarnings("unchecked")
             List<String> valueList = (List<String>) value;
-            boolean available = seatService.checkIfSeatsAvailable(valueList, reservation.getRoom().getId());
+            boolean available = seatService.checkIfSeatsAvailable(valueList, reservation.getSchedule().getId());
 
             if (available) {
-              seatService.cancelSeatsReservation(reservation.getTickets(), reservation.getRoom().getId());
-              seatService.reserveSeats(valueList, reservation.getRoom().getId());
+              seatService.cancelSeatsReservation(reservation.getTickets(), reservation.getSchedule().getId());
+              seatService.reserveSeats(valueList, reservation.getSchedule().getId());
             } else {
               throw new IllegalArgumentException("seats are already reserved.");
             }
