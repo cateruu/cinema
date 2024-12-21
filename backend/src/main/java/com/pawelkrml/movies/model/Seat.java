@@ -29,18 +29,18 @@ public class Seat {
   private boolean reserved;
 
   @ManyToOne
-  @JoinColumn(name = "room_id", unique = false)
+  @JoinColumn(name = "schedule_id", unique = false)
   @OnDelete(action = OnDeleteAction.CASCADE)
-  private Room room;
+  private Schedule schedule;
 
   public Seat() {
   }
 
-  public Seat(int row, char seat, Room room) {
+  public Seat(int row, char seat, Schedule schedule) {
     this.row = row;
     this.seat = seat;
     this.reserved = false;
-    this.room = room;
+    this.schedule = schedule;
   }
 
   public Long getId() {
@@ -75,11 +75,11 @@ public class Seat {
     this.reserved = reserved;
   }
 
-  public Room getRoom() {
-    return this.room;
+  public Schedule getSchedule() {
+    return this.schedule;
   }
 
-  public void setRoom(Room room) {
-    this.room = room;
+  public void setSchedule(Schedule schedule) {
+    this.schedule = schedule;
   }
 }

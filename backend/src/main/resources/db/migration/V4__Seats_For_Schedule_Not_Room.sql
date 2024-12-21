@@ -1,0 +1,1 @@
+ALTER TABLE seats DROP COLUMN room_id;

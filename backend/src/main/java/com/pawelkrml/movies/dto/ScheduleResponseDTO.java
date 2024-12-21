@@ -1,6 +1,7 @@
 package com.pawelkrml.movies.dto;
 
 import java.time.LocalDateTime;
+import java.util.List;
 import java.util.UUID;
 
 import com.pawelkrml.movies.model.Movie;
@@ -10,6 +11,7 @@ public class ScheduleResponseDTO {
   private LocalDateTime playingTime;
   private Movie movie;
   private RoomResponseDTO room;
+  private List<String> availableSeats;
 
   public UUID getId() {
     return this.id;
@@ -41,5 +43,13 @@ public class ScheduleResponseDTO {
 
   public void setRoom(RoomResponseDTO room) {
     this.room = room;
+  }
+
+  public List<String> getAvailableSeats() {
+    return this.availableSeats;
+  }
+
+  public void setAvailableSeats(List<String> availableSeats) {
+    this.availableSeats = availableSeats;
   }
 }

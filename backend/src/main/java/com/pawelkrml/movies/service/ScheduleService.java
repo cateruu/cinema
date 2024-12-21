@@ -29,6 +29,9 @@ public class ScheduleService {
   @Autowired
   private RoomService roomService;
 
+  @Autowired
+  private SeatService seatService;
+
   @Transactional
   public Schedule createSchedule(ScheduleDTO scheduleDTO) {
     Movie movie = movieService.getMovieById(UUID.fromString(scheduleDTO.getMovieId()));
@@ -40,14 +43,15 @@ public class ScheduleService {
     }
 
     Room room = roomService.getRoomById(roomId);
-    System.out.println("here");
 
     Schedule schedule = new Schedule();
     schedule.setPlayingTime(scheduleDTO.getPlayingTime());
     schedule.setMovie(movie);
     schedule.setRoom(room);
 
-    scheduleRepository.save(schedule);
+    Schedule savedSchedule = scheduleRepository.save(schedule);
+    seatService.createSeatsForSchedule(savedSchedule, room.getRows(), room.getSeats());
+
     return schedule;
   }
 
@@ -99,6 +103,7 @@ public class ScheduleService {
     responseDTO.setPlayingTime(schedule.getPlayingTime());
     responseDTO.setMovie(schedule.getMovie());
     responseDTO.setRoom(roomService.transformToResponseDTO(schedule.getRoom()));
+    responseDTO.setAvailableSeats(seatService.getAvailableSeatsForSchedule(schedule.getId()));
 
     return responseDTO;
   }
