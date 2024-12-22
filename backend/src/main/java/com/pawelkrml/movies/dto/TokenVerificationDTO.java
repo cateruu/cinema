@@ -1,18 +1,29 @@
 package com.pawelkrml.movies.dto;
 
 import java.util.List;
+import java.util.UUID;
 
 import com.pawelkrml.movies.model.ERole;
 
 public class TokenVerificationDTO {
+  private UUID id;
   private boolean valid;
   private String username;
   private List<ERole> roles;
 
-  public TokenVerificationDTO(boolean valid, String username, List<ERole> roles) {
+  public TokenVerificationDTO(UUID id, boolean valid, String username, List<ERole> roles) {
+    this.id = id;
     this.valid = valid;
     this.username = username;
     this.roles = roles;
+  }
+
+  public UUID getId() {
+    return this.id;
+  }
+
+  public void setId(UUID id) {
+    this.id = id;
   }
 
   public boolean getValid() {

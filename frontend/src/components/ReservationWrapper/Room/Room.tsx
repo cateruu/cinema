@@ -2,10 +2,14 @@
 
 import React, { useEffect, useRef, useState } from 'react';
 import { Schedule } from '../../../types/schedule';
-import { formatDate } from '../../../utils/formatDate';
+import { formatScheduleDate } from '../../../utils/formatDate';
 import { formatTime } from '../../../utils/formatTime';
 import DateSelection from './DateSelection/DateSelection';
 import SeatPicker from './SeatPicker/SeatPicker';
+import {
+  ReservationActionTypes,
+  useReservationDispatch,
+} from '../../../context/ReservationContext';
 
 export interface TimeSlot {
   [key: string]: {
@@ -24,7 +28,7 @@ const Room = ({ schedules, selectedMovieId }: Props) => {
   const timeSlots: TimeSlot = {};
   schedules.forEach((schedule) => {
     const playingTime = new Date(schedule.playingTime);
-    const key = formatDate(playingTime);
+    const key = formatScheduleDate(playingTime);
 
     if (timeSlots[key]) {
       timeSlots[key].push({
@@ -64,6 +68,19 @@ const Room = ({ schedules, selectedMovieId }: Props) => {
       prevMovieId.current = selectedMovieId;
     }
   }, [defaultTimeId, possibleDates, selectedMovieId, timeSlots]);
+
+  const dispatch = useReservationDispatch();
+
+  useEffect(() => {
+    if (dispatch) {
+      dispatch({
+        type: ReservationActionTypes.SET_SCHEDULE,
+        payload:
+          schedules.find((schedule) => schedule.id === selectedTimeId) ||
+          schedules[0],
+      });
+    }
+  }, [dispatch, schedules, selectedTimeId]);
 
   const selectedSchedule =
     schedules.find((schedule) => schedule.id === selectedTimeId) ||

@@ -4,6 +4,7 @@ export const UserRoles = {
 } as const;
 
 export interface UserSession {
+  id: string;
   valid: boolean;
   username: string;
   roles: string[];

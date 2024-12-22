@@ -31,7 +31,9 @@ const ReservationWrapper = async ({ selectedMovie }: Props) => {
     <div className='flex flex-col flex-grow ml-5'>
       <ReservationProvider>
         <Room schedules={schedules} selectedMovieId={selectedMovie.id} />
-        {schedules.length > 0 && <Ticket user={user} />}
+        {schedules.length > 0 && (
+          <Ticket user={user} selectedMovie={selectedMovie} />
+        )}
       </ReservationProvider>
     </div>
   );

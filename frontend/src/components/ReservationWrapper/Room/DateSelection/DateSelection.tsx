@@ -1,6 +1,10 @@
 import React from 'react';
 import SelectComponent from '../../../SelectComponent/SelectComponent';
 import { TimeSlot } from '../Room';
+import {
+  ReservationActionTypes,
+  useReservationDispatch,
+} from '../../../../context/ReservationContext';
 
 interface Props {
   selectedDate: string;
@@ -19,6 +23,8 @@ const DateSelection = ({
   selectedTimeId,
   setSelectedTimeId,
 }: Props) => {
+  const dispatch = useReservationDispatch();
+
   return (
     <section className='flex gap-2 items-end'>
       <div>
@@ -37,7 +43,15 @@ const DateSelection = ({
       {timeSlots[selectedDate]?.map((time) => (
         <button
           key={time.id}
-          onClick={() => setSelectedTimeId(time.id)}
+          onClick={() => {
+            setSelectedTimeId(time.id);
+            if (dispatch) {
+              dispatch({
+                type: ReservationActionTypes.CLEAR_TICKETS,
+                payload: '',
+              });
+            }
+          }}
           className={`h-11 bg-slate-950 rounded-xl border-2 border-slate-800 p-2 outline-none font-medium transition-colors hover:border-orange-600 ${
             selectedTimeId === time.id && '!border-orange-400'
           }`}

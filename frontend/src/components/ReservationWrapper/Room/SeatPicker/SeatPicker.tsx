@@ -67,7 +67,7 @@ const SeatPicker = ({ selectedSchedule }: Props) => {
       <MovieScreen />
       <p className='text-slate-400 font-medium -mt-16'>
         {selectedSchedule.room.name.slice(0, 1).toUpperCase() +
-          selectedSchedule.room.name.slice(1)}
+          selectedSchedule.room.name.slice(1).toLowerCase()}
       </p>
       <div
         style={{
