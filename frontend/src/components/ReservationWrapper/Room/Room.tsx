@@ -2,11 +2,12 @@
 
 import React, { useEffect, useRef, useState } from 'react';
 import { Schedule } from '../../../types/schedule';
-import SelectComponent from '../../SelectComponent/SelectComponent';
 import { formatDate } from '../../../utils/formatDate';
 import { formatTime } from '../../../utils/formatTime';
+import DateSelection from './DateSelection/DateSelection';
+import SeatPicker from './SeatPicker/SeatPicker';
 
-interface TimeSlot {
+export interface TimeSlot {
   [key: string]: {
     id: string;
     time: string;
@@ -40,6 +41,15 @@ const Room = ({ schedules, selectedMovieId }: Props) => {
     }
   });
 
+  for (const value of Object.values(timeSlots)) {
+    value.sort((a, b) => {
+      if (a.time > b.time) return 1;
+      if (a.time < b.time) return -1;
+
+      return 0;
+    });
+  }
+
   const possibleDates = Object.keys(timeSlots);
   const [selectedDate, setSelectedDate] = useState(possibleDates[0] || '');
   const defaultTimeId = timeSlots[selectedDate]?.[0].id;
@@ -55,29 +65,27 @@ const Room = ({ schedules, selectedMovieId }: Props) => {
     }
   }, [defaultTimeId, possibleDates, selectedMovieId, timeSlots]);
 
+  const selectedSchedule =
+    schedules.find((schedule) => schedule.id === selectedTimeId) ||
+    schedules[0];
+
   return (
     <section className='w-full p-3 bg-slate-950 rounded-xl'>
-      <section className='flex gap-2 items-end'>
-        <div>
-          <p className='text-xs font-medium ml-2 text-slate-400'>Date</p>
-          <SelectComponent
-            values={possibleDates}
-            value={selectedDate}
-            onChange={setSelectedDate}
+      {schedules.length > 0 ? (
+        <>
+          <DateSelection
+            possibleDates={possibleDates}
+            selectedDate={selectedDate}
+            setSelectedDate={setSelectedDate}
+            selectedTimeId={selectedTimeId}
+            setSelectedTimeId={setSelectedTimeId}
+            timeSlots={timeSlots}
           />
-        </div>
-        {timeSlots[selectedDate]?.map((time) => (
-          <button
-            key={time.id}
-            onClick={() => setSelectedTimeId(time.id)}
-            className={`h-11 bg-slate-950 rounded-xl border-2 border-slate-800 p-2 outline-none font-medium transition-colors hover:border-orange-600 ${
-              selectedTimeId === time.id && '!border-orange-400'
-            }`}
-          >
-            {time.time}
-          </button>
-        ))}
-      </section>
+          <SeatPicker selectedSchedule={selectedSchedule} />
+        </>
+      ) : (
+        <div>No available schedule for this movie.</div>
+      )}
     </section>
   );
 };

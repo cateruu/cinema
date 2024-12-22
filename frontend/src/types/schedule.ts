@@ -6,4 +6,5 @@ export interface Schedule {
   playingTime: string;
   movie: Movie;
   room: Room;
+  availableSeats: string[];
 }

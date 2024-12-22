@@ -1,9 +1,10 @@
 import React from 'react';
-import { verifySession } from '../../actions/verifySession';
 import { Movie } from '../../types/movies';
 import { Schedule } from '../../types/schedule';
 import Room from './Room/Room';
 import Ticket from '../Ticket/Ticket';
+import { ReservationProvider } from '../../context/ReservationContext';
+import { verifySession } from '../../actions/verifySession';
 
 interface Props {
   selectedMovie: Movie;
@@ -28,8 +29,10 @@ const ReservationWrapper = async ({ selectedMovie }: Props) => {
 
   return (
     <div className='flex flex-col flex-grow ml-5'>
-      <Room schedules={schedules} selectedMovieId={selectedMovie.id} />
-      <Ticket />
+      <ReservationProvider>
+        <Room schedules={schedules} selectedMovieId={selectedMovie.id} />
+        {schedules.length > 0 && <Ticket user={user} />}
+      </ReservationProvider>
     </div>
   );
 };

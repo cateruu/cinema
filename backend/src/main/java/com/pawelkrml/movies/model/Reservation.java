@@ -5,6 +5,8 @@ import java.util.List;
 import java.util.UUID;
 
 import org.hibernate.annotations.CreationTimestamp;
+import org.hibernate.annotations.OnDelete;
+import org.hibernate.annotations.OnDeleteAction;
 import org.hibernate.annotations.UpdateTimestamp;
 
 import jakarta.persistence.Column;
@@ -31,6 +33,7 @@ public class Reservation {
 
   @ManyToOne
   @JoinColumn(name = "schedule_id")
+  @OnDelete(action = OnDeleteAction.CASCADE)
   private Schedule schedule;
 
   @Column(name = "created_at")
