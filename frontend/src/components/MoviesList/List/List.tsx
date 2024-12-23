@@ -25,35 +25,33 @@ const List = ({ movies, selectedMovie }: Props) => {
     const searchFormElement = document.getElementById('search-form');
     const listElement = listRef.current;
 
-    const resizeObserver = new ResizeObserver((entries) => {
-      for (const entry of entries) {
-        if (selectedMovieElement && searchFormElement) {
-          const selectedMovieParentNode = selectedMovieElement.parentNode;
+    const resizeObserver = new ResizeObserver(() => {
+      if (selectedMovieElement && searchFormElement) {
+        const selectedMovieParentNode = selectedMovieElement.parentNode;
 
-          const screenSize = document.createElement('div');
-          screenSize.style.width = '0';
-          screenSize.style.height = '100vh';
-          screenSize.style.position = 'fixed';
-          screenSize.style.visibility = 'hidden';
+        const screenSize = document.createElement('div');
+        screenSize.style.width = '0';
+        screenSize.style.height = '100vh';
+        screenSize.style.position = 'fixed';
+        screenSize.style.visibility = 'hidden';
 
-          if (selectedMovieParentNode) {
-            selectedMovieParentNode.insertBefore(
-              screenSize,
-              selectedMovieElement
-            );
-          }
-
-          const selectedMovieHeight = selectedMovieElement.clientHeight;
-          const searchFormHeighth = searchFormElement.clientHeight;
-          const padding = 32;
-
-          setMaxListHeight(
-            screenSize.clientHeight -
-              searchFormHeighth -
-              selectedMovieHeight -
-              padding
+        if (selectedMovieParentNode) {
+          selectedMovieParentNode.insertBefore(
+            screenSize,
+            selectedMovieElement
           );
         }
+
+        const selectedMovieHeight = selectedMovieElement.clientHeight;
+        const searchFormHeighth = searchFormElement.clientHeight;
+        const padding = 32;
+
+        const maxListHeight =
+          screenSize.clientHeight -
+          searchFormHeighth -
+          selectedMovieHeight -
+          padding;
+        setMaxListHeight(maxListHeight);
       }
     });
 
@@ -72,7 +70,7 @@ const List = ({ movies, selectedMovie }: Props) => {
         style={{
           maxHeight: maxListHeight + 'px',
         }}
-        className='overflow-y-scroll mt-3 grid grid-cols-3 gap-3 rounded-s-xl scroll-'
+        className='overflow-y-auto mt-3 grid grid-cols-3 gap-3 rounded-s-xl scroll-'
       >
         {movies.map((movie) => (
           <MovieElement
