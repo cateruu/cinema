@@ -58,7 +58,7 @@ const Ticket = ({ user, selectedMovie }: Props) => {
   };
 
   return (
-    <section className='w-full h-full bg-slate-950 rounded-xl mt-5 flex'>
+    <section className='w-full h-full min-h-48 max-h-80 bg-slate-950 rounded-xl mt-5 flex overflow-hidden'>
       <section className='flex-grow p-5 flex flex-col justify-between font-medium'>
         <div>
           <p className='text-2xl'>{selectedMovie.name}</p>

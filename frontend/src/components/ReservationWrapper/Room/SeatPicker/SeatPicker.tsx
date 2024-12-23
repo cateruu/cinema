@@ -87,7 +87,7 @@ const SeatPicker = ({ selectedSchedule }: Props) => {
               onClick={() => {
                 handleSeatSelection(seat, isSelected);
               }}
-              className={`h-8 w-8 border-2 rounded-lg cursor-pointer content-center place-items-center  ${
+              className={`h-7 w-7 border-2 rounded-lg cursor-pointer content-center place-items-center  ${
                 seat.reserved
                   ? 'border-slate-400 cursor-not-allowed'
                   : 'border-orange-400'

@@ -19,27 +19,36 @@ const LinkButtons = ({ user }: Props) => {
         href='/'
         className={`${
           pathname === '/' ? 'bg-slate-950' : 'text-slate-400'
-        } rounded-xl p-3 font-medium text-sm flex items-center gap-3 hover:bg-slate-950 hover:text-orange-50 transition-colors`}
+        } rounded-xl p-2 w-full font-medium text-sm flex items-center gap-3 flex-nowrap overflow-hidden hover:bg-slate-950 hover:text-orange-50 transition-colors xl:p-3`}
       >
-        <House size={24} /> Home
+        <div className='w-6'>
+          <House />
+        </div>{' '}
+        Home
       </Link>
-      <Link
-        href='/reservations'
-        className={`${
-          pathname === '/reservations' ? 'bg-slate-950' : 'text-slate-400'
-        } rounded-xl p-3 font-medium text-sm flex items-center gap-3 hover:bg-slate-950 hover:text-orange-50 transition-colors`}
-      >
-        <Ticket size={24} />
-        Reservations
-      </Link>
+      {user && user.valid && (
+        <Link
+          href='/reservations'
+          className={`${
+            pathname === '/reservations' ? 'bg-slate-950' : 'text-slate-400'
+          } rounded-xl p-2 font-medium text-sm flex items-center gap-3 flex-nowrap overflow-hidden hover:bg-slate-950 hover:text-orange-50 transition-colors xl:p-3`}
+        >
+          <div className='w-6'>
+            <Ticket />
+          </div>
+          Reservations
+        </Link>
+      )}
       {user && user.valid && user.roles.includes(UserRoles.ADMIN) && (
         <Link
           href='/dashboard'
           className={`${
             pathname === '/dashboard' ? 'bg-slate-950' : 'text-slate-400'
-          } rounded-xl p-3 font-medium text-sm flex items-center gap-3 hover:bg-slate-950 hover:text-orange-50 transition-colors`}
+          } rounded-xl p-2 font-medium text-sm flex items-center gap-3 flex-nowrap overflow-hidden hover:bg-slate-950 hover:text-orange-50 transition-colors xl:p-3`}
         >
-          <LayoutDashboard size={24} />
+          <div className='w-6'>
+            <LayoutDashboard />
+          </div>
           Dashboard
         </Link>
       )}
