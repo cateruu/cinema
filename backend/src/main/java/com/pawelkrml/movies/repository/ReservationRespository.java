@@ -20,4 +20,6 @@ public interface ReservationRespository extends JpaRepository<Reservation, UUID>
   @Transactional
   @Query(value = "DELETE FROM reservations WHERE schedule_id = :scheduleId", nativeQuery = true)
   public void deleteAllByScheduleId(@Param("scheduleId") UUID scheduleId);
+
+  public List<Reservation> findAllByUserId(UUID id);
 }

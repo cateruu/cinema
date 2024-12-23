@@ -5,6 +5,7 @@ import Input from '../Input/Input';
 import Link from 'next/link';
 import LoadingButton from '../LoadingButton/LoadingButton';
 import { signUp } from '../../actions/auth-actions';
+import { CornerUpLeft } from 'lucide-react';
 
 const initialState = {
   message: '',
@@ -16,6 +17,12 @@ const RegisterForm = () => {
 
   return (
     <form action={formAction} className='flex flex-col items-start gap-2'>
+      <Link
+        href='/'
+        className='flex align items-center gap-1 text-sm text-slate-600 mb-3 transition-colors hover:text-orange-50'
+      >
+        <CornerUpLeft size={12} /> Home
+      </Link>
       <Input
         name='username'
         type='username'

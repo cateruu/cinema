@@ -2,9 +2,9 @@ import React from 'react';
 import { Movie } from '../../types/movies';
 import { Schedule } from '../../types/schedule';
 import Room from './Room/Room';
-import Ticket from '../Ticket/Ticket';
 import { ReservationProvider } from '../../context/ReservationContext';
 import { verifySession } from '../../actions/verifySession';
+import Ticket from './Ticket/Ticket';
 
 interface Props {
   selectedMovie: Movie;

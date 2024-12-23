@@ -1,9 +1,11 @@
 package com.pawelkrml.movies.controller;
 
 import java.lang.reflect.Field;
+import java.util.List;
 import java.util.Map;
 import java.util.UUID;
 import java.util.regex.Pattern;
+import java.util.stream.Collectors;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
@@ -20,8 +22,11 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.pawelkrml.movies.dto.PaginatedResponseDTO;
+import com.pawelkrml.movies.dto.ReservationResponseDTO;
 import com.pawelkrml.movies.dto.UserResponseDTO;
+import com.pawelkrml.movies.model.Reservation;
 import com.pawelkrml.movies.model.User;
+import com.pawelkrml.movies.service.ReservationService;
 import com.pawelkrml.movies.service.UserService;
 
 @RestController
@@ -29,6 +34,9 @@ import com.pawelkrml.movies.service.UserService;
 public class UserController {
   @Autowired
   private UserService userService;
+
+  @Autowired
+  private ReservationService reservationService;
 
   @GetMapping
   public ResponseEntity<PaginatedResponseDTO<UserResponseDTO>> getAllUsers(
@@ -84,5 +92,14 @@ public class UserController {
     userService.update(user);
 
     return ResponseEntity.ok(userService.transformToResponse(user));
+  }
+
+  @GetMapping("{id}/reservations")
+  public ResponseEntity<List<ReservationResponseDTO>> getAllReservationsForUser(@PathVariable UUID id) {
+    userService.getById(id);
+    List<Reservation> reservations = reservationService.getAllForUser(id);
+
+    return ResponseEntity.ok(reservations.stream()
+        .map(reservation -> reservationService.tranformToResponseDto(reservation)).collect(Collectors.toList()));
   }
 }

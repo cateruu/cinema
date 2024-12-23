@@ -13,6 +13,7 @@ public class ReservationResponseDTO {
   private String roomName;
   private LocalDateTime playingTime;
   private UUID userId;
+  private String thumnbnailUrl;
   private LocalDateTime createdAt;
   private LocalDateTime updatedAt;
 
@@ -82,6 +83,14 @@ public class ReservationResponseDTO {
 
   public UUID getUserId() {
     return this.userId;
+  }
+
+  public String getThumbnailUrl() {
+    return this.thumnbnailUrl;
+  }
+
+  public void setThumbnailUrl(String url) {
+    this.thumnbnailUrl = url;
   }
 
   public void setUserId(UUID id) {

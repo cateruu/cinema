@@ -18,7 +18,7 @@ const SideBar = async () => {
         {user && user.valid ? (
           <button
             className={
-              'w-full bg-slate-950 rounded-xl p-3 font-medium text-sm flex items-center flex-nowrap gap-3 overflow-hidden whitespace-nowrap'
+              'w-full bg-slate-950 rounded-xl p-2 font-medium text-sm flex items-center flex-nowrap gap-3 overflow-hidden whitespace-nowrap xl:p-3'
             }
             onClick={signOut}
           >
@@ -31,7 +31,7 @@ const SideBar = async () => {
           <Link
             href='/login'
             className={
-              'w-full bg-slate-950 rounded-xl p-3 font-medium text-sm flex items-center flex-nowrap gap-3 overflow-hidden whitespace-nowrap'
+              'w-full bg-slate-950 rounded-xl p-2 font-medium text-sm flex items-center flex-nowrap gap-3 overflow-hidden whitespace-nowrap xl:p-3'
             }
           >
             <div className='w-6'>
