@@ -1,6 +1,6 @@
 'use client';
 
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 import { Movie } from '../../../types/movies';
 import SelectedMovie from '../SelectedMovie/SelectedMovie';
 import MovieElement from '../MovieElement/MovieElement';
@@ -13,6 +13,7 @@ interface Props {
 const List = ({ movies, selectedMovie }: Props) => {
   const [mainMovie, setMainMovie] = useState<Movie>(selectedMovie);
   const [maxListHeight, setMaxListHeight] = useState(500);
+  const listRef = useRef<HTMLDivElement | null>(null);
 
   const handleSelectMovie = (movie: Movie) => {
     setMainMovie(movie);
@@ -22,37 +23,52 @@ const List = ({ movies, selectedMovie }: Props) => {
   useEffect(() => {
     const selectedMovieElement = document.getElementById('selected-movie');
     const searchFormElement = document.getElementById('search-form');
+    const listElement = listRef.current;
 
-    if (selectedMovieElement && searchFormElement) {
-      const selectedMovieParentNode = selectedMovieElement.parentNode;
+    const resizeObserver = new ResizeObserver((entries) => {
+      for (const entry of entries) {
+        if (selectedMovieElement && searchFormElement) {
+          const selectedMovieParentNode = selectedMovieElement.parentNode;
 
-      const screenSize = document.createElement('div');
-      screenSize.style.width = '0';
-      screenSize.style.height = '100vh';
-      screenSize.style.position = 'fixed';
-      screenSize.style.visibility = 'hidden';
+          const screenSize = document.createElement('div');
+          screenSize.style.width = '0';
+          screenSize.style.height = '100vh';
+          screenSize.style.position = 'fixed';
+          screenSize.style.visibility = 'hidden';
 
-      if (selectedMovieParentNode) {
-        selectedMovieParentNode.insertBefore(screenSize, selectedMovieElement);
+          if (selectedMovieParentNode) {
+            selectedMovieParentNode.insertBefore(
+              screenSize,
+              selectedMovieElement
+            );
+          }
+
+          const selectedMovieHeight = selectedMovieElement.clientHeight;
+          const searchFormHeighth = searchFormElement.clientHeight;
+          const padding = 32;
+
+          setMaxListHeight(
+            screenSize.clientHeight -
+              searchFormHeighth -
+              selectedMovieHeight -
+              padding
+          );
+        }
       }
+    });
 
-      const selectedMovieHeight = selectedMovieElement.clientHeight;
-      const searchFormHeighth = searchFormElement.clientHeight;
-      const padding = 32;
-
-      setMaxListHeight(
-        screenSize.clientHeight -
-          searchFormHeighth -
-          selectedMovieHeight -
-          padding
-      );
+    if (listElement) {
+      resizeObserver.observe(listElement);
     }
+
+    return () => resizeObserver.disconnect();
   }, []);
 
   return (
     <section className='min-w-72'>
       <SelectedMovie movie={mainMovie} />
       <div
+        ref={listRef}
         style={{
           maxHeight: maxListHeight + 'px',
         }}
