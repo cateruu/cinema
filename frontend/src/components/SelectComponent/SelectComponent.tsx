@@ -22,7 +22,7 @@ const SelectComponent = ({ values, value, onChange }: Props) => {
       </Select.Trigger>
 
       <Select.Portal>
-        <Select.Content className='bg-slate-950 rounded-xl border-2 border-slate-800 overflow-hidden'>
+        <Select.Content className='bg-slate-950 rounded-xl border-2 border-slate-800 overflow-hidden z-20'>
           <Select.Viewport>
             {values.map((value) => (
               <Select.Item

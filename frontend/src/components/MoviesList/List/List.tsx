@@ -63,14 +63,14 @@ const List = ({ movies, selectedMovie }: Props) => {
   }, []);
 
   return (
-    <section className='min-w-72'>
+    <section className='min-w-64'>
       <SelectedMovie movie={mainMovie} />
       <div
         ref={listRef}
         style={{
           maxHeight: maxListHeight + 'px',
         }}
-        className='overflow-y-auto mt-3 grid grid-cols-3 gap-3 rounded-s-xl scroll-'
+        className='overflow-y-auto mt-3 grid grid-cols-3 gap-3 rounded-s-xl'
       >
         {movies.map((movie) => (
           <MovieElement

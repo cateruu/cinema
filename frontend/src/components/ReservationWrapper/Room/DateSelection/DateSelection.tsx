@@ -27,7 +27,7 @@ const DateSelection = ({
 
   return (
     <section className='flex gap-2 items-end'>
-      <div>
+      <div className=' z-10'>
         <label
           htmlFor='select-component'
           className='text-xs font-medium ml-2 text-slate-400'
@@ -52,7 +52,7 @@ const DateSelection = ({
               });
             }
           }}
-          className={`h-11 bg-slate-950 rounded-xl border-2 border-slate-800 p-2 outline-none font-medium transition-colors hover:border-orange-600 ${
+          className={`h-11 bg-slate-950 rounded-xl border-2 border-slate-800 p-2 outline-none font-medium transition-colors hover:border-orange-600 z-10 ${
             selectedTimeId === time.id && '!border-orange-400'
           }`}
         >

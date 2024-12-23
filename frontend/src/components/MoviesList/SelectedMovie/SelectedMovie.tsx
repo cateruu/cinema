@@ -16,7 +16,7 @@ const SelectedMovie = ({ movie }: Props) => {
         src={movie.thumbnailUrl}
         alt={`${movie.name} poster`}
         width={500}
-        height={300}
+        height={500}
         className='aspect-video object-cover w-full'
         priority
       />

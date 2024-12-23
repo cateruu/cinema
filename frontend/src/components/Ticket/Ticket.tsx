@@ -70,7 +70,7 @@ const Ticket = ({ user, selectedMovie }: Props) => {
           </p>
         </div>
         <div>
-          <div className='flex justify-between'>
+          <div className='flex justify-between text-sm xl:text-base'>
             <p className='text-slate-600'>Room:</p>
             <p>
               {reservation?.selectedSchedule &&
@@ -82,9 +82,9 @@ const Ticket = ({ user, selectedMovie }: Props) => {
                     .toLowerCase()}
             </p>
           </div>
-          <div className='flex justify-between'>
+          <div className='flex justify-between gap-2 flex-nowrap'>
             <p className='text-slate-600'>Tickets:</p>
-            <p>
+            <p className='max-w-44 truncate'>
               {reservation?.tickets.map((ticket, idx) => (
                 <span key={ticket}>
                   {ticket}
@@ -96,7 +96,7 @@ const Ticket = ({ user, selectedMovie }: Props) => {
         </div>
         <div className='flex items-center justify-between'>
           {reservation && (
-            <p className='font-bold text-4xl'>
+            <p className='font-bold text-xl xl:text-2xl'>
               $
               {(reservation.tickets.length * selectedMovie.ticketPrice).toFixed(
                 2
@@ -105,12 +105,47 @@ const Ticket = ({ user, selectedMovie }: Props) => {
           )}
           <button
             onClick={handleTicketsBuy}
-            className={`font-bold text-sm py-3 px-8 bg-orange-400 rounded-xl ${
+            className={`font-bold text-sm py-3 px-4 bg-orange-400 rounded-xl whitespace-nowrap xl:px-6 ${
               !user && 'bg-slate-600'
             }`}
             disabled={isLoading}
           >
-            {user ? (isLoading ? 'Loading...' : 'Buy tickets') : 'Login to buy'}
+            {user ? (
+              isLoading ? (
+                <svg
+                  width='24'
+                  height='24'
+                  viewBox='-15 -15 150 150'
+                  className='animate-spin'
+                >
+                  <circle
+                    r='50'
+                    cx='60'
+                    cy='60'
+                    fill='transparent'
+                    stroke='#fff7ed'
+                    strokeWidth='16px'
+                    strokeDasharray='314px'
+                    strokeDashoffset='0'
+                  ></circle>
+                  <circle
+                    r='50'
+                    cx='60'
+                    cy='60'
+                    stroke='#b45309'
+                    strokeWidth='16px'
+                    strokeLinecap='round'
+                    strokeDashoffset='251px'
+                    fill='transparent'
+                    strokeDasharray='314px'
+                  ></circle>
+                </svg>
+              ) : (
+                'Buy tickets'
+              )
+            ) : (
+              'Login to buy'
+            )}
           </button>
         </div>
       </section>

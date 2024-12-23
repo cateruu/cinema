@@ -8,7 +8,7 @@ const MovieScreen = () => {
       viewBox='0 0 586 164'
       fill='none'
       xmlns='http://www.w3.org/2000/svg'
-      className='w-full'
+      className='w-full -mt-10'
     >
       <g filter='url(#filter0_d_4_182)'>
         <path

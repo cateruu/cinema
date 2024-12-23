@@ -28,7 +28,7 @@ const ReservationWrapper = async ({ selectedMovie }: Props) => {
   const schedules = (await resp.json()) as Schedule[];
 
   return (
-    <div className='flex flex-col flex-grow ml-5'>
+    <div className='hidden lg:flex flex-col flex-grow ml-5 '>
       <ReservationProvider>
         <Room schedules={schedules} selectedMovieId={selectedMovie.id} />
         {schedules.length > 0 && (

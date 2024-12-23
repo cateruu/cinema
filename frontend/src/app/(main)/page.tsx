@@ -22,7 +22,7 @@ const HomePage = async (props: { searchParams: SearchParams }) => {
     movies.content[0];
 
   return (
-    <main className='font-[family-name:var(--font-poppins)] w-full h-full ml-20 xl:ml-0'>
+    <main className='font-[family-name:var(--font-poppins)] w-full h-full ml-8 lg:ml-20 xl:ml-0'>
       <SearchHeader />
       <div className='flex pr-8 relative'>
         <MoviesList selectedMovie={selectedMovie} movies={movies} />

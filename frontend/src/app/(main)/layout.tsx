@@ -4,6 +4,7 @@ import '../globals.css';
 import NextTopLoader from 'nextjs-toploader';
 import { ReactNode } from 'react';
 import SideBar from '../../components/SideBar/SideBar';
+import MobileNavbar from '../../components/MobileNavbar/MobileNavbar';
 
 const poppins = Poppins({
   variable: '--font-poppins',
@@ -30,6 +31,7 @@ const RootLayout = async ({ children }: { children: ReactNode }) => {
       >
         <NextTopLoader color='#FB923C' showSpinner={false} />
         <SideBar />
+        <MobileNavbar />
         {children}
       </body>
     </html>

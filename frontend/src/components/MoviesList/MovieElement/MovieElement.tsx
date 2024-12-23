@@ -29,7 +29,7 @@ const MovieElement = ({ movie, isSelected, setSelectedMovie }: Props) => {
         alt={`${movie.name} poster`}
         width={500}
         height={500}
-        className='w-full aspect-square object-cover rounded-lg max-w-[200px]'
+        className='w-full aspect-square object-cover rounded-lg'
       />
       <p className='text-sm mt-1 truncate'>{movie.name}</p>
       <div className='flex gap-2 text-[10px] text-slate-400 truncate'>

@@ -87,7 +87,7 @@ const Room = ({ schedules, selectedMovieId }: Props) => {
     schedules[0];
 
   return (
-    <section className='w-full p-3 bg-slate-950 rounded-xl'>
+    <section className='w-full p-3 bg-slate-950 rounded-xl lg:min-w-[500px]'>
       {schedules.length > 0 ? (
         <>
           <DateSelection

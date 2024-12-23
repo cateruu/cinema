@@ -10,7 +10,7 @@ interface Props {
 
 const MoviesList = async ({ selectedMovie, movies }: Props) => {
   return (
-    <div>
+    <div className='w-full'>
       {movies.content.length > 0 ? (
         <List movies={movies.content} selectedMovie={selectedMovie} />
       ) : (
