@@ -125,7 +125,7 @@ const Ticket = ({ user, selectedMovie }: Props) => {
           )}
           <button
             onClick={handleTicketsBuy}
-            className={`font-bold text-sm py-3 px-4 bg-orange-400 rounded-xl whitespace-nowrap xl:px-6 ${
+            className={`font-bold text-sm py-3 px-4 bg-orange-400 rounded-xl whitespace-nowrap flex justify-center xl:px-6 ${
               !user && 'bg-slate-600'
             }`}
             disabled={isLoading}

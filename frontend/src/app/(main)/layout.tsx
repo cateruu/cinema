@@ -31,7 +31,7 @@ const RootLayout = async ({ children }: { children: ReactNode }) => {
         className={`${poppins.variable} ${kronaOne.variable} antialiased bg-slate-900 text-orange-50 flex`}
       >
         <Toaster
-          position='bottom-right'
+          position='top-center'
           toastOptions={{
             style: {
               background: '#020617',
