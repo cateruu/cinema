@@ -5,6 +5,7 @@ import NextTopLoader from 'nextjs-toploader';
 import { ReactNode } from 'react';
 import SideBar from '../../components/SideBar/SideBar';
 import MobileNavbar from '../../components/MobileNavbar/MobileNavbar';
+import { Toaster } from 'react-hot-toast';
 
 const poppins = Poppins({
   variable: '--font-poppins',
@@ -29,6 +30,17 @@ const RootLayout = async ({ children }: { children: ReactNode }) => {
       <body
         className={`${poppins.variable} ${kronaOne.variable} antialiased bg-slate-900 text-orange-50 flex`}
       >
+        <Toaster
+          position='bottom-right'
+          toastOptions={{
+            style: {
+              background: '#020617',
+              color: '#fff7ed',
+              border: '2px solid #0f172a',
+              borderRadius: '12px',
+            },
+          }}
+        />
         <NextTopLoader color='#FB923C' showSpinner={false} />
         <SideBar />
         <MobileNavbar />

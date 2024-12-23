@@ -27,7 +27,7 @@ export const buyTickets = async (
   });
 
   if (!resp.ok) {
-    throw new Error('Unable to create reservation.');
+    throw new Error('Unable to buy tickets. Please try again.');
   }
 
   const data = await resp.json();

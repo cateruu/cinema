@@ -13,6 +13,7 @@ import { formatTicketDate } from '../../utils/formatDate';
 import { useRouter } from 'next/navigation';
 import { buyTickets } from '../../actions/reservation';
 import { useReservationModal } from '../../context/ReservationModalContext';
+import toast from 'react-hot-toast';
 
 interface Props {
   user: UserSession | null;
@@ -52,8 +53,22 @@ const Ticket = ({ user, selectedMovie }: Props) => {
           payload: '',
         });
       }
+
+      toast.success('Tickets bought successfuly.', {
+        ariaProps: {
+          role: 'status',
+          'aria-live': 'polite',
+        },
+      });
     } catch (error) {
-      console.error(error);
+      if (error instanceof Error) {
+        toast.error(error.message, {
+          ariaProps: {
+            role: 'status',
+            'aria-live': 'polite',
+          },
+        });
+      }
     } finally {
       modalState?.setIsOpen(false);
       setIsLoading(false);
