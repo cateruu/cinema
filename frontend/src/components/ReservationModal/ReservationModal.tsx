@@ -18,7 +18,7 @@ const ReservationModal = ({ children }: Props) => {
   return (
     <div
       className={`fixed left-0 h-full w-full lg:hidden z-50 bg-slate-900 p-3 overflow-hidden overflow-y-auto ${
-        state?.isOpen ? 'animate-reveal' : 'top-full'
+        state?.isOpen ? 'animate-reveal' : 'animate-hide'
       }`}
     >
       <div className='flex gap-2 justify-end mb-3'>
