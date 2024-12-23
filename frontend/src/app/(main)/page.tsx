@@ -3,6 +3,8 @@ import MoviesList from '../../components/MoviesList/MoviesList';
 import ReservationWrapper from '../../components/ReservationWrapper/ReservationWrapper';
 import { Movie } from '../../types/movies';
 import { Paginated } from '../../types/pagination';
+import { ReservationModalProvider } from '../../context/ReservationModalContext';
+import ReservationModal from '../../components/ReservationModal/ReservationModal';
 
 type SearchParams = Promise<{ [key: string]: string | undefined }>;
 
@@ -25,8 +27,13 @@ const HomePage = async (props: { searchParams: SearchParams }) => {
     <main className='font-[family-name:var(--font-poppins)] w-full h-full ml-8 lg:ml-20 xl:ml-0'>
       <SearchHeader />
       <div className='flex pr-8 relative'>
-        <MoviesList selectedMovie={selectedMovie} movies={movies} />
-        <ReservationWrapper selectedMovie={selectedMovie} />
+        <ReservationModalProvider>
+          <MoviesList selectedMovie={selectedMovie} movies={movies} />
+          <ReservationWrapper selectedMovie={selectedMovie} isMobile={false} />
+          <ReservationModal>
+            <ReservationWrapper selectedMovie={selectedMovie} isMobile={true} />
+          </ReservationModal>
+        </ReservationModalProvider>
       </div>
     </main>
   );

@@ -26,7 +26,7 @@ const DateSelection = ({
   const dispatch = useReservationDispatch();
 
   return (
-    <section className='flex gap-2 items-end'>
+    <section className='flex gap-2 items-end flex-wrap'>
       <div className=' z-10'>
         <label
           htmlFor='select-component'

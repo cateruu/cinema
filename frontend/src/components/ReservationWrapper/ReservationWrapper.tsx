@@ -8,9 +8,10 @@ import { verifySession } from '../../actions/verifySession';
 
 interface Props {
   selectedMovie: Movie;
+  isMobile: boolean;
 }
 
-const ReservationWrapper = async ({ selectedMovie }: Props) => {
+const ReservationWrapper = async ({ selectedMovie, isMobile }: Props) => {
   const user = await verifySession();
 
   const resp = await fetch(
@@ -28,7 +29,11 @@ const ReservationWrapper = async ({ selectedMovie }: Props) => {
   const schedules = (await resp.json()) as Schedule[];
 
   return (
-    <div className='hidden lg:flex flex-col flex-grow ml-5 '>
+    <div
+      className={`flex-col flex-grow lg:flex ${
+        isMobile ? 'flex ml-0' : 'hidden ml-5'
+      }`}
+    >
       <ReservationProvider>
         <Room schedules={schedules} selectedMovieId={selectedMovie.id} />
         {schedules.length > 0 && (

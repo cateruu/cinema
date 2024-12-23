@@ -12,6 +12,7 @@ import Image from 'next/image';
 import { formatTicketDate } from '../../utils/formatDate';
 import { useRouter } from 'next/navigation';
 import { buyTickets } from '../../actions/reservation';
+import { useReservationModal } from '../../context/ReservationModalContext';
 
 interface Props {
   user: UserSession | null;
@@ -22,6 +23,7 @@ const Ticket = ({ user, selectedMovie }: Props) => {
   const reservation = useReservation();
   const router = useRouter();
   const dispatch = useReservationDispatch();
+  const modalState = useReservationModal();
 
   const [isLoading, setIsLoading] = useState(false);
 
@@ -53,13 +55,14 @@ const Ticket = ({ user, selectedMovie }: Props) => {
     } catch (error) {
       console.error(error);
     } finally {
+      modalState?.setIsOpen(false);
       setIsLoading(false);
     }
   };
 
   return (
     <section className='w-full h-full min-h-48 max-h-80 bg-slate-950 rounded-xl mt-5 flex overflow-hidden'>
-      <section className='flex-grow p-5 flex flex-col justify-between font-medium'>
+      <section className='min-w-64 flex-grow p-5 flex flex-col gap-3 justify-between font-medium sm:min-w-96 lg:min-w-52'>
         <div>
           <p className='text-2xl'>{selectedMovie.name}</p>
           <p className='text-slate-600'>
@@ -94,7 +97,7 @@ const Ticket = ({ user, selectedMovie }: Props) => {
             </p>
           </div>
         </div>
-        <div className='flex items-center justify-between'>
+        <div className='flex flex-col justify-between md:flex-row md:items-center'>
           {reservation && (
             <p className='font-bold text-xl xl:text-2xl'>
               $
@@ -149,12 +152,12 @@ const Ticket = ({ user, selectedMovie }: Props) => {
           </button>
         </div>
       </section>
-      <section className='min-w-24 max-w-60 h-full relative border-l-2 border-dashed border-orange-400'>
+      <section className='relative border-l-2 border-dashed border-orange-400 md:min-w-24 lg:max-w-60'>
         <Image
           src={selectedMovie.thumbnailUrl}
           alt={`${selectedMovie.name} poster`}
-          width={500}
-          height={500}
+          width={700}
+          height={700}
           className='h-full object-cover'
         />
         <div className='absolute -top-3 -left-3 w-6 h-6 bg-slate-900 rounded-full' />

@@ -74,7 +74,7 @@ const SeatPicker = ({ selectedSchedule }: Props) => {
           gridTemplateRows: `repeat(${selectedSchedule.room.rows}, 1fr)`,
           gridTemplateColumns: `repeat(${selectedSchedule.room.seats}, 1fr)`,
         }}
-        className={`grid gap-3 items-center justify-items-center mt-5`}
+        className={`grid gap-1 items-center justify-items-center mt-5 sm:gap-3`}
       >
         {seats.map((seat) => {
           if (!reservation) return;
@@ -87,7 +87,7 @@ const SeatPicker = ({ selectedSchedule }: Props) => {
               onClick={() => {
                 handleSeatSelection(seat, isSelected);
               }}
-              className={`h-5 w-5 border-2 rounded-lg cursor-pointer content-center place-items-center xl:h-7 xl:w-7  ${
+              className={`h-4 w-4 border-2 rounded-sm cursor-pointer content-center place-items-center md:rounded-md md:h-5 md:w-5 xl:rounded-lg xl:h-7 xl:w-7  ${
                 seat.reserved
                   ? 'border-slate-400 cursor-not-allowed'
                   : 'border-orange-400'
