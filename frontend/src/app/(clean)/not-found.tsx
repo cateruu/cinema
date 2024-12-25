@@ -7,7 +7,9 @@ const NotFound = () => {
       <h1 className='font-[family-name:var(--font-krona-one)] text-2xl mb-10'>
         CINEMA <span className='text-orange-400'>MNGMT</span>
       </h1>
-      <p className='text-xl'>Page you are trying to access do not exist.</p>
+      <p className='text-xl text-center'>
+        Page you are trying to access do not exist.
+      </p>
       <Link href='/' className='text-orange-400 mt-4'>
         Home
       </Link>
