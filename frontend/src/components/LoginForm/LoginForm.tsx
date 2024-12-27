@@ -28,12 +28,14 @@ const LoginForm = () => {
         type='username'
         placeholder='admin acc: admin'
         label='Username'
+        className='min-w-80'
       />
       <Input
         name='password'
         type='password'
         placeholder='admin acc: admin'
         label='Password'
+        className='min-w-80'
       />
       <div className='w-full'>
         <LoadingButton text='Sign In' isLoading={isPending} />

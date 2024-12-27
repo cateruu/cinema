@@ -2,19 +2,13 @@
 
 import { cookies } from 'next/headers';
 import { redirect } from 'next/navigation';
+import { ErrorResponse } from '../types/errors';
 
 interface LoginResponse {
   token: string;
   type: string;
   username: string;
   roles: string[];
-}
-
-interface ErrorResponse {
-  status: string;
-  message: string;
-  errors: string[];
-  timestamp: string;
 }
 
 export const signIn = async (

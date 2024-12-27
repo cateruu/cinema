@@ -10,6 +10,7 @@ import org.springframework.data.domain.Sort;
 import org.springframework.data.domain.Sort.Direction;
 import org.springframework.stereotype.Service;
 
+import com.pawelkrml.movies.dto.MovieDTO;
 import com.pawelkrml.movies.model.Movie;
 import com.pawelkrml.movies.repository.MovieRepository;
 
@@ -27,7 +28,15 @@ public class MovieService {
     return movieRepository.findAll(pageable);
   }
 
-  public Movie saveMovie(Movie movie) {
+  public Movie saveMovie(MovieDTO movieDTO) {
+    Movie movie = new Movie();
+    movie.setName(movieDTO.getName());
+    movie.setDescription(movieDTO.getDescription());
+    movie.setDuration(movieDTO.getDuration());
+    movie.setGenre(movieDTO.getGenres());
+    movie.setTicketPrice(movieDTO.getTicketPrice());
+    movie.setThumbnailUrl(movieDTO.getThumbnailUrl());
+
     return movieRepository.save(movie);
   }
 

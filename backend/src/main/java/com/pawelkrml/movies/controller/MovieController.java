@@ -20,6 +20,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.pawelkrml.movies.dto.MovieDTO;
 import com.pawelkrml.movies.dto.PaginatedResponseDTO;
 import com.pawelkrml.movies.dto.ScheduleResponseDTO;
 import com.pawelkrml.movies.model.Movie;
@@ -50,7 +51,7 @@ public class MovieController {
   }
 
   @PostMapping
-  public ResponseEntity<Movie> createMovie(@Valid @RequestBody Movie movie) {
+  public ResponseEntity<Movie> createMovie(@Valid @RequestBody MovieDTO movie) {
     return ResponseEntity.ok(movieService.saveMovie(movie));
   }
 
