@@ -9,7 +9,7 @@ const SideBar = async () => {
   const user = await verifySession();
 
   return (
-    <aside className='hidden group min-h-screen max-h-screen p-4 flex-col fixed top-0 w-[70px] overflow-hidden bg-slate-900 shadow-xl shadow-slate-950 z-50 transition-all hover:w-72 hover:overflow-visible lg:flex xl:w-fit xl:p-8 xl:overflow-visible xl:sticky xl:shadow-none xl:hover:w-fit'>
+    <aside className='hidden group min-h-screen max-h-screen p-4 flex-col fixed top-0 w-[70px] overflow-hidden bg-slate-900 shadow-xl shadow-slate-950 z-50 transition-all hover:w-72 hover:overflow-visible lg:flex xl:w-fit xl:p-8 xl:overflow-visible xl:sticky xl:shadow-none xl:hover:w-fit xl:z-20'>
       <h1 className='font-[family-name:var(--font-krona-one)] text-2xl mb-8 whitespace-nowrap w-7 overflow-hidden group-hover:w-full xl:overflow-visible xl:w-fit'>
         CINEMA <span className='text-orange-400'>MNGMT</span>
       </h1>
