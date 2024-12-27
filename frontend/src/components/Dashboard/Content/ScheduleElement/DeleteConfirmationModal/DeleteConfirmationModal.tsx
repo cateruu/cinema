@@ -3,22 +3,22 @@
 import React, { useState } from 'react';
 import * as Dialog from '@radix-ui/react-dialog';
 import { Clapperboard, Trash } from 'lucide-react';
-import { deleteMovie } from '../../../../../actions/movies';
 import toast from 'react-hot-toast';
+import { deleteSchedule } from '../../../../../actions/schedules';
 
 interface Props {
-  movieName: string;
-  movieId: string;
+  scheduleTime: string;
+  scheduleId: string;
 }
 
-const DeleteConfirmationModal = ({ movieName, movieId }: Props) => {
+const DeleteConfirmationModal = ({ scheduleId, scheduleTime }: Props) => {
   const [isOpen, setIsOpen] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
 
   const handleMovieDelete = async () => {
     setIsLoading(true);
     try {
-      const resp = await deleteMovie(movieId);
+      const resp = await deleteSchedule(scheduleId);
 
       if (!resp) {
         toast.error('Unable to delete the movie.');
@@ -37,7 +37,7 @@ const DeleteConfirmationModal = ({ movieName, movieId }: Props) => {
 
   return (
     <Dialog.Root open={isOpen} onOpenChange={setIsOpen}>
-      <Dialog.Trigger className='flex items-center gap-1 text-slate-600 text-sm transition-colors hover:text-red-600'>
+      <Dialog.Trigger className='flex items-center justify-center gap-1 text-slate-600 text-sm font-medium transition-colors hover:text-red-600 w-full bg-slate-800 rounded-lg py-2 mt-2'>
         <Trash size={16} /> Delete
       </Dialog.Trigger>
       <Dialog.Portal>
@@ -48,7 +48,7 @@ const DeleteConfirmationModal = ({ movieName, movieId }: Props) => {
             Delete movie
           </Dialog.Title>
           <Dialog.Description className='mt-3 font-medium min-w-72 sm:whitespace-nowrap'>
-            Are you sure you want to delete {movieName}?
+            Are you sure you want to delete schedule playint at {scheduleTime}?
           </Dialog.Description>
           <div className='flex items-center w-full gap-1 mt-3'>
             <Dialog.Close className='flex-grow py-2 bg-slate-900 text-sm font-medium rounded-xl'>
