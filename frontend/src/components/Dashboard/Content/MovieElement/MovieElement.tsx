@@ -21,7 +21,7 @@ const MovieElement = ({ movie }: Props) => {
       />
       <section className='mt-3 relative'>
         <p className='text-xl font-medium'>{movie.name}</p>
-        <div className='absolute bottom-1 right-0 bg-slate-950 pl-1 items-center gap-3 hidden group-hover:flex'>
+        <div className='absolute bottom-0 right-0 bg-slate-950 pl-2 pb-1 items-center gap-3 hidden group-hover:flex'>
           <Link
             href='/dashboard/edit-movie'
             className='flex items-center gap-1 text-slate-600 text-sm transition-colors hover:text-green-600'
