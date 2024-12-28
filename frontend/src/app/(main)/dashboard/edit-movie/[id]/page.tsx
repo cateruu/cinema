@@ -3,12 +3,21 @@ import React from 'react';
 import { Movie } from '../../../../../types/movies';
 import { Clapperboard, CornerUpLeft } from 'lucide-react';
 import MovieForm from '../../../../../components/MovieForm/MovieForm';
+import { verifySession } from '@/actions/verifySession';
+import { UserRoles } from '@/types/auth';
+import { redirect } from 'next/navigation';
 
 type Params = {
   params: Promise<{ id: string }>;
 };
 
 const EditPage = async ({ params }: Params) => {
+  const user = await verifySession();
+
+  if (!user || !user.roles.includes(UserRoles.ADMIN)) {
+    redirect('/');
+  }
+
   const id = (await params).id;
 
   const resp = await fetch(`${process.env.API_URL}/v1/movies/${id}`);

@@ -3,12 +3,21 @@ import React from 'react';
 import { Room } from '../../../../../types/room';
 import { Armchair, CornerUpLeft } from 'lucide-react';
 import RoomForm from '../../../../../components/RoomForm/RoomForm';
+import { verifySession } from '@/actions/verifySession';
+import { UserRoles } from '@/types/auth';
+import { redirect } from 'next/navigation';
 
 type Params = {
   params: Promise<{ id: string }>;
 };
 
 const EditRoomPage = async ({ params }: Params) => {
+  const user = await verifySession();
+
+  if (!user || !user.roles.includes(UserRoles.ADMIN)) {
+    redirect('/');
+  }
+
   const id = (await params).id;
 
   const resp = await fetch(`${process.env.API_URL}/v1/rooms/${id}`);

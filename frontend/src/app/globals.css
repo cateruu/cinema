@@ -15,3 +15,9 @@
   background: #fb923c;
   border-radius: 8px;
 }
+
+@layer base {
+  :root {
+    --radius: 0.5rem;
+  }
+}
