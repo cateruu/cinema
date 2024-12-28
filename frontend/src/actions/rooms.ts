@@ -21,7 +21,7 @@ export const deleteRoom = async (id: string) => {
     return false;
   }
 
-  revalidatePath('/dashboard');
+  revalidatePath('/dashboard?section=rooms');
 
   return true;
 };
@@ -57,7 +57,7 @@ export const createRoom = async (
     };
   }
 
-  redirect('/dashboard');
+  redirect('/dashboard?section=rooms');
 };
 
 export const updateRoom = async (
