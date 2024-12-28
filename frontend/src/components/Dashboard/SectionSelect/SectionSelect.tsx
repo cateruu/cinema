@@ -34,6 +34,16 @@ const SectionSelect = () => {
       >
         Schedules
       </Link>
+      <Link
+        href={`${pathname}?section=rooms`}
+        className={`w-28 text-center rounded-lg py-2 text-sm ${
+          currentSection === DashboardSections.ROOMS
+            ? 'bg-orange-400 font-medium'
+            : 'text-slate-400'
+        }`}
+      >
+        Rooms
+      </Link>
     </div>
   );
 };

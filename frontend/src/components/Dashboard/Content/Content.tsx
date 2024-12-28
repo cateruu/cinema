@@ -7,6 +7,8 @@ import { Movie } from '../../../types/movies';
 import { Schedule } from '../../../types/schedule';
 import MovieElement from './MovieElement/MovieElement';
 import ScheduleElement from './ScheduleElement/ScheduleElement';
+import { Room } from '../../../types/room';
+import RoomElement from './RoomElement/RoomElement';
 
 interface Props {
   activeSection: string;
@@ -19,6 +21,8 @@ const Content = async ({ activeSection }: Props) => {
     fetchUrl += '/movies';
   } else if (activeSection === DashboardSections.SCHEDULES) {
     fetchUrl += '/schedule';
+  } else if (activeSection === DashboardSections.ROOMS) {
+    fetchUrl += '/rooms';
   } else {
     return (
       <section className='p-3 text-center'>
@@ -60,6 +64,10 @@ const Content = async ({ activeSection }: Props) => {
       {activeSection === DashboardSections.SCHEDULES &&
         (data as Schedule[]).map((schedule) => (
           <ScheduleElement schedule={schedule} key={schedule.id} />
+        ))}
+      {activeSection === DashboardSections.ROOMS &&
+        (data as Paginated<Room>).content.map((room) => (
+          <RoomElement room={room} key={room.id} />
         ))}
     </section>
   );
