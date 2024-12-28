@@ -4,8 +4,12 @@ import { Upload } from 'lucide-react';
 import Image from 'next/image';
 import React, { ChangeEvent, useRef, useState } from 'react';
 
-const ThumbnailUpload = () => {
-  const [thumbnail, setThumbnail] = useState('');
+interface Props {
+  defaultImageUrl?: string;
+}
+
+const ThumbnailUpload = ({ defaultImageUrl }: Props) => {
+  const [thumbnail, setThumbnail] = useState(defaultImageUrl || '');
 
   const inputRef = useRef<HTMLInputElement | null>(null);
 

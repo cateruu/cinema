@@ -1,6 +1,10 @@
 import React from 'react';
 
-const GenreSelect = () => {
+interface Props {
+  defaultValue?: string[];
+}
+
+const GenreSelect = ({ defaultValue }: Props) => {
   const values = [
     'Action',
     'Horror',
@@ -30,6 +34,7 @@ const GenreSelect = () => {
         id='genre'
         multiple
         className='bg-slate-950 p-3 rounded-s-xl outline-none w-full'
+        defaultValue={defaultValue}
       >
         {values.map((value) => (
           <option

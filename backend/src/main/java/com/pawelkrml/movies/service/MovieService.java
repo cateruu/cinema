@@ -33,7 +33,7 @@ public class MovieService {
     movie.setName(movieDTO.getName());
     movie.setDescription(movieDTO.getDescription());
     movie.setDuration(movieDTO.getDuration());
-    movie.setGenre(movieDTO.getGenres());
+    movie.setGenre(movieDTO.getGenre());
     movie.setTicketPrice(movieDTO.getTicketPrice());
     movie.setThumbnailUrl(movieDTO.getThumbnailUrl());
 

@@ -7,9 +7,18 @@ interface Props {
   label?: string;
   className?: string;
   step?: string;
+  defaultValue?: string | string[] | number;
 }
 
-const Input = ({ type, name, placeholder, label, className, step }: Props) => {
+const Input = ({
+  type,
+  name,
+  placeholder,
+  label,
+  className,
+  step,
+  defaultValue,
+}: Props) => {
   return (
     <div>
       {label && (
@@ -26,6 +35,7 @@ const Input = ({ type, name, placeholder, label, className, step }: Props) => {
         id={name}
         placeholder={placeholder}
         step={step}
+        defaultValue={defaultValue}
         className={`bg-slate-950 border-2 border-slate-950 text-sm px-3 py-3 w-full rounded-xl focus:border-orange-400 focus:outline-none ${className}`}
       />
     </div>

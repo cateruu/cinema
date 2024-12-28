@@ -1,6 +1,7 @@
 package com.pawelkrml.movies.controller;
 
 import java.lang.reflect.Field;
+import java.math.BigDecimal;
 import java.time.LocalDateTime;
 import java.util.List;
 import java.util.Map;
@@ -85,6 +86,11 @@ public class MovieController {
       try {
         Field field = movie.getClass().getDeclaredField(key);
         field.setAccessible(true);
+
+        if (key.equals("ticketPrice")) {
+          value = BigDecimal.valueOf(Double.valueOf(value.toString()));
+        }
+
         field.set(movie, value);
       } catch (NoSuchFieldException | IllegalAccessException e) {
         throw new IllegalArgumentException("unknown key: " + key);

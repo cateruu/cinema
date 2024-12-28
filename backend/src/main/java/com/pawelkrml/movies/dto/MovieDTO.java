@@ -21,7 +21,7 @@ public class MovieDTO {
   private BigDecimal price;
 
   @NotEmpty(message = "must have at least one element")
-  private List<String> genres;
+  private List<String> genre;
 
   @NotBlank(message = "cannot be empty")
   private String thumbnailUrl;
@@ -50,12 +50,12 @@ public class MovieDTO {
     this.duration = duration;
   }
 
-  public List<String> getGenres() {
-    return this.genres;
+  public List<String> getGenre() {
+    return this.genre;
   }
 
-  public void setGenres(List<String> genres) {
-    this.genres = genres;
+  public void setGenre(List<String> genre) {
+    this.genre = genre;
   }
 
   public BigDecimal getTicketPrice() {
