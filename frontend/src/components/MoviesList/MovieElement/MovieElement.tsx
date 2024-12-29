@@ -3,7 +3,7 @@
 import React from 'react';
 import { Movie } from '../../../types/movies';
 import Image from 'next/image';
-import { useRouter } from 'next/navigation';
+import { useRouter, useSearchParams } from 'next/navigation';
 
 interface Props {
   movie: Movie;
@@ -12,13 +12,17 @@ interface Props {
 }
 
 const MovieElement = ({ movie, isSelected, setSelectedMovie }: Props) => {
+  const searchParams = useSearchParams();
   const router = useRouter();
 
   return (
     <div
       onClick={() => {
         setSelectedMovie(movie);
-        router.push(`/?selectedMovie=${movie.id}`);
+        const search = searchParams.get('search');
+        router.push(
+          `/?${search && `search=${search}`}&selectedMovie=${movie.id}`
+        );
       }}
       className={`flex flex-col px-1 bg-slate-950 rounded-xl p-1 cursor-pointer pb-2 border-2 border-slate-950  ${
         isSelected && 'border-b-orange-400'

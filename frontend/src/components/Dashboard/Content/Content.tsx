@@ -36,7 +36,7 @@ const Content = async ({ activeSection }: Props) => {
 
   const cookieStore = await cookies();
   const token = cookieStore.get('token')?.value;
-  const resp = await fetch(fetchUrl, {
+  const resp = await fetch(`${fetchUrl}?size=99999`, {
     headers: {
       Authorization: `Bearer ${token}`,
     },

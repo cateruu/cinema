@@ -41,7 +41,7 @@ export const createSchedule = async (
     errors.push('Invalid hour provided');
   }
 
-  if (+minute <= 0 || +minute > 60) {
+  if (+minute < 0 || +minute > 60) {
     errors.push('Invalid minute provided');
   }
 

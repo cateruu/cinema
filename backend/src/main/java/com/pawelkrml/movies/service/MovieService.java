@@ -21,11 +21,15 @@ public class MovieService {
   @Autowired
   private MovieRepository movieRepository;
 
-  public Page<Movie> getAllMovies(int page, int size, String sortBy, String direction) {
+  public Page<Movie> getAllMovies(int page, int size, String sortBy, String direction, String search) {
     Direction sortDirection = direction.equalsIgnoreCase("desc") ? Direction.DESC : Direction.ASC;
     Pageable pageable = PageRequest.of(page, size, Sort.by(sortDirection, sortBy));
 
-    return movieRepository.findAll(pageable);
+    if (search == null || search.isEmpty()) {
+      return movieRepository.findAll(pageable);
+    }
+
+    return movieRepository.searchMovies(search, pageable);
   }
 
   public Movie saveMovie(MovieDTO movieDTO) {

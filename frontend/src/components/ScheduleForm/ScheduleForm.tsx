@@ -71,6 +71,8 @@ const ScheduleForm = ({ movies, rooms }: Props) => {
     }
   }, [state]);
 
+  console.log(selectedMovie);
+
   return (
     <form action={formAction} className='p-3 flex flex-col gap-3 mb-12'>
       <div>

@@ -15,13 +15,13 @@ const ReservationWrapper = async ({ selectedMovie, isMobile }: Props) => {
   const user = await verifySession();
 
   const resp = await fetch(
-    `${process.env.API_URL}/v1/movies/${selectedMovie.id}/schedule`
+    `${process.env.API_URL}/v1/movies/${selectedMovie?.id}/schedule`
   );
 
   if (!resp.ok) {
     return (
       <section className='ml-5'>
-        Unable to load schedule for {selectedMovie.name}.
+        Unable to load schedule for {selectedMovie?.name}.
       </section>
     );
   }

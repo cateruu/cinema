@@ -45,8 +45,9 @@ public class MovieController {
       @RequestParam(defaultValue = "0") int page,
       @RequestParam(defaultValue = "10") int size,
       @RequestParam(defaultValue = "id") String sortBy,
-      @RequestParam(defaultValue = "desc") String direction) {
-    Page<Movie> moviePage = movieService.getAllMovies(page, size, sortBy, direction);
+      @RequestParam(defaultValue = "desc") String direction,
+      @RequestParam(required = false) String search) {
+    Page<Movie> moviePage = movieService.getAllMovies(page, size, sortBy, direction, search);
 
     return ResponseEntity.ok(PaginatedResponseDTO.from(moviePage));
   }

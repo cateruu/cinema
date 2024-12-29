@@ -12,7 +12,11 @@ const HomePage = async (props: { searchParams: SearchParams }) => {
   const searchParams = await props.searchParams;
   const selectedMovieId = searchParams.selectedMovie;
 
-  const resp = await fetch(`${process.env.API_URL}/v1/movies?direction=ASC`);
+  const resp = await fetch(
+    `${process.env.API_URL}/v1/movies?direction=ASC&size=99999999&search=${
+      searchParams.search || ''
+    }`
+  );
 
   if (!resp.ok) {
     return 'Unable to get movies. Please try again...';
