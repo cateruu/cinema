@@ -24,7 +24,9 @@ const ScheduleElement = ({ schedule }: Props) => {
         </p>
         <p className='flex items-center justify-between'>
           <span className='text-slate-600'>Movie:</span>
-          <span className='font-medium'>{schedule.movie.name}</span>
+          <span className='font-medium whitespace-nowrap truncate'>
+            {schedule.movie.name}
+          </span>
         </p>
         <p className='flex items-center justify-between'>
           <span className='text-slate-600'>Room:</span>

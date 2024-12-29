@@ -1,15 +1,20 @@
+import { cn } from '@/lib/utils';
 import React from 'react';
 
 interface Props {
   text: string;
   isLoading: boolean;
+  className?: string;
 }
 
-const LoadingButton = ({ text, isLoading }: Props) => {
+const LoadingButton = ({ text, isLoading, className }: Props) => {
   return (
     <button
       disabled={isLoading}
-      className='w-full h-11 bg-orange-400 rounded-xl font-bold flex justify-center items-center disabled:bg-orange-400'
+      className={cn(
+        'w-full h-11 bg-orange-400 rounded-xl font-bold flex justify-center items-center disabled:bg-orange-400',
+        className && className
+      )}
     >
       {isLoading ? (
         <svg
