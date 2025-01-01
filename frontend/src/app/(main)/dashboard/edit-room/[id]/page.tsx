@@ -1,11 +1,11 @@
 import Link from 'next/link';
 import React from 'react';
-import { Room } from '../../../../../types/room';
 import { Armchair, CornerUpLeft } from 'lucide-react';
-import RoomForm from '../../../../../components/RoomForm/RoomForm';
 import { verifySession } from '@/actions/verifySession';
 import { UserRoles } from '@/types/auth';
 import { redirect } from 'next/navigation';
+import { Room } from '@/types/room';
+import RoomForm from '@/components/RoomForm/RoomForm';
 
 type Params = {
   params: Promise<{ id: string }>;

@@ -1,10 +1,10 @@
 import React from 'react';
-import MovieForm from '../../../../components/MovieForm/MovieForm';
 import { Clapperboard, CornerUpLeft } from 'lucide-react';
 import Link from 'next/link';
 import { verifySession } from '@/actions/verifySession';
 import { UserRoles } from '@/types/auth';
 import { redirect } from 'next/navigation';
+import MovieForm from '@/components/MovieForm/MovieForm';
 
 const AddMoviePage = async () => {
   const user = await verifySession();

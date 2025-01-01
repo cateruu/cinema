@@ -1,9 +1,9 @@
 'use client';
 
 import React, { useEffect, useRef, useState } from 'react';
-import { Movie } from '../../../types/movies';
 import SelectedMovie from '../SelectedMovie/SelectedMovie';
 import MovieElement from '../MovieElement/MovieElement';
+import { Movie } from '@/types/movies';
 
 interface Props {
   movies: Movie[];

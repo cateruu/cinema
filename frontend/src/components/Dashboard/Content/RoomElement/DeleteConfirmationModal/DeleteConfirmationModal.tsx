@@ -4,7 +4,7 @@ import React, { useState } from 'react';
 import * as Dialog from '@radix-ui/react-dialog';
 import { Armchair, Trash } from 'lucide-react';
 import toast from 'react-hot-toast';
-import { deleteRoom } from '../../../../../actions/rooms';
+import { deleteRoom } from '@/actions/rooms';
 
 interface Props {
   roomName: string;

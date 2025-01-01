@@ -1,11 +1,11 @@
 import React from 'react';
-import { verifySession } from '../../../actions/verifySession';
 import { redirect } from 'next/navigation';
-import { UserRoles } from '../../../types/auth';
-import ButtonHeader from '../../../components/Dashboard/ButtonHeader/ButtonHeader';
-import SectionSelect from '../../../components/Dashboard/SectionSelect/SectionSelect';
-import Content from '../../../components/Dashboard/Content/Content';
-import { DashboardSections } from '../../../types/dashboard';
+import { verifySession } from '@/actions/verifySession';
+import { UserRoles } from '@/types/auth';
+import ButtonHeader from '@/components/Dashboard/ButtonHeader/ButtonHeader';
+import SectionSelect from '@/components/Dashboard/SectionSelect/SectionSelect';
+import Content from '@/components/Dashboard/Content/Content';
+import { DashboardSections } from '@/types/dashboard';
 
 type SearchParams = Promise<{ [key: string]: string | undefined }>;
 

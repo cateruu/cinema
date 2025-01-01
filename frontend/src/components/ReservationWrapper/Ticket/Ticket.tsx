@@ -6,16 +6,16 @@ import Image from 'next/image';
 
 import { useRouter } from 'next/navigation';
 import toast from 'react-hot-toast';
-import { UserSession } from '../../../types/auth';
-import { Movie } from '../../../types/movies';
+import { UserSession } from '@/types/auth';
+import { Movie } from '@/types/movies';
 import {
   ReservationActionTypes,
   useReservation,
   useReservationDispatch,
-} from '../../../context/ReservationContext';
-import { useReservationModal } from '../../../context/ReservationModalContext';
-import { buyTickets } from '../../../actions/reservation';
-import { formatTicketDate } from '../../../utils/formatDate';
+} from '@/context/ReservationContext';
+import { useReservationModal } from '@/context/ReservationModalContext';
+import { buyTickets } from '@/actions/reservation';
+import { formatTicketDate } from '@/utils/formatDate';
 
 interface Props {
   user: UserSession | null;

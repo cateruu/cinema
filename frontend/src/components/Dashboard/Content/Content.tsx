@@ -1,14 +1,14 @@
 import React from 'react';
-import { DashboardSections } from '../../../types/dashboard';
 import Link from 'next/link';
 import { cookies } from 'next/headers';
-import { Paginated } from '../../../types/pagination';
-import { Movie } from '../../../types/movies';
-import { Schedule } from '../../../types/schedule';
 import MovieElement from './MovieElement/MovieElement';
 import ScheduleElement from './ScheduleElement/ScheduleElement';
-import { Room } from '../../../types/room';
 import RoomElement from './RoomElement/RoomElement';
+import { DashboardSections } from '@/types/dashboard';
+import { Paginated } from '@/types/pagination';
+import { Movie } from '@/types/movies';
+import { Schedule } from '@/types/schedule';
+import { Room } from '@/types/room';
 
 interface Props {
   activeSection: string;

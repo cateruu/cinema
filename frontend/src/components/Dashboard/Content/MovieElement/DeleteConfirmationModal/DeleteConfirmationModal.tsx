@@ -3,8 +3,8 @@
 import React, { useState } from 'react';
 import * as Dialog from '@radix-ui/react-dialog';
 import { Clapperboard, Trash } from 'lucide-react';
-import { deleteMovie } from '../../../../../actions/movies';
 import toast from 'react-hot-toast';
+import { deleteMovie } from '@/actions/movies';
 
 interface Props {
   movieName: string;

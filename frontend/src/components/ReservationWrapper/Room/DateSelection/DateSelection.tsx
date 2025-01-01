@@ -1,10 +1,10 @@
 import React from 'react';
-import SelectComponent from '../../../SelectComponent/SelectComponent';
 import { TimeSlot } from '../Room';
 import {
   ReservationActionTypes,
   useReservationDispatch,
-} from '../../../../context/ReservationContext';
+} from '@/context/ReservationContext';
+import SelectComponent from '@/components/SelectComponent/SelectComponent';
 
 interface Props {
   selectedDate: string;

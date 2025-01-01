@@ -1,9 +1,9 @@
 'use client';
 
+import { DashboardSections } from '@/types/dashboard';
 import Link from 'next/link';
 import { usePathname, useSearchParams } from 'next/navigation';
 import React from 'react';
-import { DashboardSections } from '../../../types/dashboard';
 
 const SectionSelect = () => {
   const pathname = usePathname();

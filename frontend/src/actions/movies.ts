@@ -1,10 +1,10 @@
 'use server';
 
+import { ErrorResponse } from '@/types/errors';
+import { Movie } from '@/types/movies';
 import { revalidatePath } from 'next/cache';
 import { cookies } from 'next/headers';
-import { ErrorResponse } from '../types/errors';
 import { redirect } from 'next/navigation';
-import { Movie } from '../types/movies';
 
 interface UploadResponse {
   url: string;

@@ -3,9 +3,9 @@ import { Krona_One, Poppins } from 'next/font/google';
 import '../globals.css';
 import NextTopLoader from 'nextjs-toploader';
 import { ReactNode } from 'react';
-import SideBar from '../../components/SideBar/SideBar';
-import MobileNavbar from '../../components/MobileNavbar/MobileNavbar';
 import { Toaster } from 'react-hot-toast';
+import SideBar from '@/components/SideBar/SideBar';
+import MobileNavbar from '@/components/MobileNavbar/MobileNavbar';
 
 const poppins = Poppins({
   variable: '--font-poppins',

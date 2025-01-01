@@ -1,15 +1,15 @@
 'use client';
 
 import React, { useEffect, useRef, useState } from 'react';
-import { Schedule } from '../../../types/schedule';
-import { formatScheduleDate } from '../../../utils/formatDate';
-import { formatTime } from '../../../utils/formatTime';
 import DateSelection from './DateSelection/DateSelection';
 import SeatPicker from './SeatPicker/SeatPicker';
+import { Schedule } from '@/types/schedule';
+import { formatScheduleDate } from '@/utils/formatDate';
+import { formatTime } from '@/utils/formatTime';
 import {
   ReservationActionTypes,
   useReservationDispatch,
-} from '../../../context/ReservationContext';
+} from '@/context/ReservationContext';
 
 export interface TimeSlot {
   [key: string]: {

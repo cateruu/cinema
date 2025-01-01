@@ -1,12 +1,12 @@
 import React from 'react';
-import MovieScreen from '../../../MovieScreen/MovieScreen';
-import { Schedule } from '../../../../types/schedule';
 import { X } from 'lucide-react';
+import { Schedule } from '@/types/schedule';
 import {
   ReservationActionTypes,
   useReservation,
   useReservationDispatch,
-} from '../../../../context/ReservationContext';
+} from '@/context/ReservationContext';
+import MovieScreen from '@/components/MovieScreen/MovieScreen';
 
 const A_CHAR_CODE = 65;
 const Z_CHAR_CODE = 90;

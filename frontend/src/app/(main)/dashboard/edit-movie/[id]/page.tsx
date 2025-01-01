@@ -1,11 +1,11 @@
 import Link from 'next/link';
 import React from 'react';
-import { Movie } from '../../../../../types/movies';
 import { Clapperboard, CornerUpLeft } from 'lucide-react';
-import MovieForm from '../../../../../components/MovieForm/MovieForm';
 import { verifySession } from '@/actions/verifySession';
 import { UserRoles } from '@/types/auth';
 import { redirect } from 'next/navigation';
+import { Movie } from '@/types/movies';
+import MovieForm from '@/components/MovieForm/MovieForm';
 
 type Params = {
   params: Promise<{ id: string }>;

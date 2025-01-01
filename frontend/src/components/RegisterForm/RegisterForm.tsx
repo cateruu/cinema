@@ -4,8 +4,8 @@ import React, { useActionState } from 'react';
 import Input from '../Input/Input';
 import Link from 'next/link';
 import LoadingButton from '../LoadingButton/LoadingButton';
-import { signUp } from '../../actions/auth-actions';
 import { CornerUpLeft } from 'lucide-react';
+import { signUp } from '@/actions/auth-actions';
 
 const initialState = {
   message: '',

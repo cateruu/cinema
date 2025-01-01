@@ -1,11 +1,11 @@
 'use client';
 
+import { createRoom, updateRoom } from '@/actions/rooms';
+import { Room } from '@/types/room';
 import React, { useActionState, useEffect } from 'react';
+import toast from 'react-hot-toast';
 import Input from '../Input/Input';
 import LoadingButton from '../LoadingButton/LoadingButton';
-import toast from 'react-hot-toast';
-import { createRoom, updateRoom } from '../../actions/rooms';
-import { Room } from '../../types/room';
 
 const initialState = {
   message: '',

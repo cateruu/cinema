@@ -1,10 +1,10 @@
 'use server';
 
 import { cookies } from 'next/headers';
-import { ErrorResponse } from '../types/errors';
 import { redirect } from 'next/navigation';
 import { revalidatePath } from 'next/cache';
-import { Room } from '../types/room';
+import { ErrorResponse } from '@/types/errors';
+import { Room } from '@/types/room';
 
 export const deleteRoom = async (id: string) => {
   const cookieStore = await cookies();

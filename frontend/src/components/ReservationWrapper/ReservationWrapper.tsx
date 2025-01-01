@@ -1,10 +1,10 @@
 import React from 'react';
-import { Movie } from '../../types/movies';
-import { Schedule } from '../../types/schedule';
 import Room from './Room/Room';
-import { ReservationProvider } from '../../context/ReservationContext';
-import { verifySession } from '../../actions/verifySession';
 import Ticket from './Ticket/Ticket';
+import { Movie } from '@/types/movies';
+import { verifySession } from '@/actions/verifySession';
+import { Schedule } from '@/types/schedule';
+import { ReservationProvider } from '@/context/ReservationContext';
 
 interface Props {
   selectedMovie: Movie;

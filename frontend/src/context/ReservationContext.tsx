@@ -1,5 +1,6 @@
 'use client';
 
+import { Schedule } from '@/types/schedule';
 import {
   ActionDispatch,
   createContext,
@@ -7,7 +8,6 @@ import {
   use,
   useReducer,
 } from 'react';
-import { Schedule } from '../types/schedule';
 
 export enum ReservationActionTypes {
   ADD_TICKET = 'add_ticket',

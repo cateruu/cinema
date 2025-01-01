@@ -1,9 +1,9 @@
 import React from 'react';
-import { verifySession } from '../../actions/verifySession';
 import LinkButtons from './LinkButtons/LinkButtons';
 import { LogIn, LogOut } from 'lucide-react';
 import Link from 'next/link';
-import { signOut } from '../../actions/auth-actions';
+import { signOut } from '@/actions/auth-actions';
+import { verifySession } from '@/actions/verifySession';
 
 const MobileNavbar = async () => {
   const user = await verifySession();

@@ -2,8 +2,8 @@
 
 import React from 'react';
 import Image from 'next/image';
-import { Movie } from '../../../types/movies';
-import { useReservationModal } from '../../../context/ReservationModalContext';
+import { Movie } from '@/types/movies';
+import { useReservationModal } from '@/context/ReservationModalContext';
 
 interface Props {
   movie: Movie;

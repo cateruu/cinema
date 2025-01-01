@@ -1,8 +1,8 @@
 'use client';
 
 import React, { ReactNode, useRef } from 'react';
-import { useReservationModal } from '../../context/ReservationModalContext';
 import { X } from 'lucide-react';
+import { useReservationModal } from '@/context/ReservationModalContext';
 
 interface Props {
   children: ReactNode;

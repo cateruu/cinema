@@ -1,8 +1,8 @@
 import React from 'react';
-import { verifySession } from '../../../actions/verifySession';
-import { Reservation } from '../../../types/reservation';
 import { cookies } from 'next/headers';
-import Ticket from '../../../components/Ticket/Ticket';
+import { verifySession } from '@/actions/verifySession';
+import { Reservation } from '@/types/reservation';
+import Ticket from '@/components/Ticket/Ticket';
 
 const ReservationPage = async () => {
   const user = await verifySession();

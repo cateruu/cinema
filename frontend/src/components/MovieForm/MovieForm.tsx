@@ -2,12 +2,12 @@
 
 import React, { useActionState, useEffect } from 'react';
 import ThumbnailUpload from './ThumbnailUpload/ThumbnailUpload';
-import Input from '../Input/Input';
 import GenreSelect from './GenreSelect/GenreSelect';
 import LoadingButton from '../LoadingButton/LoadingButton';
 import toast from 'react-hot-toast';
-import { Movie } from '../../types/movies';
-import { createMovie, updateMovie } from '../../actions/movies';
+import { Movie } from '@/types/movies';
+import { createMovie, updateMovie } from '@/actions/movies';
+import Input from '../Input/Input';
 
 const initialState = {
   message: '',

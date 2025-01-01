@@ -3,11 +3,6 @@
 import React from 'react';
 import SearchHeader from '../../components/SearchHeader/SearchHeader';
 
-// interface Props {
-//   error: Error & { digest?: string };
-//   reset: () => void;
-// }
-
 const Error = () => {
   return (
     <main className='font-[family-name:var(--font-poppins)] w-full h-full'>

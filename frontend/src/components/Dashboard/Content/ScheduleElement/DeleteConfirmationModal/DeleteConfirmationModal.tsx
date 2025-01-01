@@ -4,7 +4,7 @@ import React, { useState } from 'react';
 import * as Dialog from '@radix-ui/react-dialog';
 import { Calendar, Trash } from 'lucide-react';
 import toast from 'react-hot-toast';
-import { deleteSchedule } from '../../../../../actions/schedules';
+import { deleteSchedule } from '@/actions/schedules';
 
 interface Props {
   scheduleTime: string;

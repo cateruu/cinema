@@ -1,9 +1,9 @@
 'use client';
 
 import React from 'react';
-import { Movie } from '../../../types/movies';
 import Image from 'next/image';
 import { useRouter, useSearchParams } from 'next/navigation';
+import { Movie } from '@/types/movies';
 
 interface Props {
   movie: Movie;

@@ -1,8 +1,8 @@
 import React from 'react';
-import { Schedule } from '../../../../types/schedule';
 import Image from 'next/image';
-import { formatTicketDate } from '../../../../utils/formatDate';
 import DeleteConfirmationModal from './DeleteConfirmationModal/DeleteConfirmationModal';
+import { Schedule } from '@/types/schedule';
+import { formatTicketDate } from '@/utils/formatDate';
 
 interface Props {
   schedule: Schedule;

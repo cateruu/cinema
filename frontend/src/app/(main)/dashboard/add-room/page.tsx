@@ -1,10 +1,10 @@
 import { Armchair, CornerUpLeft } from 'lucide-react';
 import Link from 'next/link';
 import React from 'react';
-import RoomForm from '../../../../components/RoomForm/RoomForm';
 import { verifySession } from '@/actions/verifySession';
 import { UserRoles } from '@/types/auth';
 import { redirect } from 'next/navigation';
+import RoomForm from '@/components/RoomForm/RoomForm';
 
 const AddRoomPage = async () => {
   const user = await verifySession();

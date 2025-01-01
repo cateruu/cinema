@@ -1,10 +1,10 @@
-import SearchHeader from '../../components/SearchHeader/SearchHeader';
-import MoviesList from '../../components/MoviesList/MoviesList';
-import ReservationWrapper from '../../components/ReservationWrapper/ReservationWrapper';
-import { Movie } from '../../types/movies';
-import { Paginated } from '../../types/pagination';
-import { ReservationModalProvider } from '../../context/ReservationModalContext';
-import ReservationModal from '../../components/ReservationModal/ReservationModal';
+import MoviesList from '@/components/MoviesList/MoviesList';
+import ReservationModal from '@/components/ReservationModal/ReservationModal';
+import ReservationWrapper from '@/components/ReservationWrapper/ReservationWrapper';
+import SearchHeader from '@/components/SearchHeader/SearchHeader';
+import { ReservationModalProvider } from '@/context/ReservationModalContext';
+import { Movie } from '@/types/movies';
+import { Paginated } from '@/types/pagination';
 
 type SearchParams = Promise<{ [key: string]: string | undefined }>;
 

@@ -1,9 +1,9 @@
 import React from 'react';
 import Link from 'next/link';
 import { LogIn, LogOut } from 'lucide-react';
-import { verifySession } from '../../actions/verifySession';
-import { signOut } from '../../actions/auth-actions';
 import LinkButtons from './LinkButtons/LinkButtons';
+import { verifySession } from '@/actions/verifySession';
+import { signOut } from '@/actions/auth-actions';
 
 const SideBar = async () => {
   const user = await verifySession();

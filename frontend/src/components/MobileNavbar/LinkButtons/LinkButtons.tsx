@@ -1,10 +1,10 @@
 'use client';
 
 import React from 'react';
-import { UserRoles, UserSession } from '../../../types/auth';
 import { Home, LayoutDashboard, Ticket } from 'lucide-react';
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
+import { UserRoles, UserSession } from '@/types/auth';
 
 interface Props {
   user: UserSession | null;

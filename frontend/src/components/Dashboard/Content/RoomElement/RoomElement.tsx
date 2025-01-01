@@ -1,7 +1,7 @@
 import React from 'react';
-import { Room } from '../../../../types/room';
 import Link from 'next/link';
 import { Edit } from 'lucide-react';
+import { Room } from '@/types/room';
 import DeleteConfirmationModal from './DeleteConfirmationModal/DeleteConfirmationModal';
 
 interface Props {

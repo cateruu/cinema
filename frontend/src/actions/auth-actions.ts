@@ -1,8 +1,8 @@
 'use server';
 
+import { ErrorResponse } from '@/types/errors';
 import { cookies } from 'next/headers';
 import { redirect } from 'next/navigation';
-import { ErrorResponse } from '../types/errors';
 
 interface LoginResponse {
   token: string;

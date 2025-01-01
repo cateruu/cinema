@@ -1,9 +1,9 @@
 import React from 'react';
-import { Movie } from '../../../../types/movies';
 import Image from 'next/image';
 import Link from 'next/link';
 import { Edit } from 'lucide-react';
 import DeleteConfirmationModal from './DeleteConfirmationModal/DeleteConfirmationModal';
+import { Movie } from '@/types/movies';
 
 interface Props {
   movie: Movie;

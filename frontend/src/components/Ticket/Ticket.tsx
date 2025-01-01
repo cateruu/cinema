@@ -1,6 +1,6 @@
+import { formatTicketDate } from '@/utils/formatDate';
 import Image from 'next/image';
 import React from 'react';
-import { formatTicketDate } from '../../utils/formatDate';
 
 interface Props {
   movieName: string;

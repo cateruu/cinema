@@ -1,11 +1,11 @@
 'use client';
 
 import React, { useActionState } from 'react';
-import Input from '../Input/Input';
 import Link from 'next/link';
-import LoadingButton from '../LoadingButton/LoadingButton';
-import { signIn } from '../../actions/auth-actions';
 import { CornerUpLeft } from 'lucide-react';
+import { signIn } from '@/actions/auth-actions';
+import Input from '../Input/Input';
+import LoadingButton from '../LoadingButton/LoadingButton';
 
 const initialState = {
   message: '',
