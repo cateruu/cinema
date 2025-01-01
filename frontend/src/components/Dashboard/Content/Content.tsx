@@ -5,10 +5,10 @@ import MovieElement from './MovieElement/MovieElement';
 import ScheduleElement from './ScheduleElement/ScheduleElement';
 import RoomElement from './RoomElement/RoomElement';
 import { DashboardSections } from '@/types/dashboard';
-import { Paginated } from '@/types/pagination';
 import { Movie } from '@/types/movies';
 import { Schedule } from '@/types/schedule';
 import { Room } from '@/types/room';
+import { Paginated } from '@/types/paginated';
 
 interface Props {
   activeSection: string;

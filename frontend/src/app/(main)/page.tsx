@@ -4,7 +4,7 @@ import ReservationWrapper from '@/components/ReservationWrapper/ReservationWrapp
 import SearchHeader from '@/components/SearchHeader/SearchHeader';
 import { ReservationModalProvider } from '@/context/ReservationModalContext';
 import { Movie } from '@/types/movies';
-import { Paginated } from '@/types/pagination';
+import { Paginated } from '@/types/paginated';
 
 type SearchParams = Promise<{ [key: string]: string | undefined }>;
 

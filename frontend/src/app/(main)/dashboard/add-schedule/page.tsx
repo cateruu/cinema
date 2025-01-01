@@ -2,7 +2,7 @@ import { verifySession } from '@/actions/verifySession';
 import ScheduleForm from '@/components/ScheduleForm/ScheduleForm';
 import { UserRoles } from '@/types/auth';
 import { Movie } from '@/types/movies';
-import { Paginated } from '@/types/pagination';
+import { Paginated } from '@/types/paginated';
 import { Room } from '@/types/room';
 import { Calendar, CornerUpLeft } from 'lucide-react';
 import { cookies } from 'next/headers';
