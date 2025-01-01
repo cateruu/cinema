@@ -1,1 +1,1 @@
-ALTER TABLE reservations DROP COLUMN room_id;
+ALTER TABLE IF EXISTS reservations DROP COLUMN room_id;

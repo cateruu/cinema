@@ -1,2 +1,2 @@
-ALTER TABLE movies
+ALTER TABLE IF EXISTS movies
 ALTER COLUMN description TYPE TEXT;

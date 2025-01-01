@@ -1,1 +1,1 @@
-ALTER TABLE seats DROP COLUMN room_id;
+ALTER TABLE IF EXISTS seats DROP COLUMN room_id;

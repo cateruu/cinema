@@ -10,6 +10,32 @@ services:
       - '5432:5432'
     volumes:
       - postgres_data:/var/lib/postgresql/data
+    healthcheck:
+      test: ['CMD-SHELL', 'pg_isready -U ${DB_USERNAME} -d ${DB_NAME}']
+      interval: 10s
+      timeout: 5s
+      retries: 5
+
+  # api:
+  #   build: .
+  #   container_name: cinema-api
+  #   depends_on:
+  #     postgres:
+  #       condition: service_healthy
+  #   environment:
+  #     DB_URL: ${DB_URL}
+  #     DB_USERNAME: ${DB_USERNAME}
+  #     DB_PASSWORD: ${DB_PASSWORD}
+  #     DB_NAME: ${DB_NAME}
+  #     SPRING_PROFILE: ${SPRING_PROFILE}
+  #     JWT_SECRET: ${JWT_SECRET}
+  #     AWS_ACCESS_KEY_ID: ${AWS_ACCESS_KEY_ID}
+  #     AWS_SECRET_ACCESS_KEY: ${AWS_SECRET_ACCESS_KEY}
+  #     AWS_BUCKET_NAME: ${AWS_BUCKET_NAME}
+  #     CDN_URL: ${CDN_URL}
+  #   ports:
+  #     - '8081:8080'
+  #   restart: unless-stopped
 
 volumes:
   postgres_data:
