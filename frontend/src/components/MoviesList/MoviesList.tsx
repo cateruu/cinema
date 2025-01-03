@@ -14,7 +14,7 @@ const MoviesList = async ({ selectedMovie, movies }: Props) => {
       {movies.content.length > 0 ? (
         <List movies={movies.content} selectedMovie={selectedMovie} />
       ) : (
-        <section>No movies :(</section>
+        <section>There are no movies to show.</section>
       )}
     </div>
   );
