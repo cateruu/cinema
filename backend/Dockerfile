@@ -1,9 +1,12 @@
 FROM openjdk:23-jdk-slim-bullseye
 
-EXPOSE 8080
+WORKDIR /app
 
-ARG JAR_FILE=target/backend.jar
+COPY .mvn/ .mvn
+COPY mvnw pom.xml ./
 
-ADD ${JAR_FILE} app.jar
+RUN ./mvnw dependency:go-offline
 
-ENTRYPOINT [ "java","-Djava.security.egd=file:/dev/./urandom","-jar","/app.jar" ]
+COPY src ./src
+
+CMD ["./mvnw", "spring-boot:run"]
