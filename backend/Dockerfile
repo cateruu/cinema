@@ -4,8 +4,6 @@ VOLUME /tmp
 
 EXPOSE 8080
 
-COPY .env .env
-
 ARG JAR_FILE=target/backend.jar
 
 ADD ${JAR_FILE} app.jar
