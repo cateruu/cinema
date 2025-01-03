@@ -1,7 +1,5 @@
 FROM openjdk:23-jdk-slim-bullseye
 
-VOLUME /tmp
-
 EXPOSE 8080
 
 ARG JAR_FILE=target/backend.jar
